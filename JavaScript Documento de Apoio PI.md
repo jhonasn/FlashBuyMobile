@@ -220,7 +220,7 @@ chave: 5, valor: acabou
 */
 ```
 - foreach
->O foreach do js é um método relativamente recente adicionado ao array, versões de navegadores mais antigos podem não ter este método. 
+> O foreach do js é um método relativamente recente adicionado ao array, versões de navegadores mais antigos podem não ter este método. 
 ```javascript
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
 
@@ -262,7 +262,7 @@ Saída:
 true
 */
 ```
->Ainda existem outros métodos úteis porém mais complexos de serem usadas em Arrays como é o caso do [.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) e [.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
+> Ainda existem outros métodos úteis porém mais complexos de serem usadas em Arrays como é o caso do [.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) e [.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 #2. Orientação ao Objeto
 O JavaScript é uma linguagem de [programação orientada a objetos (OOP) baseada em protótipos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript) sendo assim possui diferenças das linguagens de programação OOP baseados em classe.
 
