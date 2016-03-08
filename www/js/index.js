@@ -11,7 +11,7 @@ FlashBuyMobile.index = {
   },
   bindEventsRedirections: function () {
     $('#teste').on('click', function () {
-      FlashBuyMobile.load('/views/teste.html');
+      FlashBuyMobile.load('views/teste.html');
     });
   }
 };
