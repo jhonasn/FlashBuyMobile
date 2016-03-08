@@ -7,6 +7,12 @@ FlashBuyMobile.index = {
   },
   ready: function() {
     $('.button-collapse').sideNav();
+    FlashBuyMobile.index.bindEventsRedirections();
+  },
+  bindEventsRedirections: function () {
+    $('#teste').on('click', function () {
+      FlashBuyMobile.load('/views/teste.html');
+    });
   }
 };
 
