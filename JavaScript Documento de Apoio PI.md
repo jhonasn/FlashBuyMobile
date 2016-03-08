@@ -954,11 +954,11 @@ var linkAddItem = document.getElementById('additem');
 linkAddItem.addEventListener('click', adicionaItem, false);
 ```
 
-Entretanto existem diferenças de api js entre diferentes navegadores e versões de navegadores além de o uso nativo do dom ser um verboso demais.
+Entretanto existem diferenças de API js entre diferentes navegadores e versões de navegadores além de o uso nativo do DOM ser um verboso demais.
 
 #5. jQuery
 
-O jQuery é um framework que torna a api do dom mais menos verbosa e torna as diferenças de navegadores transparentes ao programador. Abaixo a mesma ação feita em dom no ultimo exemplo em jQuery.
+O jQuery é um framework js que utiliza a API do DOM com uma interface de programação (API) menos verbosa e torna as diferenças de navegadores transparentes ao programador. Abaixo a mesma ação feita em DOM no ultimo exemplo em jQuery.
 
 ```javascript
 $('#additem').on('click', adicionaItem);
