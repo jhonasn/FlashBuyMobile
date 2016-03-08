@@ -67,6 +67,7 @@ var a = 1; console.log(a);
 ```
 >Variáveis de todos os tipos podem ser interpretadas como boleanas ou seja se colocarmos uma variável dentro de um if sendo ela não boleana ela é interpretada como boleana, se negarmos ela, ela assume o valor contrario do seu valor booleano, se quisermos apenas ver seu valor boleano podemos negá-la duas vezes.
 >Ex.:
+
 ```javascript
 var a = 1;
 console.log(!!a);//true
