@@ -760,6 +760,79 @@ descreverCoisas(alberto);
 //Erro: Function Interface.ensureImplements: object does not implement the IDescricao interface. Method descricao  was not found.
 ```
 
+###2.3 Module Pattern
+
+Um dos patterns mais usados em js para projetos é o Module Pattern. Este pattern ajuda na estruturação de projeto, separando as diferentes partes do projeto em módulos, estes modulos ficam no código como variáveis globais. Uma das vantagens de se usar esse Design Pattern é que ele torna o entendimento do escopo js muito mais simples e fácil, diferente de se usar a criação de classes clássica que enche seu código com as palavras que muitas vezes nos confundem como o ```this``` e ```prototype```.
+
+Primeiramente vamos pela maneira mais simples. A declaração de objeto literal (JSON). A desvantagem dessa abordagem é não consiguimos ter campos, propriedades nem métodos privados.
+
+*Private Naming Conventions*
+Uma convenção para tornar mais legível a declaração de variáveis privadas é usar **underline** antes do nome da variável ```var _exemplo```. Podemos usar essa convenção para apenas simular uma variavel privada mesmo ela estando publica.
+
+```javascript
+//repare no case da variavel global do módulo
+var Modulo = {
+	//private naming convention
+	_counter: -1,
+	init: function() {
+		Modulo._counter++;
+	},
+	incrementar: function() {
+		console.log(Modulo._counter++);
+	}
+};
+```
+
+Para usar variáveis realmente privadas precisamos do uso de *closures*.
+
+```javascript
+var Modulo = (function () {
+	//o init já acontece neste escopo
+	var _counter = -1;
+	
+	++_counter;
+	
+	//metodo privado
+	var getCounter = function() {
+		return _counter; 
+	};
+	
+	return {
+		incrementar: function() {
+			console.log(_counter);	
+		}
+	};
+})();//invoca instancia do módulo
+```
+
+Note que ao fim é retornado um objeto literal com o que será a parte pública do módulo. Também podemos fazer o mesmo da seguinte maneira:
+
+```javascript
+var Modulo = (function () {
+	//o init já acontece neste escopo
+	var modulo = {};
+	
+	var _counter = -1;
+	
+	++_counter;
+	
+	//metodo privado
+	var getCounter = function() {
+		return _counter; 
+	};
+	
+	modulo.incrementar: function() {
+		console.log(_counter);	
+	}
+	
+	return modulo;
+})();//invoca instancia do módulo
+```
+
+####2.3.1 Revealing Module Pattern
+
+Neste pattern existe uma melhor separação do código que será retornado como a parte pública do módulo.
+
 #3. Estilo de Codificação
 
 Existem diferentes estilos de codificação, entre estes diferentes estilos podemos citar: [node](https://docs.npmjs.com/misc/coding-style), [jQuery](http://contribute.jquery.org/style-guide/js), [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/), [Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js/), entre outros. A escolha de padrão depende da preferência dos programadores. Não se trata de escolha de certo ou errado, porém o importante é manter o padrão de uniformidade de código do inicio ao fim do projeto como se apenas um programador tivesse escrito o código por mais o projeto possua muitos contribuidores. Para isso definimos padrões. Eu sugiro usarmos no PI o padrão [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/) e um verificador de código [Linting](https://en.wikipedia.org/wiki/Lint_%28software%29). Também podemos definir alguns padrões que temos preferência ao invés de usar cegamente o padrão do WordPress.
