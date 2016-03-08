@@ -867,6 +867,8 @@ var Modulo = (function () {
 })();
 ```
 
+[Mais exemplos de Module Pattern](https://toddmotto.com/mastering-the-module-pattern/)
+
 #3. Estilo de Codificação
 
 Existem diferentes estilos de codificação, entre estes diferentes estilos podemos citar: [node](https://docs.npmjs.com/misc/coding-style), [jQuery](http://contribute.jquery.org/style-guide/js), [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/), [Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js/), entre outros. A escolha de padrão depende da preferência dos programadores. Não se trata de escolha de certo ou errado, porém o importante é manter o padrão de uniformidade de código do inicio ao fim do projeto como se apenas um programador tivesse escrito o código por mais o projeto possua muitos contribuidores. Para isso definimos padrões. Eu sugiro usarmos no PI o padrão [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/) e um verificador de código [Linting](https://en.wikipedia.org/wiki/Lint_%28software%29). Também podemos definir alguns padrões que temos preferência ao invés de usar cegamente o padrão do WordPress.
