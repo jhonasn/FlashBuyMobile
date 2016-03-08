@@ -928,7 +928,45 @@ objeto.propriedadeOuCampoPublico = null;
 
 #4. DOM
 
+[Document Object Model]() é o objeto que representa os elementos html em js através de um objeto, o objeto ```document```. Podemos acessar os elementos, alterá-los, remove-los por js.
+
+```html
+<html>
+	<head>
+	</head>
+	
+	<body>
+		<button type="button">Adicionar</button>
+		
+		<script src="code.js"></script>
+	</body>
+</html>
+```
+code.js:
+```javascript
+// Primeiro é necessário criar um objeto que faz
+// referência ao elemento no HTML:
+var linkAddItem = document.getElementById('additem');
+ 
+// Depois adicionamos a função "adicionaItem" à lista de
+// funções que devem ser executadas quando o usuário clica
+// na área do elemento no navegador:
+linkAddItem.addEventListener('click', adicionaItem, false);
+```
+
+Entretanto existem diferenças de api js entre diferentes navegadores e versões de navegadores além de o uso nativo do dom ser um verboso demais.
+
 #5. jQuery
+
+O jQuery é um framework que torna a api do dom mais menos verbosa e torna as diferenças de navegadores transparentes ao programador. Abaixo a mesma ação feita em dom no ultimo exemplo em jQuery.
+
+```javascript
+$('#additem').on('click', adicionaItem);
+```
+
+Simples. O primeiro método do módulo ```jQuery```, também armazenado na variavel ```$``` é uma função que busca elementos no DOM através de query [*css selector*](http://www.w3schools.com/cssref/css_selectors.asp). O método ```on``` adicona o *event listener* no elemento.
+
+Para mais exemplos e referência da [API jQuery Consulte aqui](https://api.jquery.com/) ou pergunte ao [Oráculo](google.com).
 
 #6. Exemplo PI
 
