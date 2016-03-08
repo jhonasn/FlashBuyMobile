@@ -944,6 +944,10 @@ objeto.propriedadeOuCampoPublico = null;
 ```
 code.js:
 ```javascript
+var adicionaItem = function() {
+	alert('Item Adicionado');
+};
+
 // Primeiro é necessário criar um objeto que faz
 // referência ao elemento no HTML:
 var linkAddItem = document.getElementById('additem');
@@ -961,6 +965,10 @@ Entretanto existem diferenças de API js entre diferentes navegadores e versões
 O jQuery é um framework js que utiliza a API do DOM com uma interface de programação (API) menos verbosa e torna as diferenças de navegadores transparentes ao programador. Abaixo a mesma ação feita em DOM no ultimo exemplo em jQuery.
 
 ```javascript
+var adicionaItem = function() {
+	alert('Item Adicionado');
+};
+
 $('#additem').on('click', adicionaItem);
 ```
 
