@@ -326,7 +326,9 @@ console.log(obj['teste com espaco']);//espaco
 ```
 ###2.1.1 Herança prototipal (ou por clonagem)
 Neste tipo de herança apenas criamos um novo objeto e herdamos o protótipo da classe pai, após isso defininimos as diferenças. Para isso podemos usar o método abaixo para clonagem.
+
 >Também podemos usar este tipo de herança em objetos criados com classes definidas.
+
 ```javascript
 function clone(object) {
     function F() {}
@@ -334,7 +336,9 @@ function clone(object) {
 	return new F;
 }
 ```
+
 Usabilidade:
+
 ```javascript
 cliente = clone(pessoa);//instância de pessoa
 
@@ -345,8 +349,10 @@ cliente.cpf = '12345678901';
 cliente.descricao();
 //Pessoa: João, Idade: 25, Sexo: M
 ```
+
 ###2.1.2 Fábrica de Objeto
 Para manter a conformidade de objetos criados do modo chave-valor podemos usar o Simple [Factory Pattern](http://www.dofactory.com/javascript/factory-method-design-pattern) (ou funções fábrica) que cria objetos com a mesma estrutura e mesmos valores padrão.
+
 ```javascript
 //###
 //Simple Factory Pattern
@@ -413,9 +419,12 @@ var pessoa = criarPessoa('João', 25, 'M');
 console.log(pessoa.descricao());
 //Pessoa: João, Idade: 25, Sexo: M
 ```
+
 >Veja também: [Exemplo Simple Factory Pattern iMasters](http://imasters.com.br/artigo/24086/javascript/padrao-de-projeto-de-software-javascript-factory-parte-01).
+
 ##2.2 Classe
 A declaração de classe em javascript é feita com funções, e para a instanciação usamos a plavra chave ```new```. Para se referir ao escopo da função usamos a palava chave ```this```.
+
 ```javascript
 //classe
 function Pessoa(nome, idade, sexo) {//parametros construtor
@@ -466,6 +475,7 @@ var OutraClasse = function(parametro1) {
 
 ####2.2.1 Escopo
 Em js o escopo de execução (ou seja o this) funciona um pouco diferente das linguagem fortemente tipadas:
+
 ```javascript
 var getIdade = function() {
 	return this.getIdade();
@@ -489,7 +499,9 @@ getIdade();//undefined
 //que tem o escopo sendo a pessoa 
 pessoa.getIdade();//25
 ```
+
 Outra variável impotante em funções é que variáveis declaradas sem a chave var antes vai se refere (ou cria) variáveis no escopo global, e var se refere ao escopo da função, devemos tomar muito cuidade neste caso para não 'sujar' o escpo global.
+
 ```javascript
 var dobro = function(numero) {
 	var constante = 2;
@@ -502,8 +514,10 @@ console.log(constante);//undefined
 //escopo global violado!
 console.log(outroValor);//epa!
 ```
+
 O escopo de funções pode ser manipulado com os métodos do objeto Function 
 [```call()```](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) e [```apply()```](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply). A diferença entre os dois é que em ```call``` o segundo e seguintes argumentos são os argumentos a serem passados para a função separados por vírgula, e no ```apply``` o segundo argumento é um Array com os parametros a serem passados para a função.
+
 ```javascript
 getIdade();//undefined
 getIdade.call(pessoa);//25
@@ -518,6 +532,7 @@ metodo.apply(pessoa, [24, 'teste', true]);
 **Closure**
 
 Com o closure podemos criar um escopo acima de uma função ou classe. Esse escopo pode ser usado por exemplo para simulação de elementos de orientação ao objeto como propriedades privadas estáticas ou constantes.
+
 ```javascript
 var Book = (function() {
   
@@ -590,9 +605,13 @@ Book.prototype = {
   }
 };
 ```
+
 Fonte: [JavaScript Pro Design Patterns - Apress](http://www.apress.com/9781590599082).
+
 ####2.2.2 Herança Clássica
+
 Classes em js usam o modelo de protótipo para herança:
+
 ```javascript
 function Cliente(nome, idade, sexo, cpf) {	
 	//chama construtor de pessoa porém passando this como escopo
@@ -609,7 +628,9 @@ var cliente = new Cliente('João', 25, 'M', '12345678901');
 console.log(cliente.descricao());
 //Pessoa: João, Idade: 25, Sexo: M
 ```
+
 Esta herança funciona ok, porém mas precisamos declarar muitas linhas para a herança. Para fazer a herança de maneira mais rápida, limpa e genérica (para chamar o construtor de Pessoa em cliente precisamos chamar hardcoded) podemos definir e usar a função:
+
 ```javascript
 function extend(subClass, superClass) {
 	var F = function() {};
@@ -623,7 +644,9 @@ function extend(subClass, superClass) {
 	}
 }
 ``` 
+
 Usabilidade:
+
 ```javascript
 function Cliente(nome, idade, sexo, cpf) {	
 	//chama construtor de pessoa porém passando this como escopo
@@ -638,8 +661,11 @@ var cliente = new Cliente('João', 25, 'M', '12345678901');
 console.log(cliente.descricao());
 //Pessoa: João, Idade: 25, Sexo: M
 ```
+
 #3. Estilo de Codificação
+
 O estilo de codificação pode variar, existem algumas convenções como do [node](https://docs.npmjs.com/misc/coding-style) e outras como do [jsHint]().
+
 ```javascript
 var variaveis;
 
@@ -658,8 +684,11 @@ objeto.metodoNome = function() {
 
 objeto.propriedadeOuCampo = null;
 ```
+
 #4. DOM
+
 #5. jQuery
+
 #6. Exemplo PI
 
 **Videos de apoio: [Playlist do Rodrigo Branas - Desvendando a Linguagem JavaScript](https://www.youtube.com/playlist?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc)**
