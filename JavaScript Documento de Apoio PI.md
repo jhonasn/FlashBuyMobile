@@ -67,21 +67,21 @@ var a = 1; console.log(a);
 ```
 >Variáveis de todos os tipos podem ser interpretadas como boleanas ou seja se colocarmos uma variável dentro de um if sendo ela não boleana ela é interpretada como boleana, se negarmos ela, ela assume o valor contrario do seu valor booleano, se quisermos apenas ver seu valor boleano podemos negá-la duas vezes.
 >Ex.:
->```javascript
->var a = 1;
->console.log(!!a);//true
->console.log(!a);//false
->if(a) {
->    console.log('esta condição será satisfeita.');
->}
->
->console.log(!!null);//false
->console.log(!!undefined);//false
->console.log(!!0);//false
->console.log(!!'');//false
->console.log(!!'teste');//true
->console.log(!!-1);//true
->```
+```javascript
+var a = 1;
+console.log(!!a);//true
+console.log(!a);//false
+if(a) {
+    console.log('esta condição será satisfeita.');
+}
+
+console.log(!!null);//false
+console.log(!!undefined);//false
+console.log(!!0);//false
+console.log(!!'');//false
+console.log(!!'teste');//true
+console.log(!!-1);//true
+```
 
 #2. Dinamicidade
 Variáveis no js podem mudar de tipo livremente assim como serem deletadas.
@@ -105,8 +105,11 @@ console.log(obj.prop);//undefined
 console.log(obj.outraProp);//1
 
 ```
+
 #3. Operações Básicas
+
 - if
+
 ```javascript
 var a = 1, b = 2;
 
@@ -118,12 +121,13 @@ if(a == 1 && b === '2') {
 	console.log('nenhuma das duas condições');
 }
 ```
+
 >=== em js compara também o tipo da instância em js. Ex.: 
->```javascript 
->1 == '1'//true
->1 === '1'//false
->//diferente ficaria !== ao invés de !=
->```
+```javascript 
+1 == '1'//true
+1 === '1'//false
+//diferente ficaria !== ao invés de !=
+```
 
 - switch
 
@@ -145,7 +149,9 @@ switch(a) {
 	break;
 }
 ```
+
 - for
+
 ```javascript
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
 
@@ -162,7 +168,9 @@ Saida:
 acabou
 */
 ```
+
 - while
+
 ```javascript
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
 var contador = 0;
@@ -188,8 +196,11 @@ Saida dos dois é igual:
 acabou
 */
 ```
+
 - for in
+
 Diferente do ```for``` o ``` for in ``` roda um loop de forma ***reflexiva***.
+
 ```javascript
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
 var obj = { inteiro: 1, booleano: true, floatDouble: 2.34 }
@@ -219,8 +230,11 @@ chave: 4, valor: 5
 chave: 5, valor: acabou
 */
 ```
+
 - foreach
+
 > O foreach do js é um método relativamente recente adicionado ao array, versões de navegadores mais antigos podem não ter este método. 
+
 ```javascript
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
 
@@ -237,7 +251,9 @@ Saida:
 acabou
 */
 ```
+
 - Outros métodos de Array
+
 ```javascript
 //retorna os elementos que retornarao condição true
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
@@ -262,8 +278,11 @@ Saída:
 true
 */
 ```
+
 > Ainda existem outros métodos úteis porém mais complexos de serem usadas em Arrays como é o caso do [.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) e [.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
+
 #2. Orientação ao Objeto
+
 O JavaScript é uma linguagem de [programação orientada a objetos (OOP) baseada em protótipos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript) sendo assim possui diferenças das linguagens de programação OOP baseados em classe.
 
 ##2.1 Objeto Chave-Valor
