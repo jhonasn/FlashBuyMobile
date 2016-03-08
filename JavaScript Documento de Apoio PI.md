@@ -663,6 +663,103 @@ console.log(cliente.descricao());
 //Pessoa: João, Idade: 25, Sexo: M
 ```
 
+###2.2.3 Interfaces
+
+Assim como na herança o js não oferece nativamente suporte a interfaces e na maioria dos casos não necessitamos dela. Porém em codigos mais robustos com maior necessidade de padronização de atributos e propriedades de objetos as interfaces vem a serem muito úteis, além disso, grande parte dos Design Patterns também se apoiam firmemente em Interfaces.
+Mesmo sem suporte nativo da linguagem é possivel implementar interfaces de forma simulada apesar das limitações.
+
+Na definição da classe de Interface temos o construtor que recebe como parametro o nome da interface e os métodos que a interface deve implementar em um array de string. O método estático ```ensureImplements``` que faz a verificação se o objeto implementa a(ou as) interface(s) recebe o objeto a ser verificado.
+
+```javascript
+// Constructor.
+
+var Interface = function(name, methods) {
+    if(arguments.length != 2) {
+        throw new Error("Interface constructor called with " + arguments.length
+          + "arguments, but expected exactly 2.");
+    }
+    
+    this.name = name;
+    this.methods = [];
+    for(var i = 0, len = methods.length; i < len; i++) {
+        if(typeof methods[i] !== 'string') {
+            throw new Error("Interface constructor expects method names to be " 
+              + "passed in as a string.");
+        }
+        this.methods.push(methods[i]);        
+    }    
+};    
+
+// Static class method.
+
+Interface.ensureImplements = function(object) {
+    if(arguments.length < 2) {
+        throw new Error("Function Interface.ensureImplements called with " + 
+          arguments.length  + "arguments, but expected at least 2.");
+    }
+
+    for(var i = 1, len = arguments.length; i < len; i++) {
+        var interface = arguments[i];
+        if(interface.constructor !== Interface) {
+            throw new Error("Function Interface.ensureImplements expects arguments "   
+              + "two and above to be instances of Interface.");
+        }
+        
+        for(var j = 0, methodsLen = interface.methods.length; j < methodsLen; j++) {
+            var method = interface.methods[j];
+            if(!object[method] || typeof object[method] !== 'function') {
+                throw new Error("Function Interface.ensureImplements: object " 
+                  + "does not implement the " + interface.name 
+                  + " interface. Method " + method + " was not found.");
+            }
+        }
+    } 
+};
+```
+
+Usabilidade:
+
+```javascript
+var IDescricao = new Interface('IDescricao', ['descricao']);
+
+//implementa IDescricao
+var joao = new Pessoa('João', 25, 'M');
+
+//não implementa IDescricao
+var alberto = {
+	nome: 'Alberto',
+	idade: 25,
+	sexo: 'M'
+};
+
+//implementa IDescricao
+var marciano = {
+	nome: 'Abul akdatrazik',
+	sexo: 'Z',
+	cor: 'Verde',
+	tchenkz: '83azz',
+	descricao: function() {
+		return 'O marciano ' + this.nome +
+			' do sexo ' + this.sexo +
+			' que é ' + this.cor +
+			' possui ' + this.tchenkz +
+			' tchenkz em sua nave espacial.';
+	}
+};
+
+var descreverCoisas = function(coisaDescritivel) {
+	Interface.ensureImplements(coisaDescritivel, IDescricao);
+	coisaDescritivel.descricao();
+};
+
+descreverCoisas(joao);
+//Pessoa: João, Idade: 25, Sexo: M
+descreverCoisas(marciano);
+//O marciano Abul akdatrazik do sexo Z que é Verde possui 83azz tchenkz em sua nave espacial.
+descreverCoisas(alberto);
+//Erro: Function Interface.ensureImplements: object does not implement the IDescricao interface. Method descricao  was not found.
+```
+
 #3. Estilo de Codificação
 
 O estilo de codificação pode variar, existem algumas convenções como do [node](https://docs.npmjs.com/misc/coding-style) e outras como do [jsHint]().
