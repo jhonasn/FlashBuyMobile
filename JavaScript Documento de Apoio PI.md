@@ -479,7 +479,7 @@ Em js o escopo de execução (ou seja o this) funciona um pouco diferente das li
 
 ```javascript
 var getIdade = function() {
-	return this.getIdade();
+	return this.idade;
 }
 
 function Pessoa(nome, idade, sexo) {
