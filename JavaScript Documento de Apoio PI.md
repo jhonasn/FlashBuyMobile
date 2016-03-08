@@ -793,13 +793,14 @@ var Modulo = (function () {
 	++_counter;
 	
 	//metodo privado
-	var getCounter = function() {
+	var _getCounter = function() {
 		return _counter; 
 	};
 	
 	return {
 		incrementar: function() {
-			console.log(_counter);	
+			console.log(_getCounter());
+			return ++_counter;
 		}
 	};
 })();//invoca instancia do módulo
@@ -817,13 +818,14 @@ var Modulo = (function () {
 	++_counter;
 	
 	//metodo privado
-	var getCounter = function() {
+	var _getCounter = function() {
 		return _counter; 
 	};
 	
 	modulo.incrementar: function() {
-		console.log(_counter);	
-	}
+		console.log(_getCounter());
+		return ++_counter;	
+	};
 	
 	return modulo;
 })();//invoca instancia do módulo
@@ -831,7 +833,39 @@ var Modulo = (function () {
 
 ####2.3.1 Revealing Module Pattern
 
-Neste pattern existe uma melhor separação do código que será retornado como a parte pública do módulo.
+Neste pattern existe uma melhor separação do código que será retornado como a parte pública do módulo. Ajuda a organizar o código.
+
+```javascript
+var Modulo = (function () {
+	var _counter = -1;
+	
+	_counter++;
+	
+	//metodo privado
+	var _getCounter = function() {
+		return _counter; 
+	};
+	
+	//metodo publico
+	var incrementarCounter = function() {
+		console.log(_getCounter());
+		return ++_counter;	
+	};
+	
+	var _stringMalegna = 'I \u2661 JavaScript! \u{1F4A9}'
+	
+	//metodo publico
+	var outroMetodo = function() {
+		console.log(_stringMalegna);
+	};
+	
+	//aqui vem a diferença, apenas *revelamos* os métodos escolhidos para serem públicos
+	return {
+		incrementar: incrementarCounter
+		outro: outroMetodo
+	};
+})();
+```
 
 #3. Estilo de Codificação
 
