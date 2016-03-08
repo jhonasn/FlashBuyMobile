@@ -15,4 +15,4 @@ cordova platform add android ios windows wp8 browser
 cordova plugin add phonegap-plugin-barcodescanner cordova-plugin-device
 ```
 
-##[JavaScript Material de Apoio](FlashBuyMobile/JavaScript Documento de Apoio PI.md)
+##[JavaScript Material de Apoio](https://github.com/jhonasn/FlashBuyMobile/blob/master/JavaScript%20Documento%20de%20Apoio%20PI.md)
