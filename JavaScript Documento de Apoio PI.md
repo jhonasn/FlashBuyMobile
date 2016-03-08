@@ -762,25 +762,59 @@ descreverCoisas(alberto);
 
 #3. Estilo de Codificação
 
-O estilo de codificação pode variar, existem algumas convenções como do [node](https://docs.npmjs.com/misc/coding-style) e outras como do [jsHint]().
+Existem diferentes estilos de codificação, entre estes diferentes estilos podemos citar: [node](https://docs.npmjs.com/misc/coding-style), [jQuery](http://contribute.jquery.org/style-guide/js), [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/), [Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js/), entre outros. A escolha de padrão depende da preferência dos programadores. Não se trata de escolha de certo ou errado, porém o importante é manter o padrão de uniformidade de código do inicio ao fim do projeto como se apenas um programador tivesse escrito o código por mais o projeto possua muitos contribuidores. Para isso definimos padrões. Eu sugiro usarmos no PI o padrão [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/) e um verificador de código [Linting](https://en.wikipedia.org/wiki/Lint_%28software%29). Também podemos definir alguns padrões que temos preferência ao invés de usar cegamente o padrão do WordPress.
+
+> Um verificador de código linting é um programa que verifica erros e problemas como não conformidade de código em arquivos. Geralmente programas de linting podem ser configurados para que se defina o padrão de código usado no projeto.
 
 ```javascript
-var variaveis;
-
-if(true) {
+//exemplo de padrão de código WordPress
+var i;
+ 
+if ( condition ) {
+    doSomething( 'with a string' );
+} else if ( otherCondition ) {
+    otherThing({
+        key: value,
+        otherKey: otherValue
+    });
+} else {
+    somethingElse( true );
 }
+ 
+// Unlike jQuery, WordPress prefers a space after the ! negation operator.
+// This is also done to conform to our PHP standards.
+while ( ! condition ) {
+    iterating++;
+}
+ 
+for ( i = 0; i < 100; i++ ) {
+    object[ array[ i ] ] = someFn( i );
+    $( '.container' ).val( array[ i ] );
+}
+ 
+try {
+    // Expressions
+} catch ( e ) {
+    // Expressions
+}
+
+//outros casos
+var variaveis;
 
 var CONSTANTES;
 
 var Classes = function() {
+    var _variavelPrivada;
 }
 
-var objeto;
+var instanciaObjeto;
 
-objeto.metodoNome = function() {
+var NomeDeModulo;
+
+objeto.metodoPublico = function() {
 }
 
-objeto.propriedadeOuCampo = null;
+objeto.propriedadeOuCampoPublico = null;
 ```
 
 #4. DOM
