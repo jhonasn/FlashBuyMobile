@@ -1,10 +1,9 @@
-FlashBuyMobile.teste = {
+FlashBuy.teste = {
   init: function() {
-    FlashBuyMobile.teste.bindEvents();
+    console.log('teste init');
   },
-  bindEvents: function() {
+  ready: function() {
     $('.modal-trigger').leanModal();
+    console.log('teste ready');
   }
-}
-
-FlashBuyMobile.teste.init();
+};
