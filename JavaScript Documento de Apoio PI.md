@@ -1011,6 +1011,9 @@ Tudo o que precisaremos para este exercício será usar o [selector de #id](http
 		- Opcional: buscar tarefas (mais complexo).
 
 
+
+
+
 ------------------------------------------------------------------------------------------
 
-**Video de apoio: [Playlist do Rodrigo Branas - Desvendando a Linguagem JavaScript](https://www.youtube.com/playlist?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc)**
+**Videos de apoio: [Playlist do Rodrigo Branas - Desvendando a Linguagem JavaScript](https://www.youtube.com/playlist?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc)**
