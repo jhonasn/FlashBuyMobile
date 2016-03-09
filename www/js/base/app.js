@@ -21,16 +21,21 @@ var FlashBuy = {
   },
   //executa ações que necessitam ser executadas após os elementos html da pagina serem carregados
   ready: function () {
+    //inicializa o menu
     $('.button-collapse').sideNav();
+    //liga os botões de menu as rotas das controllers/telas
     FlashBuy.bindEventsRedirections();
     //carrega primeira tela: home
     FlashBuy.load('home', 'views/home.html');
   },
+  //carrega telas no elemento principal do app -> #content
   load: function(controller, link) {
+    //verifica se foi passado o link e controller
     if(!controller || !link) {
       throw new Error('Erro de redirecionamento, controller ou link nao foram passados para FlashBuy.load().');
     }
 
+    //carrega tela e dispara metodos da controller
     $('#content').load(link, function() {
       if(FlashBuy[controller].init) {
         FlashBuy[controller].init();
@@ -41,8 +46,11 @@ var FlashBuy = {
         }
       });
     });
+
+    //esconde o menu
     $('.button-collapse').sideNav('hide');
   },
+  //configura a chamada de telas / rotas
   bindEventsRedirections: function() {
     $('#home').on('click', function() {
       FlashBuy.load('home', 'views/home.html');
@@ -53,4 +61,5 @@ var FlashBuy = {
   }
 };
 
+//inicializa aplicação
 FlashBuy.init();
