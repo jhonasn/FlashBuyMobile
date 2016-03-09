@@ -997,7 +997,7 @@ Referências: [metodos js em DOM](http://www.w3schools.com/js/js_htmldom_documen
 
 
 
-**2. Criar um criador de lista de tarefas com ```jQuery``` e ```HTML```.**
+**2. Criar um gerenciador de lista de tarefas com ```jQuery``` e ```HTML```.**
 
 Exemplo do que é uma lista de tarefas:
 
