@@ -1,4 +1,5 @@
 #1. Tipos
+
 Assim como outras linguagens o JavaScript (js) possui vários tipos
 ```javascript
 /*
@@ -12,7 +13,7 @@ var infinito = Infinity;
 
 
 /*
-Assim como no c# o js trata a string como um array, porém não existe o tipo char em js apenas string. 
+Assim como no c# o js trata a string como um array, porém não existe o tipo char em js apenas string.
 Ou seja você pode pegar o 'i' da var abaixo assim: umaString[1];//'i'
 */
 var umaString = 'oi';
@@ -35,7 +36,7 @@ var funcao = function() {
 };
 //também podemos declarar funções dando nome a elas
 //no caso acima a função não tem nome, é uma função anônima
-//funcoes com nome (como abaixo) são lidas primeiro na execução do código (colocadas em memória) 
+//funcoes com nome (como abaixo) são lidas primeiro na execução do código (colocadas em memória)
 //porém eu não aconselho usar assim pois elas são postas como
 //globais no código e futuramente podem gerar conflitos
 function funcao2() {
@@ -49,7 +50,7 @@ funcao2();
 var a = 1, b = 'oi', c = null;
 //ou
 var a = 1,
-	b = 'oi', 
+	b = 'oi',
 	c = null;
 ```
 O ponto e vírgula no js (;) não é obrigatório caso exista quebra de linha, caso não tenha e exista continuação do código na mesma linha, o (;) é necessário.
@@ -85,6 +86,7 @@ console.log(!!-1);//true
 ```
 
 #2. Dinamicidade
+
 Variáveis no js podem mudar de tipo livremente assim como serem deletadas.
 ```javascript
 var variavel = 1;
@@ -123,8 +125,8 @@ if(a == 1 && b === '2') {
 }
 ```
 
->=== em js compara também o tipo da instância em js. Ex.: 
-```javascript 
+>=== em js compara também o tipo da instância em js. Ex.:
+```javascript
 1 == '1'//true
 1 === '1'//false
 //diferente ficaria !== ao invés de !=
@@ -234,7 +236,7 @@ chave: 5, valor: acabou
 
 - foreach
 
-> O foreach do js é um método relativamente recente adicionado ao array, versões de navegadores mais antigos podem não ter este método. 
+> O foreach do js é um método relativamente recente adicionado ao array, versões de navegadores mais antigos podem não ter este método.
 
 ```javascript
 var colecao = [ 1, 2, 3, 4, 5, 'acabou' ];
@@ -282,7 +284,7 @@ true
 
 > Ainda existem outros métodos úteis porém mais complexos de serem usadas em Arrays como é o caso do [.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) e [.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
-#2. Orientação ao Objeto
+#3. Orientação ao Objeto
 
 O JavaScript é uma linguagem de [programação orientada a objetos (OOP) baseada em protótipos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript) sendo assim possui diferenças das linguagens de programação OOP baseados em classe.
 
@@ -325,7 +327,8 @@ obj['teste com espaco'] = 'espaco';
 //neste caso para pegar o valor da prop só consiguiriamos com
 console.log(obj['teste com espaco']);//espaco
 ```
-###2.1.1 Herança prototipal (ou por clonagem)
+###3.1.1 Herança prototipal (ou por clonagem)
+
 Neste tipo de herança apenas criamos um novo objeto e herdamos o protótipo da classe pai, após isso defininimos as diferenças. Para isso podemos usar o método abaixo para clonagem.
 
 >Também podemos usar este tipo de herança em objetos criados com classes definidas.
@@ -351,7 +354,8 @@ cliente.descricao();
 //Pessoa: João, Idade: 25, Sexo: M
 ```
 
-###2.1.2 Fábrica de Objeto
+###3.1.2 Fábrica de Objeto
+
 Para manter a conformidade de objetos criados do modo chave-valor podemos usar o Simple [Factory Pattern](http://www.dofactory.com/javascript/factory-method-design-pattern) (ou funções fábrica) que cria objetos com a mesma estrutura e mesmos valores padrão.
 
 ```javascript
@@ -365,7 +369,7 @@ Factory.prototype.criarPessoa = function() {
 		idade: 0,
 		sexo: '',
 		descricao: function () {
-			return 'Pessoa: ' + this.nome + 
+			return 'Pessoa: ' + this.nome +
 					', Idade: ' +  this.idade +
 					', Sexo: ' + sexo;
 		}
@@ -409,7 +413,7 @@ var criarPessoa = function (nome, idade, sexo) {
 		idade: idade,
 		sexo: sexo,
 		descricao: function () {
-			return 'Pessoa: ' + this.nome + 
+			return 'Pessoa: ' + this.nome +
 					', Idade: ' +  this.idade +
 					', Sexo: ' + sexo;
 		}
@@ -423,7 +427,8 @@ console.log(pessoa.descricao());
 
 >Veja também: [Exemplo Simple Factory Pattern iMasters](http://imasters.com.br/artigo/24086/javascript/padrao-de-projeto-de-software-javascript-factory-parte-01).
 
-##2.2 Classe
+##3.2 Classe
+
 A declaração de classe em javascript é feita com funções, e para a instanciação usamos a plavra chave ```new```. Para se referir ao escopo da função usamos a palava chave ```this```.
 
 ```javascript
@@ -432,17 +437,17 @@ function Pessoa(nome, idade, sexo) {//parametros construtor
 	//campos publicos
 	this.nome = nome;
 	this.idade = idade;
-	
+
 	//campo privado
 	var sexo = sexo;
-	
+
 	//método público com acesso a vars privadas
 	this.descricao = function() {
-		return 'Pessoa: ' + this.nome + 
+		return 'Pessoa: ' + this.nome +
 		', Idade: ' +  this.idade +
 		', Sexo: ' + sexo;
 	};
-	
+
 	//encapsulamento do campo privado sexo
 	//propriedade sexo
 	this.getSexo = function() {
@@ -474,7 +479,7 @@ var OutraClasse = function(parametro1) {
 }
 ```
 
-####2.2.1 Escopo
+####3.2.1 Escopo
 Em js o escopo de execução (ou seja o this) funciona um pouco diferente das linguagem fortemente tipadas:
 
 ```javascript
@@ -497,7 +502,7 @@ function Pessoa(nome, idade, sexo) {
 getIdade();//undefined
 
 //chamando do objeto pessoa (João) o mesmo método
-//que tem o escopo sendo a pessoa 
+//que tem o escopo sendo a pessoa
 pessoa.getIdade();//25
 ```
 
@@ -516,13 +521,13 @@ console.log(constante);//undefined
 console.log(outroValor);//epa!
 ```
 
-O escopo de funções pode ser manipulado com os métodos do objeto Function 
+O escopo de funções pode ser manipulado com os métodos do objeto Function
 [```call()```](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call) e [```apply()```](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply). A diferença entre os dois é que em ```call``` o segundo e seguintes argumentos são os argumentos a serem passados para a função separados por vírgula, e no ```apply``` o segundo argumento é um Array com os parametros a serem passados para a função.
 
 ```javascript
 getIdade();//undefined
 getIdade.call(pessoa);//25
-//caso tivesse mais argumentos 
+//caso tivesse mais argumentos
 metodo.call(pessoa, 24, 'teste', true);
 
 getIdade.apply(pessoa);//25
@@ -530,27 +535,27 @@ getIdade.apply(pessoa);//25
 metodo.apply(pessoa, [24, 'teste', true]);
 ```
 
-**Closure**
+####3.2.2 Closure
 
 Com o closure podemos criar um escopo acima de uma função ou classe. Esse escopo pode ser usado por exemplo para simulação de elementos de orientação ao objeto como propriedades privadas estáticas ou constantes.
 
 ```javascript
 var Book = (function() {
-  
+
   // Constants (created as private static attributes).
   var UPPER_BOUND = 100;
-  
+
   // Privileged static method.
   this.getUPPER_BOUND() {
     return UPPER_BOUND;
   }
-  
+
   // Private static attributes.
   var numOfBooks = 0;
 
   // Private static method.
   function checkIsbn(isbn) {
-    ... 
+    ...
   }    
 
   // Return the constructor.
@@ -609,15 +614,15 @@ Book.prototype = {
 
 Fonte: [JavaScript Pro Design Patterns - Apress](http://www.apress.com/9781590599082).
 
-####2.2.2 Herança Clássica
+####3.2.3 Herança Clássica
 
 Classes em js usam o modelo de protótipo para herança:
 
 ```javascript
-function Cliente(nome, idade, sexo, cpf) {	
+function Cliente(nome, idade, sexo, cpf) {
 	//chama construtor de pessoa porém passando this como escopo
 	Pessoa.call(this, nome, idade, sexo);
-	this.cpf = cpf;	
+	this.cpf = cpf;
 }
 
 //configura a corrente do protótipo
@@ -638,21 +643,21 @@ function extend(subClass, superClass) {
 	F.prototype = superClass.prototype;
 	subClass.prototype = new F();
 	subClass.prototype.constructor = subClass;
-	
+
 	subClass.superclass = superClass.prototype;
 	if(superClass.prototype.constructor == Object.prototype.constructor) {
 		superClass.prototype.constructor = superClass;
 	}
 }
-``` 
+```
 
 Usabilidade:
 
 ```javascript
-function Cliente(nome, idade, sexo, cpf) {	
+function Cliente(nome, idade, sexo, cpf) {
 	//chama construtor de pessoa porém passando this como escopo
 	Cliente.superclass.constructor.call(this, nome, idade, sexo);
-	this.cpf = cpf;	
+	this.cpf = cpf;
 }
 
 //herda
@@ -663,7 +668,7 @@ console.log(cliente.descricao());
 //Pessoa: João, Idade: 25, Sexo: M
 ```
 
-###2.2.3 Interfaces
+###3.2.4 Interfaces
 
 Assim como na herança o js não oferece nativamente suporte a interfaces e na maioria dos casos não necessitamos dela. Porém em codigos mais robustos com maior necessidade de padronização de atributos e propriedades de objetos as interfaces vem a serem muito úteis, além disso, grande parte dos Design Patterns também se apoiam firmemente em Interfaces.
 Mesmo sem suporte nativo da linguagem é possivel implementar interfaces de forma simulada apesar das limitações.
@@ -678,12 +683,12 @@ var Interface = function(name, methods) {
         throw new Error("Interface constructor called with " + arguments.length
           + "arguments, but expected exactly 2.");
     }
-    
+
     this.name = name;
     this.methods = [];
     for(var i = 0, len = methods.length; i < len; i++) {
         if(typeof methods[i] !== 'string') {
-            throw new Error("Interface constructor expects method names to be " 
+            throw new Error("Interface constructor expects method names to be "
               + "passed in as a string.");
         }
         this.methods.push(methods[i]);        
@@ -694,7 +699,7 @@ var Interface = function(name, methods) {
 
 Interface.ensureImplements = function(object) {
     if(arguments.length < 2) {
-        throw new Error("Function Interface.ensureImplements called with " + 
+        throw new Error("Function Interface.ensureImplements called with " +
           arguments.length  + "arguments, but expected at least 2.");
     }
 
@@ -704,16 +709,16 @@ Interface.ensureImplements = function(object) {
             throw new Error("Function Interface.ensureImplements expects arguments "   
               + "two and above to be instances of Interface.");
         }
-        
+
         for(var j = 0, methodsLen = interface.methods.length; j < methodsLen; j++) {
             var method = interface.methods[j];
             if(!object[method] || typeof object[method] !== 'function') {
-                throw new Error("Function Interface.ensureImplements: object " 
-                  + "does not implement the " + interface.name 
+                throw new Error("Function Interface.ensureImplements: object "
+                  + "does not implement the " + interface.name
                   + " interface. Method " + method + " was not found.");
             }
         }
-    } 
+    }
 };
 ```
 
@@ -760,7 +765,7 @@ descreverCoisas(alberto);
 //Erro: Function Interface.ensureImplements: object does not implement the IDescricao interface. Method descricao  was not found.
 ```
 
-###2.3 Module Pattern
+###3.3 Module Pattern
 
 Um dos patterns mais usados em js para projetos é o Module Pattern. Este pattern ajuda na estruturação de projeto, separando as diferentes partes do projeto em módulos, estes modulos ficam no código como variáveis globais. Uma das vantagens de se usar esse Design Pattern é que ele torna o entendimento do escopo js muito mais simples e fácil, diferente de se usar a criação de classes clássica que enche seu código com as palavras que muitas vezes nos confundem como o ```this``` e ```prototype```.
 
@@ -789,14 +794,14 @@ Para usar variáveis realmente privadas precisamos do uso de *closures*.
 var Modulo = (function () {
 	//o init já acontece neste escopo
 	var _counter = -1;
-	
+
 	++_counter;
-	
+
 	//metodo privado
 	var _getCounter = function() {
-		return _counter; 
+		return _counter;
 	};
-	
+
 	return {
 		incrementar: function() {
 			console.log(_getCounter());
@@ -812,53 +817,53 @@ Note que ao fim é retornado um objeto literal com o que será a parte pública 
 var Modulo = (function () {
 	//o init já acontece neste escopo
 	var modulo = {};
-	
+
 	var _counter = -1;
-	
+
 	++_counter;
-	
+
 	//metodo privado
 	var _getCounter = function() {
-		return _counter; 
+		return _counter;
 	};
-	
+
 	modulo.incrementar: function() {
 		console.log(_getCounter());
-		return ++_counter;	
+		return ++_counter;
 	};
-	
+
 	return modulo;
 })();//invoca instancia do módulo
 ```
 
-####2.3.1 Revealing Module Pattern
+####3.3.1 Revealing Module Pattern
 
 Neste pattern existe uma melhor separação do código que será retornado como a parte pública do módulo. Ajuda a organizar o código.
 
 ```javascript
 var Modulo = (function () {
 	var _counter = -1;
-	
+
 	_counter++;
-	
+
 	//metodo privado
 	var _getCounter = function() {
-		return _counter; 
+		return _counter;
 	};
-	
+
 	//metodo publico
 	var incrementarCounter = function() {
 		console.log(_getCounter());
-		return ++_counter;	
+		return ++_counter;
 	};
-	
+
 	var _stringMalegna = 'I \u2661 JavaScript! \u{1F4A9}'
-	
+
 	//metodo publico
 	var outroMetodo = function() {
 		console.log(_stringMalegna);
 	};
-	
+
 	//aqui vem a diferença, apenas *revelamos* os métodos escolhidos para serem públicos
 	return {
 		incrementar: incrementarCounter
@@ -869,7 +874,7 @@ var Modulo = (function () {
 
 [Mais exemplos de Module Pattern](https://toddmotto.com/mastering-the-module-pattern/)
 
-#3. Estilo de Codificação
+#4. Estilo de Codificação
 
 Existem diferentes estilos de codificação, entre estes diferentes estilos podemos citar: [node](https://docs.npmjs.com/misc/coding-style), [jQuery](http://contribute.jquery.org/style-guide/js), [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/), [Idiomatic JavaScript](https://github.com/rwaldron/idiomatic.js/), entre outros. A escolha de padrão depende da preferência dos programadores. Não se trata de escolha de certo ou errado, porém o importante é manter o padrão de uniformidade de código do inicio ao fim do projeto como se apenas um programador tivesse escrito o código por mais o projeto possua muitos contribuidores. Para isso definimos padrões. Eu sugiro usarmos no PI o padrão [WordPress](https://make.wordpress.org/core/handbook/best-practices/coding-standards/javascript/) e um verificador de código [Linting](https://en.wikipedia.org/wiki/Lint_%28software%29). Também podemos definir alguns padrões que temos preferência ao invés de usar cegamente o padrão do WordPress.
 
@@ -878,7 +883,7 @@ Existem diferentes estilos de codificação, entre estes diferentes estilos pode
 ```javascript
 //exemplo de padrão de código WordPress
 var i;
- 
+
 if ( condition ) {
     doSomething( 'with a string' );
 } else if ( otherCondition ) {
@@ -889,18 +894,18 @@ if ( condition ) {
 } else {
     somethingElse( true );
 }
- 
+
 // Unlike jQuery, WordPress prefers a space after the ! negation operator.
 // This is also done to conform to our PHP standards.
 while ( ! condition ) {
     iterating++;
 }
- 
+
 for ( i = 0; i < 100; i++ ) {
     object[ array[ i ] ] = someFn( i );
     $( '.container' ).val( array[ i ] );
 }
- 
+
 try {
     // Expressions
 } catch ( e ) {
@@ -926,18 +931,18 @@ objeto.metodoPublico = function() {
 objeto.propriedadeOuCampoPublico = null;
 ```
 
-#4. DOM
+#5. DOM
 
-[Document Object Model]() é o objeto que representa os elementos html em js através de um objeto, o objeto ```document```. Podemos acessar os elementos, alterá-los, remove-los por js.
+[Document Object Model](https://en.wikipedia.org/wiki/Document_Object_Model) é o objeto que representa os elementos html em js através de um objeto, o objeto ```document```. Podemos acessar os elementos, alterá-los, remove-los por js.
 
 ```html
 <html>
 	<head>
 	</head>
-	
+
 	<body>
 		<button type="button">Adicionar</button>
-		
+
 		<script src="code.js"></script>
 	</body>
 </html>
@@ -951,7 +956,7 @@ var adicionaItem = function() {
 // Primeiro é necessário criar um objeto que faz
 // referência ao elemento no HTML:
 var linkAddItem = document.getElementById('additem');
- 
+
 // Depois adicionamos a função "adicionaItem" à lista de
 // funções que devem ser executadas quando o usuário clica
 // na área do elemento no navegador:
@@ -960,7 +965,7 @@ linkAddItem.addEventListener('click', adicionaItem, false);
 
 Entretanto existem diferenças de API js entre diferentes navegadores e versões de navegadores além de o uso nativo do DOM ser um verboso demais.
 
-#5. jQuery
+#6. jQuery
 
 O jQuery é um framework js que utiliza a API do DOM com uma interface de programação (API) menos verbosa e torna as diferenças de navegadores transparentes ao programador. Abaixo a mesma ação feita em DOM no ultimo exemplo em jQuery.
 
@@ -976,6 +981,34 @@ Simples. O primeiro método do módulo ```jQuery```, também armazenado na varia
 
 Para mais exemplos e referência da [API jQuery Consulte aqui](https://api.jquery.com/) ou pergunte ao [Oráculo](google.com).
 
-#6. Exemplo PI
+#7. Exercícios:
+
+1. Criar uma calculadora usando apenas ```HTML``` e ```javascript``` sem ```jQuery```, apenas ```DOM```.
+Referências: [metodos js em DOM](http://www.w3schools.com/js/js_htmldom_document.asp).
+
+[Tudo o que precisaremos para este exercício](http://www.w3schools.com/js/js_htmldom_elements.asp).
+
+	- A calculadora deve fazer as operações de:
+		- Soma
+		- Subtração
+		- Divisão
+		- Multiplicação
+
+2. Criar um criador de lista de tarefas com ```jQuery``` e ```HTML```.
+
+Exemplo do que é uma lista de tarefas:
+![lista de tarefas](http://etcandroid.com/wp-content/uploads/2015/04/google-keep-notes-and-lists-2.png)
+
+Referências: [jQuery API](https://api.jquery.com/), [selectors](http://www.w3schools.com/jquery/jquery_ref_selectors.asp), [events](http://www.w3schools.com/jquery/jquery_ref_events.asp), [css methods](http://www.w3schools.com/jquery/jquery_ref_html.asp), [metodos de navegação html](http://www.w3schools.com/jquery/jquery_ref_traversing.asp), [curso inicial](http://www.w3schools.com/jquery/jquery_get_started.asp).
+
+Tudo o que precisaremos para este exercício será usar o [selector de #id](http://www.w3schools.com/jquery/sel_id.asp), [metodo navegador find](http://www.w3schools.com/jquery/traversing_find.asp), o [evento de click](http://www.w3schools.com/jquery/event_click.asp), e os metodos [text](http://www.w3schools.com/jquery/html_text.asp), [val](http://www.w3schools.com/jquery/html_val.asp), [prop](http://www.w3schools.com/jquery/html_prop.asp), [remove](http://www.w3schools.com/jquery/html_remove.asp), [append](http://www.w3schools.com/jquery/html_append.asp), [prepend](http://www.w3schools.com/jquery/html_prepend.asp), [empty](http://www.w3schools.com/jquery/html_empty.asp) e [html](http://www.w3schools.com/jquery/html_html.asp). Talvez necessite de mais algum que pode ser encontrado nas referências.
+
+	- Características necessárias da lista de tarefas:
+		- Adicionar novas tarefas
+		- Marcar tarefas como terminadas
+		- Deletar tarefas
+		- Opcional: buscar tarefas (mais complexo).
+
+
 
 **Videos de apoio: [Playlist do Rodrigo Branas - Desvendando a Linguagem JavaScript](https://www.youtube.com/playlist?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc)**
