@@ -997,6 +997,7 @@ Referências: [metodos js em DOM](http://www.w3schools.com/js/js_htmldom_documen
 2. Criar um criador de lista de tarefas com ```jQuery``` e ```HTML```.
 
 Exemplo do que é uma lista de tarefas:
+
 ![lista de tarefas](http://etcandroid.com/wp-content/uploads/2015/04/google-keep-notes-and-lists-2.png)
 
 Referências: [jQuery API](https://api.jquery.com/), [selectors](http://www.w3schools.com/jquery/jquery_ref_selectors.asp), [events](http://www.w3schools.com/jquery/jquery_ref_events.asp), [css methods](http://www.w3schools.com/jquery/jquery_ref_html.asp), [metodos de navegação html](http://www.w3schools.com/jquery/jquery_ref_traversing.asp), [curso inicial](http://www.w3schools.com/jquery/jquery_get_started.asp).
@@ -1010,5 +1011,5 @@ Tudo o que precisaremos para este exercício será usar o [selector de #id](http
 		- Opcional: buscar tarefas (mais complexo).
 
 
-
+------------------------------------------------------------------------------------------
 **Videos de apoio: [Playlist do Rodrigo Branas - Desvendando a Linguagem JavaScript](https://www.youtube.com/playlist?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc)**
