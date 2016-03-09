@@ -983,7 +983,7 @@ Para mais exemplos e referência da [API jQuery Consulte aqui](https://api.jquer
 
 #7. Exercícios:
 
-*1. Criar uma calculadora usando apenas ```HTML``` e ```javascript``` sem ```jQuery```, apenas ```DOM```.*
+**1. Criar uma calculadora usando apenas ```HTML``` e ```javascript``` sem ```jQuery```, apenas ```DOM```.**
 
 Referências: [metodos js em DOM](http://www.w3schools.com/js/js_htmldom_document.asp).
 
@@ -997,7 +997,7 @@ Referências: [metodos js em DOM](http://www.w3schools.com/js/js_htmldom_documen
 
 
 
-*2. Criar um criador de lista de tarefas com ```jQuery``` e ```HTML```.*
+**2. Criar um criador de lista de tarefas com ```jQuery``` e ```HTML```.**
 
 Exemplo do que é uma lista de tarefas:
 
