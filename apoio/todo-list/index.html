@@ -5,7 +5,34 @@
     <title>Exemplo Lista de Tarefas</title>
   </head>
   <body>
+    <div id="lista-tarefas">
+      <label for="nova-tarefa">Descrição</label>
+      <input type="text" id="descricao-nova-tarefa" value="">
+      <button type="button" id="adicionar-tarefa">Adicionar Tarefa</button>
+      <br>
+      <br>
+      <table border="1">
+        <caption>Lista de Tarefas</caption>
+        <thead>
+          <tr>
+            <th>Terminado</th>
+            <th>Descrição Tarefa</th>
+            <th>Deletar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- template
+           <tr id="id-tarefa">
+            <td><input type="checkbox" class="terminar" /></td>
+            <td>descrição tarefa</td>
+            <td><button type="button" class="deletar"></button></td>
+          </tr>
+        -->
+        </tbody>
+      </table>
+    </div>
 
-  <script type="text/javascript" src="code.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="code.js"></script>
   </body>
 </html>
