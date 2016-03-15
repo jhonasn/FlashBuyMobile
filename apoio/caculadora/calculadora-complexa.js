@@ -1,11 +1,11 @@
-var Calculadora = {
+var CalculadoraComplexa = {
   display: null,
   resultado: null,
   init: function() {
-    Calculadora.bindActions();
+    CalculadoraComplexa.bindEvents();
   },
-  bindActions: function() {
-    Calculadora.display = document.getElementById('display');
+  bindEvents: function() {
+    CalculadoraComplexa.display = document.getElementById('display');
 
     var c = document.getElementById('C');
     // var virg = document.getElementById(',');
@@ -29,16 +29,16 @@ var Calculadora = {
     var numeros = document.getElementsByClassName('numero');
     var operadores = document.getElementsByClassName('operador');
 
-    c.addEventListener('click', Calculadora.clearEventListener);
-    // numeros.addEventListener('click', Calculadora.numeroEventListener); //erro
-    Calculadora.htmlCollectionAddClickEventListener(numeros, Calculadora.numeroEventListener);
-    // operadores.addEventListener('click', Calculadora.operadorEventListener); //erro
-    Calculadora.htmlCollectionAddClickEventListener(operadores, Calculadora.operadorEventListener);
+    c.addEventListener('click', CalculadoraComplexa.clearEventListener);
+    // numeros.addEventListener('click', CalculadoraComplexa.numeroEventListener); //erro
+    CalculadoraComplexa.htmlCollectionAddClickEventListener(numeros, CalculadoraComplexa.numeroEventListener);
+    // operadores.addEventListener('click', CalculadoraComplexa.operadorEventListener); //erro
+    CalculadoraComplexa.htmlCollectionAddClickEventListener(operadores, CalculadoraComplexa.operadorEventListener);
 
-    //numeros.addEventListener('click', Calculadora.terminoCalculoEventListener); //ja sabe né
-    // Calculadora.htmlCollectionAddClickEventListener(numeros, Calculadora.terminoCalculoEventListener);
-    // operadores.addEventListener('click', Calculadora.terminoCalculoEventListener); //ja sabe né
-    //Calculadora.htmlCollectionAddClickEventListener(operadores, Calculadora.terminoCalculoEventListener);
+    //numeros.addEventListener('click', CalculadoraComplexa.terminoCalculoEventListener); //ja sabe né
+    // CalculadoraComplexa.htmlCollectionAddClickEventListener(numeros, CalculadoraComplexa.terminoCalculoEventListener);
+    // operadores.addEventListener('click', CalculadoraComplexa.terminoCalculoEventListener); //ja sabe né
+    //CalculadoraComplexa.htmlCollectionAddClickEventListener(operadores, CalculadoraComplexa.terminoCalculoEventListener);
 
     // div.addEventListener('click', fun);
     // mult.addEventListener('click', fun);
@@ -62,61 +62,61 @@ var Calculadora = {
     }
   },
   clearEventListener: function() {
-    Calculadora.display.innerText = '';
+    CalculadoraComplexa.display.innerText = '';
   },
   numeroEventListener: function(e) {
-    Calculadora.verificaTerminoCalculo();
+    CalculadoraComplexa.verificaTerminoCalculo();
 
     var numero = this.innerText.trim();
-    Calculadora.display.innerText += numero;
+    CalculadoraComplexa.display.innerText += numero;
   },
   operadorEventListener: function() {
-    //Calculadora.verificaTerminoCalculo();
+    //CalculadoraComplexa.verificaTerminoCalculo();
 
     var operador = this.innerText.trim();
 
-    var operadorEncontrado = Calculadora.display.innerText.match(/\+|\-|\*|\//g);
+    var operadorEncontrado = CalculadoraComplexa.display.innerText.match(/\+|\-|\*|\//g);
 
     if(operador == '=' || (operadorEncontrado && operadorEncontrado.length > 0)) {
       operadorEncontrado = operadorEncontrado[0];
 
-      var numeros = Calculadora.display.innerText.split(operadorEncontrado);
+      var numeros = CalculadoraComplexa.display.innerText.split(operadorEncontrado);
 
       var n1 = parseInt(numeros[0]);
       var n2 = parseInt(numeros[1]);
 
-      Calculadora.resultado = 0;
+      CalculadoraComplexa.resultado = 0;
 
       switch (operadorEncontrado) {
         case '+':
-        Calculadora.resultado = n1 + n2;
+        CalculadoraComplexa.resultado = n1 + n2;
           break;
         case '-':
-        Calculadora.resultado = n1 - n2;
+        CalculadoraComplexa.resultado = n1 - n2;
           break;
         case '*':
-        Calculadora.resultado = n1 * n2;
+        CalculadoraComplexa.resultado = n1 * n2;
           break;
         case '/':
-        Calculadora.resultado = n1 / n2;
+        CalculadoraComplexa.resultado = n1 / n2;
           break;
         // case '=':
         //   break;
         default:
-        Calculadora.resultado = 'Erro na Calculadora';
+        CalculadoraComplexa.resultado = 'Erro na Calculadora';
           break;
       }
 
-      Calculadora.display.innerText = Calculadora.resultado;
+      CalculadoraComplexa.display.innerText = CalculadoraComplexa.resultado;
     } else {
-      Calculadora.display.innerText += operador;
+      CalculadoraComplexa.display.innerText += operador;
     }
   },
   verificaTerminoCalculo: function () {
-    if(Calculadora.resultado == Calculadora.display.innerText) {
-      Calculadora.clearEventListener();
+    if(CalculadoraComplexa.resultado == CalculadoraComplexa.display.innerText) {
+      CalculadoraComplexa.clearEventListener();
     }
   }
 };
 
-Calculadora.init();
+CalculadoraComplexa.init();

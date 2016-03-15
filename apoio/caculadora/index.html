@@ -1,41 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Exemplo Calculadora</title>
-  </head>
-  <body>
 
+<head>
+  <meta charset="utf-8">
+  <title>Exemplo Calculadora</title>
+</head>
+
+<body>
+
+  <h3>Calculadora "Complexa"</h3>
   <table id="calculadora">
     <tr>
       <td id="display" colspan="4"></td>
     </tr>
     <tr>
-      <td><button id="C">C</button></td>
-      <td><button id="/" class="operador">/</button></td>
-      <td><button id="*" class="operador">*</button></td>
-      <td><button id="-" class="operador">-</button></td>
+      <td>
+        <button id="C">C</button>
+      </td>
+      <td>
+        <button id="/" class="operador">/</button>
+      </td>
+      <td>
+        <button id="*" class="operador">*</button>
+      </td>
+      <td>
+        <button id="-" class="operador">-</button>
+      </td>
     </tr>
     <tr>
-      <td><button id="7" class="numero">7</button></td>
-      <td><button id="8" class="numero">8</button></td>
-      <td><button id="9" class="numero">9</button></td>
-      <td><button id="+" class="operador">+</button></td>
+      <td>
+        <button id="7" class="numero">7</button>
+      </td>
+      <td>
+        <button id="8" class="numero">8</button>
+      </td>
+      <td>
+        <button id="9" class="numero">9</button>
+      </td>
+      <td>
+        <button id="+" class="operador">+</button>
+      </td>
     </tr>
     <tr>
-      <td><button id="4" class="numero">4</button></td>
-      <td><button id="5" class="numero">5</button></td>
-      <td><button id="6" class="numero">6</button></td>
-      <td><button id="=" class="operador">=</button></td>
+      <td>
+        <button id="4" class="numero">4</button>
+      </td>
+      <td>
+        <button id="5" class="numero">5</button>
+      </td>
+      <td>
+        <button id="6" class="numero">6</button>
+      </td>
+      <td>
+        <button id="=" class="operador">=</button>
+      </td>
     </tr>
     <tr>
-      <td><button id="1" class="numero">1</button></td>
-      <td><button id="2" class="numero">2</button></td>
-      <td><button id="3" class="numero">3</button></td>
-      <td><button id="0" class="numero">0</button></td>
+      <td>
+        <button id="1" class="numero">1</button>
+      </td>
+      <td>
+        <button id="2" class="numero">2</button>
+      </td>
+      <td>
+        <button id="3" class="numero">3</button>
+      </td>
+      <td>
+        <button id="0" class="numero">0</button>
+      </td>
     </tr>
   </table>
 
-  <script type="text/javascript" src="code.js"></script>
-  </body>
+  <br>
+  <hr>
+  <br>
+
+  <h3>Calculadora "Simples"</h3>
+
+  <div id="calculadora-simples">
+    <input type="text" id="n1" />
+    <select id="operacao">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" id="n2" />
+    <button type="button" id="calcular">=</button>
+    <input type="text" id="resultado" readonly />
+  </div>
+
+  <script type="text/javascript" src="calculadora-complexa.js"></script>
+  <script type="text/javascript" src="calculadora-simples.js"></script>
+</body>
+
 </html>
