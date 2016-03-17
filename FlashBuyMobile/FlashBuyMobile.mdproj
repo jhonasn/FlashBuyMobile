@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ItemType>GenericProject</ItemType>
+    <ProjectGuid>{57D42CAB-3F69-48FF-A0C6-305622E6F613}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Default|AnyCPU' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="config.xml" />
+    <None Include="hooks\README.md" />
+    <None Include="www\index.html" />
+    <None Include="www\css\index.css" />
+    <None Include="www\css\material-icons.css" />
+    <None Include="www\css\materialize.css" />
+    <None Include="www\data\configuration.json" />
+    <None Include="www\font\material-design-icons\LICENSE.txt" />
+    <None Include="www\font\material-design-icons\Material-Design-Icons.eot" />
+    <None Include="www\font\material-design-icons\Material-Design-Icons.svg" />
+    <None Include="www\font\material-design-icons\Material-Design-Icons.ttf" />
+    <None Include="www\font\material-design-icons\Material-Design-Icons.woff" />
+    <None Include="www\font\material-design-icons\Material-Design-Icons.woff2" />
+    <None Include="www\font\material-design-icons\material-icons-regular.woff2" />
+    <None Include="www\font\roboto\Roboto-Bold.eot" />
+    <None Include="www\font\roboto\Roboto-Bold.ttf" />
+    <None Include="www\font\roboto\Roboto-Bold.woff" />
+    <None Include="www\font\roboto\Roboto-Bold.woff2" />
+    <None Include="www\font\roboto\Roboto-Light.eot" />
+    <None Include="www\font\roboto\Roboto-Light.ttf" />
+    <None Include="www\font\roboto\Roboto-Light.woff" />
+    <None Include="www\font\roboto\Roboto-Light.woff2" />
+    <None Include="www\font\roboto\Roboto-Medium.eot" />
+    <None Include="www\font\roboto\Roboto-Medium.ttf" />
+    <None Include="www\font\roboto\Roboto-Medium.woff" />
+    <None Include="www\font\roboto\Roboto-Medium.woff2" />
+    <None Include="www\font\roboto\Roboto-Regular.eot" />
+    <None Include="www\font\roboto\Roboto-Regular.ttf" />
+    <None Include="www\font\roboto\Roboto-Regular.woff" />
+    <None Include="www\font\roboto\Roboto-Regular.woff2" />
+    <None Include="www\font\roboto\Roboto-Thin.eot" />
+    <None Include="www\font\roboto\Roboto-Thin.ttf" />
+    <None Include="www\font\roboto\Roboto-Thin.woff" />
+    <None Include="www\font\roboto\Roboto-Thin.woff2" />
+    <None Include="www\img\logo.png" />
+    <None Include="www\js\base\app.js" />
+    <None Include="www\js\base\base.js" />
+    <None Include="www\js\base\util.js" />
+    <None Include="www\js\controllers\home.js" />
+    <None Include="www\js\controllers\teste.js" />
+    <None Include="www\js\lib\jquery.js" />
+    <None Include="www\js\lib\jquery.ui.touch-punch.js" />
+    <None Include="www\js\lib\materialize.js" />
+    <None Include="www\views\home.html" />
+    <None Include="www\views\teste.html" />
+  </ItemGroup>
+</Project>
