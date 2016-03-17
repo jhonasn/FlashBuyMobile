@@ -33,6 +33,8 @@ var FlashBuy = {
     //verifica se foi passado o link e controller
     if(!controller || !link) {
       throw new Error('Erro de redirecionamento, controller ou link nao foram passados para FlashBuy.load().');
+    } else if (link.indexOf(controller) == -1) {
+        throw new Error('Erro de redirecionamento, controller e link não correspondem.');
     }
 
     //carrega tela e dispara metodos da controller
