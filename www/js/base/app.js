@@ -52,12 +52,27 @@ var FlashBuy = {
   },
   //configura a chamada de telas / rotas
   bindEventsRedirections: function() {
-    $('#home').on('click', function() {
-      FlashBuy.load('home', 'views/home.html');
-    });
-    $('#teste').on('click', function() {
-      FlashBuy.load('teste', 'views/teste.html');
-    });
+      $.getJSON('data/configuration.json')
+      .success(function (configuration) {
+          if(!configuration) {
+              throw new Error("Erro ao iniciar aplicação. Configuração da aplicação inválida.");
+          } else if(!configuration.controllers) {
+              throw new Error("Erro ao iniciar aplicação. Não foi possível encontrar as configurações de controllers.");
+          }
+
+          for (var i = 0; i < configuration.controllers.length; i++) {
+              var controllerName = configuration.controllers[i];
+
+              $('#' + controllerName).on('click', function() {
+                  controllerName = $(this).attr('id');
+
+                  FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
+              });
+          }
+      })
+      .error(function (err) {
+          throw new Error("Erro ao iniciar aplicação. Não foi possível encontrar o arquivo de configuração.");
+      });
   }
 };
 
