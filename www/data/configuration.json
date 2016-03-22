@@ -7,18 +7,22 @@
         "atributo html id com o mesmo nome da controller registrada aqui em controllers.",
         "3. Adicionar novo arquivo .js com o mesmo nome da controller registrada na",
         "pasta controllers e a propriedade do módulo FlashBuy.nomeDaSuaNovaController.",
-        "4. Adicionar a view referente a nova controller em views com o mesmo nome da",
+        "4. Referenciar o novo arquivo .js com o mesmo nome da controller registrada na pasta controllers",
+        "em index.html",
+        "5. Adicionar a view referente a nova controller em views com o mesmo nome da",
         "controller criada.",
         "",
         "",
         "resumo:",
         "1. Adiciona 'nomeDaSuaNovaController' em 'controllers' de configuration.json",
         "2. Adiciona <li><a id='nomeDaSuaNovaController'> em index.html",
-        "3. Adiciona js/controllers/nomeDaSuaNovaController.js com FlashBuy.nomeDaSuaNovaController",
-        "4. Adiciona views/nomeDaSuaNovaController.html"
+        "4. Adiciona <script type='text/javascript' src='js/controllers/nomeDaSuaNovaController.js'></script> em index.html",
+        "5. Adiciona js/controllers/nomeDaSuaNovaController.js com FlashBuy.nomeDaSuaNovaController",
+        "6. Adiciona views/nomeDaSuaNovaController.html"
     ],
     "controllers": [
         "home",
-        "teste"
+        "listaAnuncios",
+        "testeMD5"
     ]
 }
