@@ -18,6 +18,11 @@ FlashBuy.util = {
     },
     getDeviceInfo: function () {
         return device;
+    },
+    //criptografa o texto em MD5
+    criptografarMD5: function (texto) {
+        var texto = md5(texto);
+        return texto
     }
 };
 
