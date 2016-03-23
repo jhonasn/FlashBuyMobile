@@ -1,14 +1,31 @@
 ﻿{
   "version": "2.2.1",
-  "output": "Error",
-  "ignore": [],
+  "output": "Warning",
+  "ignore": [
+    "js/lib/jquery.js",
+    "js/lib/jquery.ui.touch-punch.js",
+    "js/lib/materialize.js",
+    "js/lib/md5.js",
+    "js/lib/qrcode.js",
+    "js/base/base.js"
+  ],
   "options": {
     "devel": true,
+    "browser": true,
     "for": true,
-    "maxlen": 100
+    "maxlen": 150,
+    "sloppy": false,
+    "vars": false,
+    "debug": false,
+    "evil": false,
+    "nomen": true,
+    "unparam": false,
+    "stupid": false,
+    "white": false
   },
   "globalVariables": [
-    "FlashBuy"
+    "FlashBuy",
+    "$"
   ],
   "runOnSave": true
 }

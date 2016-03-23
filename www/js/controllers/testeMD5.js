@@ -43,10 +43,10 @@ FlashBuy.testeMD5 = {
             {
                 titulo: 'Teste de Template, titulo 3',
                 descricao: 'Descrição de teste que se repete do teste 2/3'
-            },
+            }
         ];
 
-        var htmlTemplate = FlashBuy.util.getHtml('views/testeMD5template.html');
+        htmlTemplate = FlashBuy.util.getHtml('views/testeMD5template.html');
 
         models.forEach(function (model) {
             var htmlRenderizado = FlashBuy.util.templateHtml(htmlTemplate, model);

@@ -13,7 +13,7 @@ FlashBuy.util = {
             $(document).ready(callback);
         }
     },
-    gerarQRCode: function (string, divId) {        
+    gerarQRCode: function (string, divId) {
         var qrcode = new QRCode(divId, {
                 text: string,
                 width: 128,
@@ -31,8 +31,7 @@ FlashBuy.util = {
     },
     //criptografa o texto em MD5
     criptografarMD5: function (texto) {
-        var texto = md5(texto);
-        return texto
+        return md5(texto);
     },
     getHtml: function (url) {
         var html;
@@ -57,7 +56,7 @@ FlashBuy.util = {
     templateUrl: function (url, model) {
         var html = FlashBuy.util.getHtml(url);
 
-        return FlashBuy.util.templateHtml(html, model)
+        return FlashBuy.util.templateHtml(html, model);
     },
     templateHtml: function (html, model) {
         if (model) {
