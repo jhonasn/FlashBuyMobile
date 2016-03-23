@@ -35,20 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apoio", "apoio", "{D78FEC29
 		apoio\JavaScript Documento de Apoio PI.md = apoio\JavaScript Documento de Apoio PI.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "calculadora", "calculadora", "{BF4058B6-A1FA-42A2-92A7-FD84403904B4}"
-	ProjectSection(SolutionItems) = preProject
-		apoio\caculadora\calculadora-complexa.js = apoio\caculadora\calculadora-complexa.js
-		apoio\caculadora\calculadora-simples.js = apoio\caculadora\calculadora-simples.js
-		apoio\caculadora\index.html = apoio\caculadora\index.html
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "todo-list", "todo-list", "{6159CF7F-C710-4C93-A481-187CB10F6015}"
-	ProjectSection(SolutionItems) = preProject
-		apoio\todo-list\code.js = apoio\todo-list\code.js
-		apoio\todo-list\index.html = apoio\todo-list\index.html
-		apoio\todo-list\jquery.js = apoio\todo-list\jquery.js
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,7 +48,5 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D78FEC29-92F9-4069-84FA-C8B471316734} = {1A7685E6-7835-40E5-AB2E-042ABD24FD6B}
-		{BF4058B6-A1FA-42A2-92A7-FD84403904B4} = {D78FEC29-92F9-4069-84FA-C8B471316734}
-		{6159CF7F-C710-4C93-A481-187CB10F6015} = {D78FEC29-92F9-4069-84FA-C8B471316734}
 	EndGlobalSection
 EndGlobal
