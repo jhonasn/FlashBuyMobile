@@ -23,6 +23,7 @@
     "controllers": [
         "home",
         "listaAnuncios",
-        "testeMD5"
+        "testeMD5",
+        "geradorQr"
     ]
 }
