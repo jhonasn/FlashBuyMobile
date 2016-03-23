@@ -3,12 +3,12 @@
   "output": "Error",
   "ignore": [],
   "options": {
-    "browser": true,
     "devel": true,
     "for": true,
     "maxlen": 100
   },
   "globalVariables": [
     "FlashBuy"
-  ]
+  ],
+  "runOnSave": true
 }

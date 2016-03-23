@@ -1,3 +1,6 @@
+/// <reference path="js/base/base.js" />
+/// <reference path="js/base/util.js" />
+
 //Modulo principal, podemos adicionar aqui regras de negócio que podem ser reutilizadas em outras telas
 var FlashBuy = {
     //construtor
