@@ -10,8 +10,15 @@ FlashBuy.util = {
             $(document).ready(callback);
         }
     },
-    gerarQRCode: function (gerarAposElementoId) {
-        //implementar...
+    gerarQRCode: function (string, divId) {        
+        var qrcode = new QRCode(divId, {
+                text: string,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
     },
     getDeviceId: function () {
         return device.uuid;
@@ -21,8 +28,8 @@ FlashBuy.util = {
     },
     //criptografa o texto em MD5
     criptografarMD5: function (texto) {
-        var texto = md5(texto);
-        return texto
+        console.log(texto)
+        return md5(texto);
     }
 };
 
