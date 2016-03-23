@@ -1,3 +1,7 @@
 #content {
-  margin-top: 10px;
+    margin-top: 10px;
+}
+
+#main-loading {
+    margin-top: 0;
 }

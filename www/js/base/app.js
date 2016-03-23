@@ -78,6 +78,13 @@ var FlashBuy = {
         .error(function (err) {
             throw new Error("Erro ao iniciar aplicação. Não foi possível encontrar o arquivo de configuração.");
         });
+    },
+    loading: function (show) {
+        if (show) {
+            $('#main-loading').show();
+        } else {
+            $('#main-loading').hide();
+        }
     }
 };
 
