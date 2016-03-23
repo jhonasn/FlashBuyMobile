@@ -10,7 +10,7 @@ FlashBuy.util = {
             $(document).ready(callback);
         }
     },
-    gerarQRCode: function () {
+    gerarQRCode: function (gerarAposElementoId) {
         //implementar...
     },
     getDeviceId: function () {
