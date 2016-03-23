@@ -28,7 +28,6 @@ FlashBuy.util = {
     },
     //criptografa o texto em MD5
     criptografarMD5: function (texto) {
-        console.log(texto)
         return md5(texto);
     }
 };
