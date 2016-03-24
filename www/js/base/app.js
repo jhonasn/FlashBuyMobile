@@ -73,7 +73,7 @@ var FlashBuy = {
                         var $controllerButton = $content.find('#' + controllerName);
                         if ($controllerButton.length) {
                             $controllerButton.on('click', function () {
-                                //controllerName = $(this).attr('id');
+                                controllerName = $(this).attr('id');
 
                                 FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
                             });
