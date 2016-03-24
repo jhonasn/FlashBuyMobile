@@ -1,5 +1,6 @@
 ﻿FlashBuy.geradorQr = {
-    init: function () {
+    init: function (teste, outro) {
+        console.log('teste: ' + teste + ', outro: ' + outro);
         console.log('geradorQr init');
     },
     ready: function () {

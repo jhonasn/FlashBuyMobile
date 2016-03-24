@@ -3,6 +3,7 @@
 
 //Modulo principal, podemos adicionar aqui regras de negócio que podem ser reutilizadas em outras telas
 var FlashBuy = {
+    controllers: null,
     //construtor
     init: function () {
         FlashBuy.bindEvents();
@@ -40,15 +41,51 @@ var FlashBuy = {
             throw new Error('Erro de redirecionamento, controller e link não correspondem.');
         }
 
+        var $content = $('#content');
+        var $controllerButton = $content.find('#' + controller);
+
         //carrega tela e dispara metodos da controller
-        $('#content').load(link, function () {
+        $content.load(link, function () {            
             if (FlashBuy[controller].init) {
-                FlashBuy[controller].init();
+                //carregamento de parametros para a controller
+                if ($controllerButton.length) {
+                    var paramsButton = $controllerButton.data();
+                    var initParamsNames = getParamNames(FlashBuy[controller].init);
+                    var params = [];
+
+                    initParamsNames.forEach(function (paramName) {
+                        var paramValue = paramsButton[paramName];
+                        if (paramValue) {
+                            params.push(paramValue);
+                        }
+                    });
+
+                    var controllerInstance = FlashBuy[controller];
+                    controllerInstance.init.apply(controllerInstance, params);
+                } else {
+                    FlashBuy[controller].init();
+                }
             }
             $('#content').ready(function () {
+                //configura chamada de telas / rotas dentro da tela carregada
+                if (FlashBuy.controllers) {
+                    FlashBuy.controllers.forEach(function (controllerName) {
+                        var $controllerButton = $content.find('#' + controllerName);
+                        if ($controllerButton.length) {
+                            $controllerButton.on('click', function () {
+                                //controllerName = $(this).attr('id');
+
+                                FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
+                            });
+                        }
+                    });
+                }                
+
+                //chama a função ready da controller
                 if (FlashBuy[controller].ready) {
                     FlashBuy[controller].ready();
                 }
+
             });
         });
 
@@ -64,6 +101,8 @@ var FlashBuy = {
             } else if (!configuration.controllers) {
                 throw new Error("Erro ao iniciar aplicação. Não foi possível encontrar as configurações de controllers.");
             }
+
+            FlashBuy.controllers = configuration.controllers;
 
             for (var i = 0; i < configuration.controllers.length; i++) {
                 var controllerName = configuration.controllers[i];
