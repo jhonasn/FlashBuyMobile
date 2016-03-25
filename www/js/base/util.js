@@ -33,6 +33,32 @@ FlashBuy.util = {
     criptografarMD5: function (texto) {
         return md5(texto);
     },
+
+    getListaAnuncios: function () {
+        //metodo para carregar o json listaAnunciosFake
+        $.getJSON('data/listaAnunciosFake.json', function (listaDeAnuncios) {
+            $.each(listaDeAnuncios.anunciosFake, function (index, oferta) {
+                $("#divOferta").append(
+                    "<div class='col s12 m7'>" +
+                        "<div class='card small'>" +
+                        "<!-- Imagem do card, por enquanto vou deixar sem -->" +
+                            "<div class='card-image'>" +
+                                "<img src='../img/semImagem.png'>" +
+                                "<span class='card-title'>" + oferta.Produto + "</span>" +
+                            "</div>" +
+                            "<div class='card-content'>" +
+                                "<p>" + oferta.Descricao + "</p>" +
+                            "</div>" +
+                            "<div class='card-action'>" +
+                                "<a href='#'>Ver mais</a>" +
+                                "<a href='#'>Recusar</a>" +
+                            "</div>" +
+                        "</div>" +
+                    "</div>");
+            });
+        });
+    },
+
     getHtml: function (url) {
         var html;
         var err;
