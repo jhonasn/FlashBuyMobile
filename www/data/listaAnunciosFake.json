@@ -1,0 +1,58 @@
+{
+    "anunciosFake": [
+        {
+            "IdOferta ": "001",
+            "IdAnunciante ": "001",
+            "Produto": "PRODUTO 001",
+            "Descricao": "Descrição do produto001",
+            "Foto": "sem foto ainda",
+            "Valor": "1.00",
+            "DataInicio": "10.08.1995",
+            "DateTime ": "10.08.1995",
+            "EnumOferta": "001",
+            "IdAnunciante": "001",
+            "IdCompraPacote": "001",
+            "IdAprovador": "001",
+            "DataHoraAprovacao  ": "10.08.1995",
+            "Administrador": "administrador001",
+            "Anunciante": "anuciante001",
+            "LocalOferta": "pindamonhangaba"
+        },
+        {
+            "IdOferta ": "002",
+            "IdAnunciante ": "002",
+            "Produto": "PRODUTO 002",
+            "Descricao": "Descrição do produto002",
+            "Foto": "sem foto ainda",
+            "Valor": "2.00",
+            "DataInicio": "31.03.2010",
+            "DateTime ": "12.07.2059",
+            "EnumOferta": "002",
+            "IdAnunciante": "002",
+            "IdCompraPacote": "002",
+            "IdAprovador": "002",
+            "DataHoraAprovacao  ": "13.12.2015",
+            "Administrador": "administrador002",
+            "Anunciante": "anuciante002",
+            "LocalOferta": "tangamandápio"
+        },
+        {
+            "IdOferta ": "003",
+            "IdAnunciante ": "003",
+            "Produto": "PRODUTO 003",
+            "Descricao": "Descrição do produto002",
+            "Foto": "sem foto ainda",
+            "Valor": "2.00",
+            "DataInicio": "31.03.2010",
+            "DateTime ": "12.07.2059",
+            "EnumOferta": "003",
+            "IdAnunciante": "002",
+            "IdCompraPacote": "003",
+            "IdAprovador": "003",
+            "DataHoraAprovacao  ": "13.12.2015",
+            "Administrador": "administrador002",
+            "Anunciante": "anuciante002",
+            "LocalOferta": "tangamandápio"
+        }
+    ]
+}
