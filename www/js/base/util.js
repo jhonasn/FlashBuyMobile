@@ -50,8 +50,7 @@ FlashBuy.util = {
                                 "<p>" + oferta.Descricao + "</p>" +
                             "</div>" +
                             "<div class='card-action'>" +
-                                "<button type='button' id='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +
-                                "<a href='#'>Ver mais</a>" +
+                                "<button type='button' id='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +                                
                                 "<a href='#'>Recusar</a>" +
                             "</div>" +
                         "</div>" +
