@@ -8,6 +8,9 @@ FlashBuy.anunciosAdquiridos = {
     },
     ready: function () {
         console.log('anunciosAdquiridos ready');
+
+        //método de chamar a lista de anúncios fake
+        FlashBuy.util.getListaAnuncios();
     }
 };
 
