@@ -25,6 +25,7 @@
     "listaAnuncios",
     "testeMD5",
     "geradorQr",
-    "anunciosAdquiridos"
+    "anunciosAdquiridos",
+    "descricaoAnuncio"
   ]
 }
