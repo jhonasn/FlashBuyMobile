@@ -38,23 +38,25 @@ FlashBuy.util = {
         //metodo para carregar o json listaAnunciosFake
         $.getJSON('data/listaAnunciosFake.json', function (listaDeAnuncios) {
             $.each(listaDeAnuncios.anunciosFake, function (index, oferta) {
-                $("#divOferta").append(
-                    "<div class='col s12 m7'>" +
-                        "<div class='card small'>" +
-                        "<!-- Imagem do card, por enquanto vou deixar sem -->" +
-                            "<div class='card-image'>" +
-                                "<img src='../img/semImagem.png'>" +
-                                "<span class='card-title'>" + oferta.Produto + "</span>" +
+                $("#divOfertas").append(
+                    "<div class='oferta'>"+
+                        "<div class='col s12 m7'>" +
+                            "<div class='card small'>" +
+                            "<!-- Imagem do card, por enquanto vou deixar sem -->" +
+                                "<div class='card-image'>" +
+                                    "<img src='../img/semImagem.png'>" +
+                                    "<span class='card-title'>" + oferta.Produto + "</span>" +
+                                "</div>" +
+                                "<div class='card-content'>" +
+                                    "<p>" + oferta.Descricao + "</p>" +
+                                "</div>" +
+                                "<div class='card-action'>" +
+                                    "<button type='button' id='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +                                
+                                    "<a href='#'>Recusar</a>" +
+                                "</div>" +
                             "</div>" +
-                            "<div class='card-content'>" +
-                                "<p>" + oferta.Descricao + "</p>" +
-                            "</div>" +
-                            "<div class='card-action'>" +
-                                "<button type='button' id='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +                                
-                                "<a href='#'>Recusar</a>" +
-                            "</div>" +
-                        "</div>" +
-                    "</div>");
+                        "</div>"+
+                    '</div>');
             });
         });
     },
