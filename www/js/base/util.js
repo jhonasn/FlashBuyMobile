@@ -34,7 +34,7 @@ FlashBuy.util = {
         return md5(texto);
     },
 
-    getListaAnuncios: function () {
+    getListaAnuncios: function (cb) {
         //metodo para carregar o json listaAnunciosFake
         $.getJSON('data/listaAnunciosFake.json', function (listaDeAnuncios) {
             $.each(listaDeAnuncios.anunciosFake, function (index, oferta) {
@@ -51,13 +51,17 @@ FlashBuy.util = {
                                     "<p>" + oferta.Descricao + "</p>" +
                                 "</div>" +
                                 "<div class='card-action'>" +
-                                    "<button type='button' id='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +                                
+                                    "<button type='button' data-controller='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +                                
                                     "<a href='#'>Recusar</a>" +
                                 "</div>" +
                             "</div>" +
                         "</div>"+
                     '</div>');
             });
+
+            if (cb) {
+                cb();
+            }
         });
     },
 
@@ -97,6 +101,22 @@ FlashBuy.util = {
         }
 
         return html;
+    },
+    configurarRotasControllers: function () {
+        //configura chamada de telas / rotas dentro da tela carregada
+        var $content = $('#content');
+        if (FlashBuy.controllers) {
+            FlashBuy.controllers.forEach(function (controllerName) {
+                var $controllerButton = $content.find('[data-controller="' + controllerName + '"]');
+                if ($controllerButton.length) {
+                    $controllerButton.on('click', function () {
+                        controllerName = $(this).data('controller');
+
+                        FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
+                    });
+                }
+            });
+        }
     }
 };
 

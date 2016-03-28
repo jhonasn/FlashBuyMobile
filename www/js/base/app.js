@@ -71,20 +71,6 @@ var FlashBuy = {
                 if (FlashBuy[controller].ready) {
                     FlashBuy[controller].ready();
                 }
-
-                //configura chamada de telas / rotas dentro da tela carregada
-                if (FlashBuy.controllers) {
-                    FlashBuy.controllers.forEach(function (controllerName) {
-                        var $controllerButton = $content.find('#' + controllerName);
-                        if ($controllerButton.length) {
-                            $controllerButton.on('click', function () {
-                                controllerName = $(this).attr('id');
-
-                                FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
-                            });
-                        }
-                    });
-                }
             });
         });
 

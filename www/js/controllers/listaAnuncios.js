@@ -10,6 +10,8 @@ FlashBuy.listaAnuncios = {
         console.log('listaAnuncios ready');
 
         //método de chamar a lista de anúncios fake
-        FlashBuy.util.getListaAnuncios();
+        FlashBuy.util.getListaAnuncios(function () {
+            FlashBuy.util.configurarRotasControllers();
+        });
     }
 };
