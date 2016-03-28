@@ -67,6 +67,11 @@ var FlashBuy = {
                 }
             }
             $('#content').ready(function () {
+                //chama a função ready da controller
+                if (FlashBuy[controller].ready) {
+                    FlashBuy[controller].ready();
+                }
+
                 //configura chamada de telas / rotas dentro da tela carregada
                 if (FlashBuy.controllers) {
                     FlashBuy.controllers.forEach(function (controllerName) {
@@ -79,13 +84,7 @@ var FlashBuy = {
                             });
                         }
                     });
-                }                
-
-                //chama a função ready da controller
-                if (FlashBuy[controller].ready) {
-                    FlashBuy[controller].ready();
                 }
-
             });
         });
 
