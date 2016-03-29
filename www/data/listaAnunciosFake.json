@@ -1,7 +1,7 @@
 {
     "anunciosFake": [
         {
-            "IdOferta ": "001",
+            "IdOferta": "001",
             "IdAnunciante ": "001",
             "Produto": "PRODUTO 001",
             "Descricao": "Descrição do produto001",
@@ -19,7 +19,7 @@
             "LocalOferta": "pindamonhangaba"
         },
         {
-            "IdOferta ": "002",
+            "IdOferta": "002",
             "IdAnunciante ": "002",
             "Produto": "PRODUTO 002",
             "Descricao": "Descrição do produto002",
@@ -37,7 +37,7 @@
             "LocalOferta": "tangamandápio"
         },
         {
-            "IdOferta ": "003",
+            "IdOferta": "003",
             "IdAnunciante ": "003",
             "Produto": "PRODUTO 003",
             "Descricao": "Descrição do produto002",
