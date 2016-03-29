@@ -32,39 +32,7 @@ FlashBuy.util = {
     //criptografa o texto em MD5
     criptografarMD5: function (texto) {
         return md5(texto);
-    },
-
-    getListaAnuncios: function (cb) {
-        //metodo para carregar o json listaAnunciosFake
-        $.getJSON('data/listaAnunciosFake.json', function (listaDeAnuncios) {
-            $.each(listaDeAnuncios.anunciosFake, function (index, oferta) {
-                $("#divOfertas").append(
-                    "<div class='oferta'>" +
-                        "<div class='col s12 m7'>" +
-                            "<div class='card small'>" +
-                            "<!-- Imagem do card, por enquanto vou deixar sem -->" +
-                                "<div class='card-image'>" +
-                                    "<img src='../img/semImagem.png'>" +
-                                    "<span class='card-title'>" + oferta.Produto + "</span>" +
-                                "</div>" +
-                                "<div class='card-content'>" +
-                                    "<p>" + oferta.Descricao + "</p>" +
-                                "</div>" +
-                                "<div class='card-action'>" +
-                                    "<button type='button' data-controller='descricaoAnuncio' data-idOferta='" + oferta.IdOferta + "' data-descricaoOferta='" + oferta.Descricao + "'>Abrir Oferta</button>" +
-                                    "<a href='#'>Recusar</a>" +
-                                "</div>" +
-                            "</div>" +
-                        "</div>" +
-                    '</div>');
-            });
-
-            if (cb) {
-                cb();
-            }
-        });
-    },
-
+    },    
     getHtml: function (url) {
         var html;
         var err;
