@@ -15,13 +15,13 @@ FlashBuy.util = {
     },
     gerarQRCode: function (string, divId) {
         var qrcode = new QRCode(divId, {
-                text: string,
-                width: 128,
-                height: 128,
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H
-            });
+            text: string,
+            width: 128,
+            height: 128,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
     },
     getDeviceId: function () {
         return device.uuid;
@@ -39,7 +39,7 @@ FlashBuy.util = {
         $.getJSON('data/listaAnunciosFake.json', function (listaDeAnuncios) {
             $.each(listaDeAnuncios.anunciosFake, function (index, oferta) {
                 $("#divOfertas").append(
-                    "<div class='oferta'>"+
+                    "<div class='oferta'>" +
                         "<div class='col s12 m7'>" +
                             "<div class='card small'>" +
                             "<!-- Imagem do card, por enquanto vou deixar sem -->" +
@@ -51,11 +51,11 @@ FlashBuy.util = {
                                     "<p>" + oferta.Descricao + "</p>" +
                                 "</div>" +
                                 "<div class='card-action'>" +
-                                    "<button type='button' data-controller='descricaoAnuncio' data-teste='1' data-outro='outro'>Abrir Oferta</button>" +                                
+                                    "<button type='button' data-controller='descricaoAnuncio' data-idOferta='" + oferta.IdOferta + "' data-descricaoOferta='" + oferta.Descricao + "'>Abrir Oferta</button>" +
                                     "<a href='#'>Recusar</a>" +
                                 "</div>" +
                             "</div>" +
-                        "</div>"+
+                        "</div>" +
                     '</div>');
             });
 
