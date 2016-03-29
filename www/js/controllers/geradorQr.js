@@ -1,4 +1,8 @@
-﻿FlashBuy.geradorQr = {
+﻿/// <reference path="js/base/base.js" />
+/// <reference path="js/base/app.js" />
+/// <reference path="js/base/util.js" />
+
+FlashBuy.geradorQr = {
     init: function (teste, outro) {
         console.log('teste: ' + teste + ', outro: ' + outro);
         console.log('geradorQr init');

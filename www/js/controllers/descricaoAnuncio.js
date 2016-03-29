@@ -1,4 +1,8 @@
-﻿FlashBuy.descricaoAnuncio = {
+﻿/// <reference path="js/base/base.js" />
+/// <reference path="js/base/app.js" />
+/// <reference path="js/base/util.js" />
+
+FlashBuy.descricaoAnuncio = {
     init: function (idOferta, descricaoOferta) {
         console.log('idOferta: ' + idOferta + ', descricaoOferta: ' + descricaoOferta);
 
