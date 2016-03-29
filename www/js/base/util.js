@@ -112,7 +112,19 @@ FlashBuy.util = {
                     $controllerButton.on('click', function () {
                         controllerName = $(this).data('controller');
 
-                        FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
+                        //carregamento de parametros para a controller
+                        var paramsButton = $(this).data();
+                        var initParamsNames = getParamNames(FlashBuy[controllerName].init);
+                        var params = [];
+
+                        initParamsNames.forEach(function (paramName) {
+                            var paramValue = paramsButton[paramName.toLowerCase()];
+                            if (paramValue) {
+                                params.push(paramValue);
+                            }
+                        });
+
+                        FlashBuy.load(controllerName, 'views/' + controllerName + '.html', params);
                     });
                 }
             });

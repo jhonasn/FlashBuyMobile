@@ -33,7 +33,7 @@ var FlashBuy = {
         FlashBuy.load('home', 'views/home.html');
     },
     //carrega telas no elemento principal do app -> #content
-    load: function (controller, link) {
+    load: function (controller, link, params) {
         //verifica se foi passado o link e controller
         if (!controller || !link) {
             throw new Error('Erro de redirecionamento, controller ou link nao foram passados para FlashBuy.load().');
@@ -42,30 +42,17 @@ var FlashBuy = {
         }
 
         var $content = $('#content');
-        var $controllerButton = $content.find('#' + controller);
 
         //carrega tela e dispara metodos da controller
-        $content.load(link, function () {            
+        $content.load(link, function () {
             if (FlashBuy[controller].init) {
-                //carregamento de parametros para a controller
-                if ($controllerButton.length) {
-                    var paramsButton = $controllerButton.data();
-                    var initParamsNames = getParamNames(FlashBuy[controller].init);
-                    var params = [];
-
-                    initParamsNames.forEach(function (paramName) {
-                        var paramValue = paramsButton[paramName];
-                        if (paramValue) {
-                            params.push(paramValue);
-                        }
-                    });
-
-                    var controllerInstance = FlashBuy[controller];
-                    controllerInstance.init.apply(controllerInstance, params);
+                if (params && Array.isArray(params) && params.length > 0) {
+                    FlashBuy[controller].init.apply(FlashBuy[controller], params);
                 } else {
                     FlashBuy[controller].init();
                 }
             }
+
             $('#content').ready(function () {
                 //chama a função ready da controller
                 if (FlashBuy[controller].ready) {
@@ -93,8 +80,7 @@ var FlashBuy = {
                 var controllerName = configuration.controllers[i];
 
                 $('#' + controllerName).on('click', function () {
-                    controllerName = $(this).attr('id');
-
+                    controllerName = $(this).attr('id');                    
                     FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
                 });
             }
