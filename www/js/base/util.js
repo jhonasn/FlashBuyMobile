@@ -70,6 +70,11 @@ FlashBuy.util = {
 
         return html;
     },
+    conectadoInternet: function ()
+    {
+        alert(navigator.connection.type);
+    },
+ 
     configurarRotasControllers: function () {
         //configura chamada de telas / rotas dentro da tela carregada
         var $content = $('#content');
