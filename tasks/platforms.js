@@ -13,7 +13,7 @@ var path = require('path');
 var sys = require('sys')
 var exec = require('child_process').exec;
 
-packageJson.platforms.forEach(function(platform) {
+packageJson.cordovaPlatforms.forEach(function(platform) {
     var platformCmd = 'cordova platform ' + command + ' ' + platform;
     exec(platformCmd);
 });

@@ -4,7 +4,8 @@
   "description": "Aplicativo de compras flashmob",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"postinstall": "node tasks/platforms && node tasks/plugins"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,7 @@
 	},
 	{
 		"name": "Cléverson A. Specht",
-		"email": "0049.cleversonspecht@cnec.br",
+		"email": "0049.cleversonspecht@cnec.br"
 	}
   ],
   "license": "MIT",
@@ -32,19 +33,19 @@
     "url": "https://github.com/jhonasn/FlashBuyMobile/issues"
   },
   "homepage": "https://github.com/jhonasn/FlashBuyMobile#readme",
-  "platforms": [
+  "cordovaPlatforms": [
 	"android",
 	"ios",
 	"wp8",
 	"windows",
 	"browser"
   ],
-  "plugins": [
+  "cordovaPlugins": [
 	"cordova-plugin-whitelist",
 	"cordova-plugin-device",
 	"cordova-plugin-network-information",
 	{
-      "locator": "phonegap-plugin-push"
+      "locator": "phonegap-plugin-push",
       "variables": {
         "SENDER_ID": "XXXXXXX"
       }
