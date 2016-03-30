@@ -40,6 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{BB902C57
 	ProjectSection(SolutionItems) = preProject
 		tasks\platforms.js = tasks\platforms.js
 		tasks\plugins.js = tasks\plugins.js
+		tasks\serve.js = tasks\serve.js
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hooks", "hooks", "{6BF72617-1029-4725-8EE0-6C84DE5734F7}"

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
 	"test": "echo \"Error: no test specified\" && exit 1",
-	"postinstall": "node tasks/platforms && node tasks/plugins"
+	"postinstall": "node tasks/platforms && node tasks/plugins",
+	"serve": "node tasks/serve"
   },
   "repository": {
 	"type": "git",
@@ -53,5 +54,13 @@
   ],
   "devDependencies": {
   },
-  "dependencies": {}
+  "dependencies": {
+	"browser-sync": "*",
+	"http-proxy-middleware": "*"
+  },
+  "proxy": {
+	"wsexterno": "http://189.16.45.2",
+	"wsinterno": "http://172.16.10.251",
+	"get": "http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta"
+  }
 }
