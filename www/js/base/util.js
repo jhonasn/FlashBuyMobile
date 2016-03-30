@@ -70,6 +70,21 @@ FlashBuy.util = {
 
         return html;
     },
+    conectadoInternet: function ()
+    {
+        if (navigator.connection.type != Connection.NONE) {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    },
+
+    tipoInternet: function () {
+        return navigator.connection.type;
+    },
+
     configurarRotasControllers: function () {
         //configura chamada de telas / rotas dentro da tela carregada
         var $content = $('#content');
