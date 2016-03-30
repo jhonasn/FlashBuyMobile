@@ -27,12 +27,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1A7685E6-7
 		.gitignore = .gitignore
 		config.xml = config.xml
 		LICENSE = LICENSE
+		package.json = package.json
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apoio", "apoio", "{D78FEC29-92F9-4069-84FA-C8B471316734}"
 	ProjectSection(SolutionItems) = preProject
 		apoio\JavaScript Documento de Apoio PI.md = apoio\JavaScript Documento de Apoio PI.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{BB902C57-BD82-4C6C-9901-64B0924DEA97}"
+	ProjectSection(SolutionItems) = preProject
+		tasks\platforms.js = tasks\platforms.js
+		tasks\plugins.js = tasks\plugins.js
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hooks", "hooks", "{6BF72617-1029-4725-8EE0-6C84DE5734F7}"
+	ProjectSection(SolutionItems) = preProject
+		hooks\after_prepare.js = hooks\after_prepare.js
+		hooks\before_build.js = hooks\before_build.js
+		hooks\before_emulate.js = hooks\before_emulate.js
+		hooks\before_run.js = hooks\before_run.js
+		hooks\README.md = hooks\README.md
 	EndProjectSection
 EndProject
 Global
@@ -48,5 +64,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D78FEC29-92F9-4069-84FA-C8B471316734} = {1A7685E6-7835-40E5-AB2E-042ABD24FD6B}
+		{BB902C57-BD82-4C6C-9901-64B0924DEA97} = {1A7685E6-7835-40E5-AB2E-042ABD24FD6B}
+		{6BF72617-1029-4725-8EE0-6C84DE5734F7} = {1A7685E6-7835-40E5-AB2E-042ABD24FD6B}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,56 @@
+{
+  "name": "flash-buy-mobile",
+  "version": "1.0.0",
+  "description": "Aplicativo de compras flashmob",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonasn/FlashBuyMobile.git"
+  },
+  "keywords": [
+    "buy",
+    "flash",
+    "flashmob",
+    "compra"
+  ],
+  "author": "Faculdade Cenecista de Campo Largo - Projeto Integrador - Sistemas de Informação <0049.edjalmaferreira@cnec.br>",
+  "contributors": [
+	{
+		"name": "Jhonas Nascimento",
+		"email": "jhonasn@gmail.com"
+	},
+	{
+		"name": "Cléverson A. Specht",
+		"email": "0049.cleversonspecht@cnec.br",
+	}
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhonasn/FlashBuyMobile/issues"
+  },
+  "homepage": "https://github.com/jhonasn/FlashBuyMobile#readme",
+  "platforms": [
+	"android",
+	"ios",
+	"wp8",
+	"windows",
+	"browser"
+  ],
+  "plugins": [
+	"cordova-plugin-whitelist",
+	"cordova-plugin-device",
+	"cordova-plugin-network-information",
+	{
+      "locator": "phonegap-plugin-push"
+      "variables": {
+        "SENDER_ID": "XXXXXXX"
+      }
+    }
+  ],
+  "devDependencies": {
+  },
+  "dependencies": {}
+}
