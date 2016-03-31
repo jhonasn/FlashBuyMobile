@@ -17,3 +17,9 @@ npm install
 ```
 
 ##[JavaScript Material de Apoio](https://github.com/jhonasn/FlashBuyMobile/blob/master/apoio/JavaScript%20Documento%20de%20Apoio%20PI.md)
+
+---
+
+##[JavaScript Estilo de Codificação](https://github.com/armoucar/javascript-style-guide)
+
+---
