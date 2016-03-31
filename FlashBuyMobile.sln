@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "www", "http://localhost:49504", "{26D4C74D-78A8-45FB-80B9-37F8A7E10D26}"
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "FlashBuyMobile", "http://localhost:49504", "{26D4C74D-78A8-45FB-80B9-37F8A7E10D26}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
@@ -45,10 +47,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tasks", "tasks", "{BB902C57
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hooks", "hooks", "{6BF72617-1029-4725-8EE0-6C84DE5734F7}"
 	ProjectSection(SolutionItems) = preProject
-		hooks\after_prepare.js = hooks\after_prepare.js
-		hooks\before_build.js = hooks\before_build.js
-		hooks\before_emulate.js = hooks\before_emulate.js
-		hooks\before_run.js = hooks\before_run.js
+		hooks\after_device.js = hooks\after_device.js
+		hooks\before_device.js = hooks\before_device.js
+		hooks\indexProperties.js = hooks\indexProperties.js
 		hooks\README.md = hooks\README.md
 	EndProjectSection
 EndProject

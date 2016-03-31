@@ -55,8 +55,6 @@
   "devDependencies": {
   },
   "dependencies": {
-	"browser-sync": "*",
-	"http-proxy-middleware": "*"
   },
   "proxy": {
 	"wsexterno": "http://189.16.45.2",
