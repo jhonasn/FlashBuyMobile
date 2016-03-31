@@ -15,5 +15,12 @@ var exec = require('child_process').exec;
 
 packageJson.cordovaPlatforms.forEach(function(platform) {
     var platformCmd = 'cordova platform ' + command + ' ' + platform;
-    exec(platformCmd);
+    exec(platformCmd, function(error, stdout, stderr) {
+        if(error) {
+            console.log('Error on ' + command + 'ing ' + platform);
+            return;
+        }
+
+        console.log(platform + ' ' + command + 'ed.');
+    });
 });

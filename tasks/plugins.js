@@ -35,16 +35,16 @@ function createAddRemoveStatement(plugin) {
     return pluginCmd;
 }
 
-function processPlugin(index) {
-    if(index >= packageJson.cordovaPlugins.length)
-        return;
-
-    var plugin = packageJson.cordovaPlugins[index];
+packageJson.cordovaPlugins.forEach(function(plugin) {
     var pluginCommand = createAddRemoveStatement(plugin);
     console.log(pluginCommand);
-    exec(pluginCommand, function(){
-        processPlugin(index + 1);
-    });
-}
 
-processPlugin(0);
+    exec(pluginCommand, function(error, stdout, stderr) {
+        if(error) {
+            console.log('Error on ' + command + 'ing ' + plugin);
+            return;
+        }
+
+        console.log(plugin + ' ' + command + 'ed.');
+    });
+});
