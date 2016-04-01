@@ -66,23 +66,69 @@ FlashBuy.util = {
                 regex = new RegExp(regex, 'g');
                 html = html.replace(regex, value);
             }
-        }
-
+        }
         return html;
     },
-    conectadoInternet: function ()
-    {
+
+    conectadoInternet: function () {
         if (navigator.connection.type != Connection.NONE) {
             return true;
-        }
-        else
-        {
+        } else  {
             return false;
+        }
+    },
+    
+    onInternet : function(callback)
+    {
+        if (callback.type=="online") {
+            alert("Você está em uma " + FlashBuy.util.tipoInternet());
+        } else {
+            alert("Você está desconectado.");
         }
     },
 
     tipoInternet: function () {
-        return navigator.connection.type;
+        var connType = navigator.connection.type;
+        var retorno = "Conexão ";
+        switch (connType) {
+            case Connection.UNKNOWN: {
+                retorno += "desconhecida";
+                break;
+            }
+            case Connection.ETHERNET: {
+                retorno += "a cabo";
+                break;
+            }
+            case Connection.WIFI: {
+                retorno += "WI-FI";
+                break;
+            }
+            case Connection.CELL_2G: {
+                retorno += "2G";
+                break;
+            }
+            case Connection.CELL_3G: {
+                retorno += "3G";
+                break;
+            }
+            case Connection.CELL_4G: {
+                retorno += "4G";
+                break;
+            }
+            case Connection.CELL: {
+                retorno += "de dados celulares";
+                break;
+            }
+            case Connection.NONE: {
+                retorno += "inexistente";
+                break;
+            }
+            default: {
+                retorno: "Houve um problema ao identificar sua conexão. Tente novamente mais tarde.";
+                break;
+            }
+        }
+        return retorno + ".";
     },
 
     configurarRotasControllers: function () {
