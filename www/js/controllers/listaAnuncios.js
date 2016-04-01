@@ -15,7 +15,7 @@ FlashBuy.listaAnuncios = {
     },
     //metodo para carregar o json listaAnunciosFake
     carregarAnuncios: function (cb) {
-        //COMO CARREGAR DENTRO DA VARIAVEL models O OBJETO data DA FUNCAO getListaAnuncios???
+       
         $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
