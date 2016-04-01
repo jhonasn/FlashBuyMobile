@@ -6,6 +6,7 @@ FlashBuy.util = {
     isDevice: function () {
         return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
     },
+    
     onDeviceReady: function (callback) {
         if (FlashBuy.util.isDevice()) {
             $(document).on('deviceready', callback);
@@ -13,6 +14,7 @@ FlashBuy.util = {
             $(document).ready(callback);
         }
     },
+    
     gerarQRCode: function (string, divId) {
         var qrcode = new QRCode(divId, {
             text: string,
@@ -23,16 +25,20 @@ FlashBuy.util = {
             correctLevel: QRCode.CorrectLevel.H
         });
     },
+    
     getDeviceId: function () {
         return device.uuid;
     },
+    
     getDeviceInfo: function () {
         return device;
     },
+    
     //criptografa o texto em MD5
     criptografarMD5: function (texto) {
         return md5(texto);
-    },    
+    },
+    
     getHtml: function (url) {
         var html;
         var err;
@@ -48,16 +54,18 @@ FlashBuy.util = {
         });
 
         if (err) {
-            throw new Error('N„o foi possivel encontrar a p·gina ' + url + '. Dados TÈcnicos: \n' + JSON.stringify(err));
+            throw new Error('N√£o foi possivel encontrar a p√°gina ' + url + '. Dados T√©cnicos: \n' + JSON.stringify(err));
         }
 
         return html;
     },
+    
     templateUrl: function (url, model) {
         var html = FlashBuy.util.getHtml(url);
 
         return FlashBuy.util.templateHtml(html, model);
     },
+    
     templateHtml: function (html, model) {
         if (model) {
             for (var key in model) {
@@ -70,6 +78,7 @@ FlashBuy.util = {
 
         return html;
     },
+    
     conectadoInternet: function ()
     {
         if (navigator.connection.type != Connection.NONE) {
@@ -86,7 +95,7 @@ FlashBuy.util = {
     },
 
     configurarRotasControllers: function () {
-        //configura chamada de telas / rotas dentro da tela carregada
+        //configura chamada de controllers / rotas dentro da view atual
         var $content = $('#content');
         if (FlashBuy.controllers) {
             FlashBuy.controllers.forEach(function (controllerName) {
