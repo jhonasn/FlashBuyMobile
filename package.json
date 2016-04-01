@@ -1,0 +1,100 @@
+{
+  "name": "flash-buy-mobile",
+  "version": "1.0.0",
+  "description": "Aplicativo de compras flashmob",
+  "main": "index.js",
+  "scripts": {
+	"test": "echo \"Error: no test specified\" && exit 1",
+	"postinstall": "node tasks/platforms && node tasks/plugins",
+	"serve": "node tasks/serve"
+  },
+  "repository": {
+	"type": "git",
+	"url": "git+https://github.com/jhonasn/FlashBuyMobile.git"
+  },
+  "keywords": [
+	"buy",
+	"flash",
+	"flashmob",
+	"compra"
+  ],
+  "author": "Faculdade Cenecista de Campo Largo - Projeto Integrador - Sistemas de Informação <0049.edjalmaferreira@cnec.br>",
+  "contributors": [
+	{
+		"name": "Jhonas Nascimento",
+		"email": "jhonasn@gmail.com"
+	},
+	{
+		"name": "Cléverson A. Specht",
+		"email": "0049.cleversonspecht@cnec.br"
+	},
+	{
+		"name": "Eduardo Garrett",
+		"email": "eduardo-garrett-miranda@hotmail.com"
+	},
+	{
+		"name": "José Victor Verone",
+		"email": "jose_victor_veronez@hotmail.com"
+	},
+	{
+		"name": "Gustavo Silva",
+		"email": "gustavo_s@outlook.com"
+	},
+	{
+		"name": "Vinícius Roderjan",
+		"email": "vini.roderjan@gmail.com"
+	},		
+	{
+		"name": "Bruno Henrique",
+		"email": "brunoprocemp@hotmail.com"
+	},
+	{
+		"name": "Matheus Magaton",
+		"email": "ml_magaton@outlook.com"
+	},
+	{
+		"name": "Felipe Stival",
+		"email": "felipe.stival@live.com"
+	},
+	{
+		"name": "Kevin",
+		"email": "cortexcitadel@gmail.com"
+	},
+	{
+		"name": "Erik Zeribetto",
+		"email": "erikzeribetto@gmail.com"
+	}
+  ],
+  "license": "MIT",
+  "bugs": {
+	"url": "https://github.com/jhonasn/FlashBuyMobile/issues"
+  },
+  "homepage": "https://github.com/jhonasn/FlashBuyMobile#readme",
+  "cordovaPlatforms": [
+	"android",
+	"ios",
+	"wp8",
+	"windows",
+	"browser"
+  ],
+  "cordovaPlugins": [
+	"cordova-plugin-whitelist",
+	"cordova-plugin-device",
+	"cordova-plugin-network-information",
+	{
+	  "locator": "phonegap-plugin-push",
+	  "variables": {
+		"SENDER_ID": "XXXXXXX"
+	  }
+	}
+  ],
+  "devDependencies": {
+  },
+  "dependencies": {
+  },
+  "proxy": {
+	"wsexterno": "http://189.16.45.2",
+	"wsinterno": "http://172.16.10.251",
+	"get": "http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta"
+  }
+}

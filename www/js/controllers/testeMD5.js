@@ -54,14 +54,14 @@ FlashBuy.testeMD5 = {
         });
 
         //teste proxy
-        $.get('wsexterno/flashbuywebapi/api/Ofertas/GetOferta')
+        $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
             console.log(data)
         })
         .error(function () {
-            console.error('erro proxy!');
             console.error(arguments);
         })
+
     }
 };

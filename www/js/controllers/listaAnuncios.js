@@ -4,44 +4,56 @@
 
 FlashBuy.listaAnuncios = {
     init: function () {
+        //método de chamar a lista de anúncios fake
+        FlashBuy.listaAnuncios.carregarAnuncios(function () {
+            FlashBuy.util.configurarRotasControllers();
+        });
         console.log('listaAnuncios init');
     },
     ready: function () {
-        //metodo para carregar o json listaAnunciosFake
-        function getListaAnuncios(cb) {
-            $.getJSON('data/listaAnunciosFake.json', function (listaDeAnuncios) {
-                $.each(listaDeAnuncios.anunciosFake, function (index, oferta) {
-                    $("#divOfertas").append(
-                        "<div class='oferta'>" +
-                            "<div class='col s12 m7'>" +
-                                "<div class='card small'>" +
-                                "<!-- Imagem do card, por enquanto vou deixar sem -->" +
-                                    "<div class='card-image'>" +
-                                        "<img src='../img/semImagem.png'>" +
-                                        "<span class='card-title'>" + oferta.Produto + "</span>" +
-                                    "</div>" +
-                                    "<div class='card-content'>" +
-                                        "<p>" + oferta.Descricao + "</p>" +
-                                    "</div>" +
-                                    "<div class='card-action'>" +
-                                        "<button type='button' data-controller='descricaoAnuncio' data-idOferta='" + oferta.IdOferta + "'>Abrir Oferta</button>" +
-                                        "<a href='#'>Recusar</a>" +
-                                    "</div>" +
-                                "</div>" +
-                            "</div>" +
-                        '</div>');
-                });
-
-                if (cb) {
-                    cb();
-                }
-            });
-        }
         console.log('listaAnuncios ready');
-
-        //método de chamar a lista de anúncios fake
-        getListaAnuncios(function () {
-            FlashBuy.util.configurarRotasControllers();
+    },
+    //faz a comunicação com o web service
+    getListaAnuncios: function () {
+        $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
+        .success(function (data) {
+            console.info('proxy ok!');
+            console.log(data);
+        })
+        .error(function () {
+            console.error(arguments);
         });
+    },
+    //metodo para carregar o json listaAnunciosFake
+    carregarAnuncios: function (cb) {
+        //COMO CARREGAR DENTRO DA VARIAVEL models O OBJETO data DA FUNCAO getListaAnuncios???
+        var models = [
+           {
+               produto: 'Teste de produto 2, titulo 1',
+               idOferta: '001',
+               //descricao: 'Descrição de teste que se repete do teste 2/1'
+           },
+            {
+                produto: 'Teste de produto, titulo 2',
+                idOferta: '002',
+                //descricao: 'Descrição de teste que se repete do teste 2/2'
+            },
+            {
+                produto: 'Teste de produto, titulo 3',
+                idOferta: '003',
+                //descricao: 'Descrição de teste que se repete do teste 2/3'
+            }
+        ];
+
+        htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosTemplate.html');
+
+        models.forEach(function (model) {
+            var htmlRenderizado = FlashBuy.util.templateHtml(htmlTemplate, model);
+            $('#divOferta').append(htmlRenderizado);
+        });
+
+        if (cb) {
+            cb();
+        }
     }
 };
