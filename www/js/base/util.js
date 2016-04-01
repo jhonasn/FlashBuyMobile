@@ -132,7 +132,7 @@ FlashBuy.util = {
     },
 
     configurarRotasControllers: function () {
-        //configura chamada de telas / rotas dentro da tela carregada
+        //configura chamada de controllers / rotas dentro da view atual
         var $content = $('#content');
         if (FlashBuy.controllers) {
             FlashBuy.controllers.forEach(function (controllerName) {
