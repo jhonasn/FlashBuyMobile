@@ -14,12 +14,11 @@ FlashBuy.listaAnuncios = {
         console.log('listaAnuncios ready');
     },    
     //metodo para carregar o json listaAnunciosFake
-    carregarAnuncios: function (cb) {
-        //COMO CARREGAR DENTRO DA VARIAVEL models O OBJETO data DA FUNCAO getListaAnuncios???
+    carregarAnuncios: function (cb) {       
         $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
-            console.log(data);
+            //console.log(data);
             htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosTemplate.html');
 
             data.forEach(function (model) {
