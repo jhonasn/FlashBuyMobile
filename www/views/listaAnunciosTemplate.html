@@ -1,19 +1,18 @@
 ﻿<!--por enquanto estou utilizando dentro do model apenas esses dois valores, logo implementaremos os outros-->
 <div class='oferta'>
     <div class='col s12 m7'>
-        <div class='card small'>            
-            <div class='card-image'>           
-                <img src='../img/semImagem.png'> 
-                <span class='card-title'> {{produto}}  </span>              
-            </div> 
-            <div class='card-content'>                
-                <p>  descricao </p> 
-            </div> 
+        <div class='card small'>
+            <div class='card-image'>
+                <img src='../img/semImagem.png'>
+                <span class='card-title'> Descricao : {{Produto}}  </span>
+            </div>
+            <div class='card-content'>
+                <p>id da oferta = {{IdOferta}}</p>
+            </div>
             <div class='card-action'>
-                 
-                <button type='button' data-controller='descricaoAnuncio' data-idoferta="{{idOferta}}">Abrir Oferta</button> 
-                <a href='#'>Recusar</a> 
-            </div> 
-        </div> 
-    </div> 
+                <button type='button' data-controller='descricaoAnuncio' data-idoferta="{{IdOferta}}" data-datainicio="{{DataInicio}}" data-datafim="{{DataFim}}" data-produto="{{Produto}}" data-idanunciante="{{IdAnunciante}}">Abrir Oferta</button>
+                <a href='#'>Recusar</a>
+            </div>
+        </div>
+    </div>
 </div>
