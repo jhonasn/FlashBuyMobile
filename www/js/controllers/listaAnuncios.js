@@ -4,7 +4,7 @@
 
 FlashBuy.listaAnuncios = {
     init: function () {
-        //método de chamar a lista de anúncios fake
+        //método para fazer a listagem
         FlashBuy.listaAnuncios.carregarAnuncios(function () {
             FlashBuy.util.configurarRotasControllers();
         });
@@ -13,9 +13,8 @@ FlashBuy.listaAnuncios = {
     ready: function () {
         console.log('listaAnuncios ready');
     },
-    //metodo para carregar o json listaAnunciosFake
+    //metodo para comunicar com o web service
     carregarAnuncios: function (cb) {
-       
         $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
