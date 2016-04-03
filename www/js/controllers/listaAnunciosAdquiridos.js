@@ -18,7 +18,8 @@ FlashBuy.listaAnunciosAdquiridos = {
     },
     //metodo para comunicar com o web service
     carregarAnuncios: function (cb, idCliente) {
-        $.get('http://www.flashbuy.com.br/api/Compras/GetComprasCliente?idCliente=' + idCliente)
+        idCliente = 1;
+        $.get('http://189.16.45.2/flashbuywebapi/api/Compras/GetComprasCliente?idCliente=' + idCliente)
         .success(function (data) {
             console.info('proxy ok!');
             console.log(data);
