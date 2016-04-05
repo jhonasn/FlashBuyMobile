@@ -27,6 +27,7 @@
     "geradorQr",
     "listaAnunciosAdquiridos",
     "descricaoAnuncio",
-    "testeConexao"
+    "testeConexao",
+    "qrCodeAnuncio"
   ]
 }
