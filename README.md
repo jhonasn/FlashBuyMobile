@@ -15,7 +15,12 @@ cd FlashBuyMobile
 
 npm install
 ```
+
+---
+
 ##[Instalação e Configuração Cordova Windows + Android](https://docs.google.com/document/d/19J-oy0pL-LuMrOGTGXOL15cuSX9mpp0WQ9nldDdeIVc/edit?usp=sharing)
+
+---
 
 ##[JavaScript Material de Apoio](https://github.com/jhonasn/FlashBuyMobile/blob/master/apoio/JavaScript%20Documento%20de%20Apoio%20PI.md)
 
