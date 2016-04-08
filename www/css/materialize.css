@@ -10478,7 +10478,7 @@ select {
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 150px;
+  height: 256px;
   -webkit-perspective: 500px;
           perspective: 500px;
   -webkit-transform-style: preserve-3d;
