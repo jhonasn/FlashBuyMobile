@@ -21,7 +21,7 @@ FlashBuy.descricaoAnuncio = {
 
         //area dos botões
         $("#descricaoOferta").append("<div class='row'>");
-        $("#descricaoOferta").append("<button type='button' class='waves-effect waves-light btn' data-controller='qrCodeAnuncio' data-qrcode='" + idOferta + "'>Gerar Código</button>");
+        $("#descricaoOferta").append("<button type='button' class='waves-effect waves-light btn' data-controller='qrCodeAnuncio' data-qrcode='" + idOferta + "'>Eu quero</button>");
         $("#descricaoOferta").append("</div>");
 
         FlashBuy.util.configurarRotasControllers();
