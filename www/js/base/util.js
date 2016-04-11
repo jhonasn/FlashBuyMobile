@@ -13,9 +13,11 @@ FlashBuy.util = {
             $(document).ready(callback);
         }
     },
-    gerarQRCode: function (string, divId) {
+    gerarQRCode: function (texto, divId) {
+        //Conversão da variável em string necessária, se nao tiver, o qrCode nao funciona
+        texto = String(texto);
         var qrcode = new QRCode(divId, {
-            text: string,
+            text: texto,
             width: 128,
             height: 128,
             colorDark: "#000000",
