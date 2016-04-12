@@ -29,8 +29,12 @@ var FlashBuy = {
         $('.button-collapse').sideNav();
         //liga os botões de menu as rotas das controllers/telas
         FlashBuy.bindEventsRedirections();
-        //carrega primeira tela: home
-        FlashBuy.load('home', 'views/home.html');
+        //carrega primeira tela: login se existir, se não carrega a home
+        if(FlashBuy.util.login) {
+            FlashBuy.load('login', 'views/login.html');
+        } else {
+            FlashBuy.load('home', 'views/home.html');
+        }
     },
     //carrega telas no elemento principal do app -> #content
     load: function (controller, link, params) {
