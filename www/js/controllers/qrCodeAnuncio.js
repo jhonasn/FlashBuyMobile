@@ -1,6 +1,6 @@
-﻿/// <reference path="js/base/base.js" />
-/// <reference path="js/base/app.js" />
-/// <reference path="js/base/util.js" />
+﻿/// <reference path="../base/base.js" />
+/// <reference path="../base/app.js" />
+/// <reference path="../base/util.js" />
 
 FlashBuy.qrCodeAnuncio = {
     init: function (qrcode) {
