@@ -22,13 +22,24 @@
             <div class="nav-wrapper">
                 <!-- Menu lateral telas pequenas -->
                 <ul id="slide-out" class="side-nav">
-                    <li><a id="home" href="#!">Tela Home</a></li>
-                    <li><a id="listaAnuncios" href="#!">Anuncios</a></li>
-                    <li><a id="listaAnunciosAdquiridos" href="#!">Anuncios Adquiridos</a></li>                   
-                    <!--<li><a id="testeMD5" href="#!">Teste MD5</a></li>
-                    <li><a id="geradorQr" href="#!">Teste qrCode</a></li>                    
-                    <li><a id="testeConexao" href="#!">Teste de conexão</a></li>-->
+                    <li><a data-controller="home" href="#!">Tela Home</a></li>
+                    <li><a data-controller="listaAnuncios" href="#!">Anuncios</a></li>
+                    <li><a data-controller="listaAnunciosAdquiridos" href="#!">Anuncios Adquiridos</a></li>                   
+                    <!--<li><a data-controller="testeMD5" href="#!">Teste MD5</a></li>
+                    <li><a data-controller="geradorQr" href="#!">Teste qrCode</a></li>                    
+                    <li><a data-controller="testeConexao" href="#!">Teste de conexão</a></li>-->
                 </ul>
+                
+                <!-- Barra para celulares no modo horizontal, tablets e computadores -->
+                <ul class="right hide-on-med-and-down">
+                    <li><a data-controller="home" href="#!">Tela Home</a></li>
+                    <li><a data-controller="listaAnuncios" href="#!">Anuncios</a></li>
+                    <li><a data-controller="listaAnunciosAdquiridos" href="#!">Anuncios Adquiridos</a></li>                   
+                    <!--<li><a data-controller="testeMD5" href="#!">Teste MD5</a></li>
+                    <li><a data-controller="geradorQr" href="#!">Teste qrCode</a></li>                    
+                    <li><a data-controller="testeConexao" href="#!">Teste de conexão</a></li>-->
+                </ul>
+                
                 <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
             </div>
         </nav>

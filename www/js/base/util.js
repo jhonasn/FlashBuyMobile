@@ -1,5 +1,5 @@
-/// <reference path="js/base/base.js" />
-/// <reference path="js/base/app.js" />
+/// <reference path="../base/base.js" />
+/// <reference path="../base/app.js" />
 
 //utilidades variadas que podem ser reutilizadas em todo o projeto
 FlashBuy.util = {
@@ -14,7 +14,7 @@ FlashBuy.util = {
         }
     },
     gerarQRCode: function (texto, divId) {
-        //Conversão da variável em string necessária, se nao tiver, o qrCode nao funciona
+        //Conversï¿½o da variï¿½vel em string necessï¿½ria, se nao tiver, o qrCode nao funciona
         texto = String(texto);
         var qrcode = new QRCode(divId, {
             text: texto,
@@ -50,7 +50,7 @@ FlashBuy.util = {
         });
 
         if (err) {
-            throw new Error('Não foi possivel encontrar a página ' + url + '. Dados Técnicos: \n' + JSON.stringify(err));
+            throw new Error('Nï¿½o foi possivel encontrar a pï¿½gina ' + url + '. Dados Tï¿½cnicos: \n' + JSON.stringify(err));
         }
 
         return html;
@@ -68,7 +68,8 @@ FlashBuy.util = {
                 regex = new RegExp(regex, 'g');
                 html = html.replace(regex, value);
             }
-        }
+        }
+
         return html;
     },
 
@@ -83,15 +84,15 @@ FlashBuy.util = {
     onInternet : function(callback)
     {
         if (callback.type=="online") {
-            alert("Você está em uma " + FlashBuy.util.tipoInternet());
+            alert("Vocï¿½ estï¿½ em uma " + FlashBuy.util.tipoInternet());
         } else {
-            alert("Você está desconectado.");
+            alert("Vocï¿½ estï¿½ desconectado.");
         }
     },
 
     tipoInternet: function () {
         var connType = navigator.connection.type;
-        var retorno = "Conexão ";
+        var retorno = "Conexï¿½o ";
         switch (connType) {
             case Connection.UNKNOWN: {
                 retorno += "desconhecida";
@@ -126,7 +127,7 @@ FlashBuy.util = {
                 break;
             }
             default: {
-                retorno: "Houve um problema ao identificar sua conexão. Tente novamente mais tarde.";
+                retorno: "Houve um problema ao identificar sua conexï¿½o. Tente novamente mais tarde.";
                 break;
             }
         }

@@ -1,5 +1,5 @@
-/// <reference path="js/base/base.js" />
-/// <reference path="js/base/util.js" />
+/// <reference path="../base/base.js" />
+/// <reference path="../base/util.js" />
 
 //Modulo principal, podemos adicionar aqui regras de negócio que podem ser reutilizadas em outras telas
 var FlashBuy = {
@@ -83,8 +83,8 @@ var FlashBuy = {
             for (var i = 0; i < configuration.controllers.length; i++) {
                 var controllerName = configuration.controllers[i];
 
-                $('#' + controllerName).on('click', function () {
-                    controllerName = $(this).attr('id');                    
+                $('[data-controller="' + controllerName + '"]').on('click', function () {
+                    controllerName = $(this).data('controller');                    
                     FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
                 });
             }
