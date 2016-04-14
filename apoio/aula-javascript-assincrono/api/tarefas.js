@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
 
-var Tarefa = mongoose.model('Tarefa', {
+var schemaTarefa = new mongoose.Schema({
     concluida: Boolean,
     titulo: String,
     descricao: String,
     dataCriacao: Date
 });
+
+var Tarefa = mongoose.model('tarefas', schemaTarefa);
 
 module.exports = {
     get(req, res) {        
@@ -25,14 +27,15 @@ module.exports = {
     put(req, res) {
         if(!req.body) res.send(204, { error: 'registro não informado' });
         if(req.body._id) {
-            Tarefa.update({ _id: req.body._id}, req.body, (err, numAffected) => {
+            Tarefa.update({ _id: req.body._id}, req.body, (err, tarefas, affected) => {
                 res.send(numAffected > 0);
             });
         } else {
             req.body.dataCriacao = new Date();
             delete req.body._id;
+            if(req.body.concluida) req.body.concluida = JSON.parse(req.body.concluida);
             var tarefa = new Tarefa(req.body);
-            tarefa.save((err) => {
+            tarefa.save((err, tarefas, affected) => {
                 res.send(req.body);
             });
         }

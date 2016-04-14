@@ -26,7 +26,7 @@ var ProjetoAula = {
     salvar: function() {
         var tarefa = {
             _id: ProjetoAula.elementos.novaTarefa._id.value,
-            concluido: false,
+            concluida: false,
             titulo: ProjetoAula.elementos.novaTarefa.titulo.value,
             descricao: ProjetoAula.elementos.novaTarefa.descricao.value
         };
