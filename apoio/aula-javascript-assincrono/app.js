@@ -30,9 +30,9 @@ mongoose.connect('mongodb://localhost/aulaJavaScriptAssincrono');
 
 var tarefas = require('./api/tarefas');
 
-app.get('/api', tarefas.get);
-app.put('/api', tarefas.put);
-app.delete('/api', tarefas.delete);
+app.get('/api/tarefas', tarefas.get);
+app.put('/api/tarefas', tarefas.put);
+app.delete('/api/tarefas', tarefas.delete);
 
 app.listen(3000, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

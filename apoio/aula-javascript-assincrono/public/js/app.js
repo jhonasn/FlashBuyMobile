@@ -14,7 +14,7 @@ var ProjetoAula = {
         ProjetoAula.listarTarefas();
     },
     listarTarefas: function() {
-        jQuery.get('/api')
+        jQuery.get('/api/tarefas')
             .success(function(data) {
                 ProjetoAula.tarefas = data;
                 ProjetoAula.renderizar();
@@ -33,7 +33,7 @@ var ProjetoAula = {
 
         $.ajax({
             method: 'PUT',
-            url: '/api',
+            url: '/api/tarefas',
             data: tarefa
         })
         .success(function(data) {
@@ -57,7 +57,7 @@ var ProjetoAula = {
         
         $.ajax({
             method: 'DELETE',
-            url: '/api',
+            url: '/api/tarefas',
             data: id
         })
         .success(function(data) {

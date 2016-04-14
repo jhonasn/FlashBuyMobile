@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 
-var schemaTarefa = new mongoose.Schema({
+var Tarefa = mongoose.model('tarefas', {
     concluida: Boolean,
     titulo: String,
     descricao: String,
     dataCriacao: Date
 });
-
-var Tarefa = mongoose.model('tarefas', schemaTarefa);
 
 module.exports = {
     get(req, res) {        
@@ -35,8 +33,8 @@ module.exports = {
             delete req.body._id;
             if(req.body.concluida) req.body.concluida = JSON.parse(req.body.concluida);
             var tarefa = new Tarefa(req.body);
-            tarefa.save((err, tarefas, affected) => {
-                res.send(req.body);
+            tarefa.save((err, tarefa, affected) => {
+                res.send(tarefa);
             });
         }
     },
