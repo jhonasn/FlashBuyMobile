@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Aula de JavaScript Assíncrono e Resolução de Dúvidas</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <template class="tarefa">
+        <li>
+            <input type="checkbox" name="concluido" class="form-control">
+            <input type="text" name="titulo" placeholder="Título" class="form-control">
+            <textarea name="descricao" class="form-control" cols="30" rows="10" placeholder="Descrição"></textarea>
+        </li>
+    </template>
+
+    <section class="lista-tarefas col-xs-12">
+        <div class="nova-tarefa">
+            <form name="nova-tarefa">
+                <input type="hidden" name="_id" value="">
+                <input type="text" name="titulo" placeholder="Título" class="form-control col-xs-4">
+                <textarea name="descricao" class="form-control col-xs-6" cols="30" rows="10" placeholder="Descrição"></textarea>
+                <button type="button" class="btn btn-success col-xs-2" onclick="ProjetoAula.salvar()">Salvar</button>
+            </form>
+        </div>
+
+        <ul class="tarefas"></ul>
+    </section>
+
+
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/jquery.serializeObject.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
