@@ -7,42 +7,43 @@ var Tarefa = mongoose.model('tarefas', {
     dataCriacao: Date
 });
 
+var objectIdIsValid = mongoose.Types.ObjectId.isValid;
+
 module.exports = {
-    get(req, res) {        
-        var id = req.body._id || req.body;
-        if(Object.keys(req.body).length == 0) id = null;
-        
-        if (id) {
-            Tarefa.findById(req.param('id'), (err, tarefa) => {
+    get: function(req, res) {
+        if (objectIdIsValid(req.body.id)) {
+            Tarefa.findById(req.body.id, function(err, tarefa) {
                 res.send(tarefa)
             });
         } else {
-            Tarefa.find({}, (err, tarefas) => {
+            Tarefa.find({}, function(err, tarefas) {
                 res.send(tarefas);
             });
         }
     },
-    put(req, res) {
+    put: function(req, res) {
         if(!req.body) res.send(204, { error: 'registro não informado' });
         if(req.body._id) {
-            Tarefa.update({ _id: req.body._id}, req.body, (err, tarefas, affected) => {
+            Tarefa.update({ _id: req.body._id}, req.body, function(err, tarefas, affected) {
                 res.send(numAffected > 0);
             });
         } else {
             req.body.dataCriacao = new Date();
-            delete req.body._id;
-            if(req.body.concluida) req.body.concluida = JSON.parse(req.body.concluida);
+            //if(req.body.concluida) req.body.concluida = JSON.parse(req.body.concluida);
+
             var tarefa = new Tarefa(req.body);
-            tarefa.save((err, tarefa, affected) => {
+            tarefa.save(function(err, tarefa, affected) {
                 res.send(tarefa);
             });
         }
     },
-    delete(req, res) {
-        if(req.param('id')) {
-            res.send('não implementado mas ok!');
+    delete: function(req, res) {
+        if(objectIdIsValid(req.body.id)) {
+            Tarefa.remove({ _id: req.body.id }, function(err) {
+                res.send(true);
+            });
         } else {
-            res.send(404);
+            res.send(404, { error: 'registro não encontrado.'});
         }
     }
 };
