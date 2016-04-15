@@ -1,10 +1,10 @@
 var mongoose = require('mongoose');
 
 var Tarefa = mongoose.model('tarefas', {
-    concluida: Boolean,
-    titulo: String,
-    descricao: String,
-    dataCriacao: Date
+    concluida: { type: Boolean, required: true },
+    titulo: { type: String, required: true },
+    descricao: { type: String, required: true },
+    dataCriacao: { type: Date, required: true }
 });
 
 var objectIdIsValid = mongoose.Types.ObjectId.isValid;
@@ -24,12 +24,13 @@ module.exports = {
     put: function(req, res) {
         if(!req.body) res.send(204, { error: 'registro não informado' });
         if(req.body._id) {
-            Tarefa.update({ _id: req.body._id}, req.body, function(err, tarefas, affected) {
-                res.send(numAffected > 0);
+            var id = req.body._id;
+            delete req.body._id;
+            Tarefa.update({ _id: id}, req.body, function(err, affected) {
+                res.send(affected.n > 0);
             });
         } else {
             req.body.dataCriacao = new Date();
-            //if(req.body.concluida) req.body.concluida = JSON.parse(req.body.concluida);
 
             var tarefa = new Tarefa(req.body);
             tarefa.save(function(err, tarefa, affected) {

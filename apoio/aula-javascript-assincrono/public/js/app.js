@@ -46,7 +46,14 @@ var ProjetoAula = {
             descricao: ProjetoAula.elementos.novaTarefa.descricao.value
         };
 
-        ProjetoAula.salvar(tarefa);
+        ProjetoAula.salvar(tarefa, function (err, data) {
+            if(data) {
+                ProjetoAula.limparNovaTarefa();
+                // ProjetoAula.renderizar();
+                // ProjetoAula.tarefas.push(data);
+                ProjetoAula.listarTarefas();
+            }
+        });
     },
 
     alterarTarefa: function () {
@@ -55,10 +62,16 @@ var ProjetoAula = {
             concluida: ProjetoAula.elementos.novaTarefa.concluida.value,
             titulo: ProjetoAula.elementos.novaTarefa.titulo.value,
             descricao: ProjetoAula.elementos.novaTarefa.descricao.value,
-            dataCriacao: ProjetoAula.elementos.novaTarefa.descricao.value
+            dataCriacao: ProjetoAula.elementos.novaTarefa.dataCriacao.value
         };
 
-        ProjetoAula.salvar(tarefa);
+        ProjetoAula.salvar(tarefa, function (err, data) {
+            if(data) {
+                ProjetoAula.limparNovaTarefa();
+                // ProjetoAula.renderizar();
+                ProjetoAula.listarTarefas();
+            }
+        });
     },
 
     concluirTarefa: function (checkboxTarefa) {
@@ -67,23 +80,29 @@ var ProjetoAula = {
 
         tarefa.concluida = checkboxTarefa.checked;
 
-        ProjetoAula.salvar();
+        ProjetoAula.salvar(tarefa, function (err, data) {
+            // if(!data) {
+            //     tarefa.concluida = !tarefa.concluida;
+            //     ProjetoAula.renderizar();
+            // }
+            ProjetoAula.listarTarefas();
+        });
     },
 
-    salvar: function(tarefa) {
+    salvar: function(tarefa, cb) {
         $.ajax({
             method: 'PUT',
             url: '/api/tarefas',
             data: tarefa
         })
             .success(function(data) {
-                ProjetoAula.tarefas.push(data);
-
-                ProjetoAula.limparNovaTarefa();
-                ProjetoAula.renderizar();
+                if(cb) {
+                    cb(null, data);
+                }
             })
             .error(function(err) {
                 alert('não foi possivel alterar a tarefa ' + tarefa.titulo + '. erro ' + err.status);
+                cb(err, null);
             });
     },
 
@@ -103,10 +122,11 @@ var ProjetoAula = {
         })
             .success(function(data) {
                 if(data) {
-                    var indiceTarefa = ProjetoAula.tarefas.indexOf(tarefa);
-                    ProjetoAula.tarefas.splice(indiceTarefa, 1);
+                    // var indiceTarefa = ProjetoAula.tarefas.indexOf(tarefa);
+                    // ProjetoAula.tarefas.splice(indiceTarefa, 1);
 
-                    ProjetoAula.renderizar();
+                    // ProjetoAula.renderizar();
+                    ProjetoAula.listarTarefas();
                 }
             })
             .error(function(err) {
@@ -156,6 +176,9 @@ var ProjetoAula = {
                     .closest('li')
                 .find('.descricao')
                     .text(tarefa.descricao)
+                    .closest('li')
+                .find('.concluida')
+                    .prop('checked', tarefa.concluida)
                     .closest('li')
                 .find('.dataCriacao')
                     .text(
