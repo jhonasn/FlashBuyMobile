@@ -3,11 +3,14 @@
 /// <reference path="../base/util.js" />
 
 FlashBuy.descricaoAnuncio = {
-    init: function (idOferta, DataInicio, DataFim, produto, idAnunciante) {
+    init: function (idOferta, DataInicio, DataFim, produto, idAnunciante, imgMime) {
         //iniciar carousel
         $(document).ready(function () {
             $('.carousel').carousel();
-        });       
+        });
+
+        // colocando imagem na div divImagem
+        $("#divImagem").append("<img src=" + imgMime + " />");
             
         //jogando as informações na tela, podemos implementar um template depois
         $("#descricaoOferta").append("<div class='row'>");
