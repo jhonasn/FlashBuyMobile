@@ -23,7 +23,7 @@ FlashBuy.listaAnunciosAdquiridos = {
         .success(function (data) {
             console.info('proxy ok!');
             console.log(data);
-            htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosTemplate.html');
+            htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosAdquiridosTemplate.html');
 
             data.forEach(function (model) {
                 //valida se tem imagem
