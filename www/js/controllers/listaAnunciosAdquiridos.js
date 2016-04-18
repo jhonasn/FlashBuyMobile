@@ -26,6 +26,10 @@ FlashBuy.listaAnunciosAdquiridos = {
             htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosTemplate.html');
 
             data.forEach(function (model) {
+                //valida se tem imagem
+                if (model.imgMime === null) {
+                    model.imgMime = "../img/semImagem.png";
+                }
                 var htmlRenderizado = FlashBuy.util.templateHtml(htmlTemplate, model);
                 $('#divOferta').append(htmlRenderizado);
             });
