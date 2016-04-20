@@ -60,8 +60,8 @@ var ProjetoAula = {
                     Materialize.toast('Tarefa adicionada!', 3000, 'rounded');
                 }
                 ProjetoAula.limparNovaTarefa();
-                // ProjetoAula.renderizar();
                 // ProjetoAula.tarefas.push(data);
+                // ProjetoAula.renderizar();
                 ProjetoAula.listarTarefas();
             }
         });

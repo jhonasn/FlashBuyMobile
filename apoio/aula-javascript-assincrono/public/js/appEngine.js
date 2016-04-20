@@ -181,33 +181,6 @@ var ProjetoAula = {
         jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.adicionarTarefa()');
     },
 
-    renderizar: function() {
-        ProjetoAula.elementos.$listaTarefas.empty();
-
-        ProjetoAula.tarefas.forEach(function(tarefa) {
-            var $tarefa = jQuery(ProjetoAula.template);
-
-            $tarefa
-                .attr('itemid', tarefa._id)
-                .find('.titulo')
-                    .text(tarefa.titulo)
-                    .closest('li')
-                .find('.descricao')
-                    .text(tarefa.descricao)
-                    .closest('li')
-                .find('.concluida')
-                    .prop('checked', tarefa.concluida)
-                    .closest('li')
-                .find('.dataCriacao')
-                    .text(
-                        ProjetoAula.formatarData(new Date(tarefa.dataCriacao))
-                    );
-
-
-            ProjetoAula.elementos.$listaTarefas.append($tarefa);
-        });
-    },
-
     converterData: function (data) {
     	data = data.trim();
     	var datahora = data.split(' ');
@@ -224,17 +197,6 @@ var ProjetoAula = {
 		);
 
 		return data.toJSON();
-    },
-
-    formatarData: function(data) {
-        var d = data.getDate();
-        var m = data.getMonth() + 1;
-        var y = data.getFullYear();
-        var h = data.getHours();
-        var min = data.getMinutes();
-        var mil = data.getMilliseconds();
-
-        return d + '/' + m  + '/' + y + ' ' + h + ':' + min + ':' + mil;
     },
 
     loading: function (loading) {
