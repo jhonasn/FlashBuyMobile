@@ -28,6 +28,7 @@
     "listaAnunciosAdquiridos",
     "descricaoAnuncio",
     "testeConexao",
-    "qrCodeAnuncio"
+    "qrCodeAnuncio",
+    "descricaoAnuncioAdquirido"
   ]
 }

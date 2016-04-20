@@ -3,14 +3,14 @@
     <div class='col s12 m7'>
         <div class='card small'>
             <div class='card-image'>
-                <img src='../img/semImagem.png'>
+                <img src={{imgMime}}>
                 <span class='card-title'> Descricao : {{Produto}}  </span>
             </div>
             <div class='card-content'>
                 <p>id da oferta = {{IdOferta}}</p>
             </div>
             <div class='card-action'>
-                <button type='button' class="waves-effect waves-light btn" data-controller='descricaoAnuncio' data-idoferta="{{IdOferta}}" data-datainicio="{{DataInicio}}" data-datafim="{{DataFim}}" data-produto="{{Produto}}" data-idanunciante="{{IdAnunciante}}">Abrir Oferta</button>
+                <button type='button' class="waves-effect waves-light btn" data-controller='descricaoAnuncio' data-imgMime="{{imgMime}}" data-idoferta="{{IdOferta}}" data-datainicio="{{DataInicio}}" data-datafim="{{DataFim}}" data-produto="{{Produto}}" data-idanunciante="{{IdAnunciante}}">Abrir Oferta</button>
                 <!--<a href='#'>Recusar</a>-->
             </div>
         </div>

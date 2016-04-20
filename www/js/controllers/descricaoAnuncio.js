@@ -3,15 +3,18 @@
 /// <reference path="../base/util.js" />
 
 FlashBuy.descricaoAnuncio = {
-    init: function (idOferta, DataInicio, DataFim, produto, idAnunciante) {
+    init: function (idOferta, DataInicio, DataFim, produto, idAnunciante, imgMime) {
         //iniciar carousel
         $(document).ready(function () {
             $('.carousel').carousel();
-        });       
-            
+        });
+
+        // colocar imagem
+        $("#divImagem").append("<img src=" + imgMime + " />");
+        
         //jogando as informações na tela, podemos implementar um template depois
         $("#descricaoOferta").append("<div class='row'>");
-        $("#descricaoOferta").append("<div class='col s12 m7'>");        
+        $("#descricaoOferta").append("<div class='col s12 m7'>");
         $("#descricaoOferta").append("<blockquote> produto: " + produto + "</blockquote>");
         $("#descricaoOferta").append("<blockquote> dataInicio: " + DataInicio + "</blockquote>");
         $("#descricaoOferta").append("<blockquote> dataFim: " + DataFim + "</blockquote>");
@@ -33,6 +36,6 @@ FlashBuy.descricaoAnuncio = {
     },
     gerarQrCode: function (string, divId) {
         //configuração das rotas do controller
-        
+
     }
 };
