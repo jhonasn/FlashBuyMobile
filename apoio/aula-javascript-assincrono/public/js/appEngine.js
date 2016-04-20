@@ -2,46 +2,46 @@
 /// <reference path="lib/materialize.js" />
 
 var ProjetoAula = {
-    tarefas: [],
-    template: null,
-    elementos: {
-        novaTarefa: null,
+	elementos: {
+		novaTarefa: null,
         $listaTarefas: null,
         $titulo: null
-    },
+	},
 
     init: function() {
-        ProjetoAula.template = jQuery('template.tarefa').html();
-        ProjetoAula.elementos.novaTarefa = jQuery('form[name=nova-tarefa]').get(0);
+    	ProjetoAula.elementos.novaTarefa = jQuery('form[name=nova-tarefa]').get(0);
         ProjetoAula.elementos.$listaTarefas = jQuery('section.lista-tarefas ul.tarefas');
         ProjetoAula.elementos.$titulo = jQuery('section.lista-tarefas h4');
-
-        ProjetoAula.listarTarefas();
     },
 
     listarTarefas: function() {
-        ProjetoAula.loading(true);
+    	ProjetoAula.loading(true);
 
-        jQuery.get('/api/tarefas')
+        jQuery.get('/engine/tarefas')
             .success(function(data) {
-                ProjetoAula.loading(false);
-                ProjetoAula.tarefas = data;
-                ProjetoAula.renderizar();
+            	ProjetoAula.loading(false);
+                ProjetoAula.elementos.$listaTarefas.html(data);
             })
             .error(function(err) {
-                ProjetoAula.loading(false);
-                var msg = 'erro ' + err.status + ' ao buscar as tarefas do servidor';
-                Materialize.toast(msg, 3000, 'rounded');
+            	ProjetoAula.loading(false);
+            	var msg = 'erro ' + err.status + ' ao buscar as tarefas do servidor';
+            	Materialize.toast(msg, 3000, 'rounded');                
             });
     },
 
-    buscarTarefaPorId: function(id) {
-        var tarefa = ProjetoAula.tarefas.filter(function(tarefa) {
-            return tarefa._id == id;
-        });
+    buscarTarefaPorId: function (id) {
+        var $tarefa = ProjetoAula.elementos.$listaTarefas.find('li[itemid="' + id + '"]');
 
-        if (tarefa) {
-            return tarefa[0];
+        if($tarefa.length) {
+        	var tarefa = {
+        		_id: id,
+	            concluida: $tarefa.find('input[type=checkbox].concluida').value,
+	            titulo: $tarefa.find('.titulo').text(),
+	            descricao: $tarefa.find('.descricao').text(),
+	            dataCriacao: ProjetoAula.converterData($tarefa.find('.dataCriacao').text())
+        	};
+
+        	return tarefa;            
         } else {
             return null;
         }
@@ -54,20 +54,15 @@ var ProjetoAula = {
             descricao: ProjetoAula.elementos.novaTarefa.descricao.value
         };
 
-        ProjetoAula.salvar(tarefa, function(err, data) {
-            if (data) {
-                if (!err) {
-                    Materialize.toast('Tarefa adicionada!', 3000, 'rounded');
-                }
+        ProjetoAula.salvar(tarefa, function (err, data) {
+            if(data) {
                 ProjetoAula.limparNovaTarefa();
-                // ProjetoAula.renderizar();
-                // ProjetoAula.tarefas.push(data);
                 ProjetoAula.listarTarefas();
             }
         });
     },
 
-    alterarTarefa: function() {
+    alterarTarefa: function () {
         var tarefa = {
             _id: ProjetoAula.elementos.novaTarefa._id.value,
             concluida: ProjetoAula.elementos.novaTarefa.concluida.value,
@@ -76,56 +71,48 @@ var ProjetoAula = {
             dataCriacao: ProjetoAula.elementos.novaTarefa.dataCriacao.value
         };
 
-        ProjetoAula.salvar(tarefa, function(err, data) {
-            if (data) {
-                if (!err) {
-                    Materialize.toast('Tarefa alterada!', 3000, 'rounded');
-                }
+        ProjetoAula.salvar(tarefa, function (err, data) {
+            if(data) {
                 ProjetoAula.limparNovaTarefa();
-                // ProjetoAula.renderizar();
                 ProjetoAula.listarTarefas();
             }
         });
     },
 
-    concluirTarefa: function(checkboxTarefa) {
+    concluirTarefa: function (checkboxTarefa) {
         var id = jQuery(checkboxTarefa).closest('li').attr('itemid');
         var tarefa = ProjetoAula.buscarTarefaPorId(id);
 
         tarefa.concluida = checkboxTarefa.checked;
 
-        ProjetoAula.salvar(tarefa, function(err, data) {
-            // if(!data) {
-            //     tarefa.concluida = !tarefa.concluida;
-            //     ProjetoAula.renderizar();
-            // }
-            if (!err) {
-                Materialize.toast('Tarefa alterada!', 3000, 'rounded');
-            }
+        ProjetoAula.salvar(tarefa, function (err, data) {
             ProjetoAula.listarTarefas();
         });
     },
 
     salvar: function(tarefa, cb) {
-        ProjetoAula.loading(true);
+    	ProjetoAula.loading(true);
 
         $.ajax({
-                method: 'PUT',
-                url: '/api/tarefas',
-                data: tarefa
-            })
+            method: 'PUT',
+            url: '/engine/tarefas',
+            data: tarefa
+        })
             .success(function(data) {
-                ProjetoAula.loading(false);
+            	ProjetoAula.loading(false);
 
-                if (cb) {
+            	if(data) {
+                	Materialize.toast('Tarefa salva!', 3000, 'rounded');                
+            	}
+
+                if(cb) {
                     cb(null, data);
                 }
             })
             .error(function(err) {
-                ProjetoAula.loading(false);
-
+            	ProjetoAula.loading(false);
                 var msg = 'não foi possivel alterar a tarefa ' + tarefa.titulo + '. erro ' + err.status;
-                Materialize.toast(msg, 3000, 'rounded');
+            	Materialize.toast(msg, 3000, 'rounded');                
                 cb(err, null);
             });
     },
@@ -134,42 +121,38 @@ var ProjetoAula = {
         var id = jQuery(elementoBotaoRemover).closest('li').attr('itemid');
         var tarefa = ProjetoAula.buscarTarefaPorId(id);
 
-        if (!tarefa) {
+        if(!tarefa) {
             var msg = 'Tarefa não encontrada na aplicação.';
-            Materialize.toast(msg, 3000, 'rounded');
+        	Materialize.toast(msg, 3000, 'rounded');                
             return;
         }
-
-        ProjetoAula.loading(true);
+        
+    	ProjetoAula.loading(true);
 
         $.ajax({
-                method: 'DELETE',
-                url: '/api/tarefas',
-                data: { id: id }
-            })
+            method: 'DELETE',
+            url: '/engine/tarefas',
+            data: { id: id }
+        })
             .success(function(data) {
-                ProjetoAula.loading(false);
-                if (data) {
-                    // var indiceTarefa = ProjetoAula.tarefas.indexOf(tarefa);
-                    // ProjetoAula.tarefas.splice(indiceTarefa, 1);
-
-                    // ProjetoAula.renderizar();
-                    Materialize.toast('Tarefa removida!', 3000, 'rounded');
+            	ProjetoAula.loading(false);
+                if(data) {
+                	Materialize.toast('Tarefa excluida!', 3000, 'rounded');                
                     ProjetoAula.listarTarefas();
                 }
             })
             .error(function(err) {
-                ProjetoAula.loading(false);
+            	ProjetoAula.loading(false);
                 var msg = 'não foi possivel deletar a tarefa ' + tarefa.titulo + '. erro ' + err.status;
-                Materialize.toast(msg, 3000, 'rounded');
+            	Materialize.toast(msg, 3000, 'rounded');                
             });
     },
 
-    iniciarAlteracaoTarefa: function(elementoTarefa) {
+    iniciarAlteracaoTarefa: function (elementoTarefa) {
         var id = jQuery(elementoTarefa).closest('li').attr('itemid');
         var tarefa = ProjetoAula.buscarTarefaPorId(id);
 
-        if (!tarefa) {
+        if(!tarefa) {
             var msg = 'Não foi possível encontrar a tarefa selecionada na aplicação.';
             Materialize.toast(msg, 3000, 'rounded');
             return;
@@ -206,18 +189,14 @@ var ProjetoAula = {
 
             $tarefa
                 .attr('itemid', tarefa._id)
-                    .find('.titulo')
+                .find('.titulo')
                     .text(tarefa.titulo)
                     .closest('li')
                 .find('.descricao')
                     .text(tarefa.descricao)
                     .closest('li')
                 .find('.concluida')
-                    .attr('id', 'ck_' + tarefa._id)
                     .prop('checked', tarefa.concluida)
-                    .closest('li')
-                .find('label.concluida')
-                    .attr('for', 'ck_' + tarefa._id)
                     .closest('li')
                 .find('.dataCriacao')
                     .text(
@@ -229,6 +208,24 @@ var ProjetoAula = {
         });
     },
 
+    converterData: function (data) {
+    	data = data.trim();
+    	var datahora = data.split(' ');
+    	data = datahora[0].split('/');
+    	hora = datahora[1].split(':');
+
+    	data = new Date(
+    		Number(data[2]), 
+    		Number(data[1]), 
+    		Number(data[0]), 
+    		Number(hora[0]),
+    		Number(hora[1]),
+    		Number(hora[2])
+		);
+
+		return data.toJSON();
+    },
+
     formatarData: function(data) {
         var d = data.getDate();
         var m = data.getMonth() + 1;
@@ -237,18 +234,18 @@ var ProjetoAula = {
         var min = data.getMinutes();
         var mil = data.getMilliseconds();
 
-        return d + '/' + m + '/' + y + ' ' + h + ':' + min + ':' + mil;
+        return d + '/' + m  + '/' + y + ' ' + h + ':' + min + ':' + mil;
     },
 
-    loading: function(loading) {
+    loading: function (loading) {
         var $progress = jQuery('.progress');
-        if (loading) {
+        if(loading) {
             $progress.show();
         } else {
             $progress.hide();
         }
     }
-
+    
 };
 
 // jQuery.ready(ProjetoAula.init);
