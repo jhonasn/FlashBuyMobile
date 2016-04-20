@@ -29,7 +29,7 @@ module.exports = {
         if (tarefa._id) {
             var id = tarefa._id;
             delete tarefa._id;
-            
+
             Tarefa.update({ _id: id }, tarefa, function(err, affected) {
                 cb(err, !!affected.ok);
             });
@@ -45,7 +45,7 @@ module.exports = {
     remove: function(id, cb) {
         if (objectIdIsValid(id)) {
             Tarefa.remove({ _id: id }, function(err, tarefa) {
-                cb(err, !!tarefa.result.ok)
+                cb(err, !!tarefa.result.ok);
             });
         } else {
             cb({ status: 404, message: 'registro não encontrado.' });

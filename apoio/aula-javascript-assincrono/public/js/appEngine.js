@@ -25,7 +25,7 @@ var ProjetoAula = {
             .error(function(err) {
             	ProjetoAula.loading(false);
             	var msg = 'erro ' + err.status + ' ao buscar as tarefas do servidor';
-            	Materialize.toast(msg, 3000, 'rounded');                
+            	Materialize.toast(msg, 3000, 'rounded');
             });
     },
 
@@ -41,7 +41,7 @@ var ProjetoAula = {
 	            dataCriacao: ProjetoAula.converterData($tarefa.find('.dataCriacao').text())
         	};
 
-        	return tarefa;            
+        	return tarefa;
         } else {
             return null;
         }
@@ -102,7 +102,7 @@ var ProjetoAula = {
             	ProjetoAula.loading(false);
 
             	if(data) {
-                	Materialize.toast('Tarefa salva!', 3000, 'rounded');                
+                	Materialize.toast('Tarefa salva!', 3000, 'rounded');
             	}
 
                 if(cb) {
@@ -112,7 +112,7 @@ var ProjetoAula = {
             .error(function(err) {
             	ProjetoAula.loading(false);
                 var msg = 'não foi possivel alterar a tarefa ' + tarefa.titulo + '. erro ' + err.status;
-            	Materialize.toast(msg, 3000, 'rounded');                
+            	Materialize.toast(msg, 3000, 'rounded');
                 cb(err, null);
             });
     },
@@ -123,10 +123,10 @@ var ProjetoAula = {
 
         if(!tarefa) {
             var msg = 'Tarefa não encontrada na aplicação.';
-        	Materialize.toast(msg, 3000, 'rounded');                
+        	Materialize.toast(msg, 3000, 'rounded');
             return;
         }
-        
+
     	ProjetoAula.loading(true);
 
         $.ajax({
@@ -137,14 +137,14 @@ var ProjetoAula = {
             .success(function(data) {
             	ProjetoAula.loading(false);
                 if(data) {
-                	Materialize.toast('Tarefa excluida!', 3000, 'rounded');                
+                	Materialize.toast('Tarefa excluida!', 3000, 'rounded');
                     ProjetoAula.listarTarefas();
                 }
             })
             .error(function(err) {
             	ProjetoAula.loading(false);
                 var msg = 'não foi possivel deletar a tarefa ' + tarefa.titulo + '. erro ' + err.status;
-            	Materialize.toast(msg, 3000, 'rounded');                
+            	Materialize.toast(msg, 3000, 'rounded');
             });
     },
 
@@ -166,7 +166,7 @@ var ProjetoAula = {
 
         ProjetoAula.elementos.$titulo.text('Alterar tarefa: ' + tarefa.titulo);
         jQuery(ProjetoAula.elementos.novaTarefa).find('button.cancelar').show();
-        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.alterarTarefa()')
+        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.alterarTarefa()');
     },
 
     limparNovaTarefa: function() {
@@ -178,7 +178,7 @@ var ProjetoAula = {
 
         ProjetoAula.elementos.$titulo.text('Nova Tarefa:');
         jQuery(ProjetoAula.elementos.novaTarefa).find('button.cancelar').hide();
-        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.adicionarTarefa()')
+        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.adicionarTarefa()');
     },
 
     renderizar: function() {
@@ -215,9 +215,9 @@ var ProjetoAula = {
     	hora = datahora[1].split(':');
 
     	data = new Date(
-    		Number(data[2]), 
-    		Number(data[1]), 
-    		Number(data[0]), 
+    		Number(data[2]),
+    		Number(data[1]),
+    		Number(data[0]),
     		Number(hora[0]),
     		Number(hora[1]),
     		Number(hora[2])
@@ -245,7 +245,7 @@ var ProjetoAula = {
             $progress.hide();
         }
     }
-    
+
 };
 
 // jQuery.ready(ProjetoAula.init);

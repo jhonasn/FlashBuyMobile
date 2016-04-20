@@ -17,7 +17,7 @@ handlebars = handlebars.create({
     extname: '.hbs'
 });
 
-app.engine('.hbs', handlebars.engine)
+app.engine('.hbs', handlebars.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', '.hbs');
 

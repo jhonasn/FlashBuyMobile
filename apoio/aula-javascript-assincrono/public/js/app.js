@@ -183,7 +183,7 @@ var ProjetoAula = {
 
         ProjetoAula.elementos.$titulo.text('Alterar tarefa: ' + tarefa.titulo);
         jQuery(ProjetoAula.elementos.novaTarefa).find('button.cancelar').show();
-        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.alterarTarefa()')
+        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.alterarTarefa()');
     },
 
     limparNovaTarefa: function() {
@@ -195,7 +195,7 @@ var ProjetoAula = {
 
         ProjetoAula.elementos.$titulo.text('Nova Tarefa:');
         jQuery(ProjetoAula.elementos.novaTarefa).find('button.cancelar').hide();
-        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.adicionarTarefa()')
+        jQuery(ProjetoAula.elementos.novaTarefa).find('button.confirmar').attr('onclick', 'ProjetoAula.adicionarTarefa()');
     },
 
     renderizar: function() {
