@@ -81,13 +81,13 @@ FlashBuy.util = {
         }
     },
     
-    onInternet : function(callback)
-    {
-        if (callback.type=="online") {
-            alert("Voc� est� em uma " + FlashBuy.util.tipoInternet());
-        } else {
-            alert("Voc� est� desconectado.");
-        }
+    onInternet: function (callback) {
+        $(document).on('online', function () {
+            callback(true);            
+        });
+        $(document).on('offline', function () {
+            callback(false);            
+        });
     },
 
     tipoInternet: function () {

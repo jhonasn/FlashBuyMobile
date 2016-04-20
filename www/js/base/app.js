@@ -30,7 +30,8 @@ var FlashBuy = {
         //liga os botões de menu as rotas das controllers/telas
         FlashBuy.bindEventsRedirections();
         //carrega primeira tela: login se existir, se não carrega a home
-        if(FlashBuy.login) {
+        //Estou negando a expressão abaixo para que eu possa trabalhar no login sem atrapalhar vocês :3
+        if (!FlashBuy.login) {
             FlashBuy.load('login', 'views/login.html');
         } else {
             FlashBuy.load('home', 'views/home.html');
