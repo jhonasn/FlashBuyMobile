@@ -16,6 +16,7 @@ FlashBuy.util = {
     gerarQRCode: function (texto, divId) {
         //Convers�o da vari�vel em string necess�ria, se nao tiver, o qrCode nao funciona
         texto = String(texto);
+        var tamanhoDiv = $(divId).width();
         var qrcode = new QRCode(divId, {
             text: texto,
             width: 128,
@@ -24,6 +25,28 @@ FlashBuy.util = {
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
         });
+    },
+    getUsuario: function () {
+        var user = localStorage.getItem(FlashBuy.Cliente);
+        if (!user) {
+            var deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
+            $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId)
+             .success(function (data) {
+                 //ANALISA RETORNO
+                 if (data.length) {
+                     //SALVA OBJETO CLIENTE NA LOCAL STORAGE
+                     localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
+                     console.log('Agora usuário está logado');
+                     return data;
+                 }
+             })
+             .error(function () {
+                 console.error(arguments);
+             });
+        }
+        else {
+            return JSON.parse(user);
+        }
     },
     getDeviceId: function () {
         return device.uuid;
@@ -34,7 +57,7 @@ FlashBuy.util = {
     //criptografa o texto em MD5
     criptografarMD5: function (texto) {
         return md5(texto);
-    },    
+    },
     getHtml: function (url) {
         var html;
         var err;
@@ -76,17 +99,17 @@ FlashBuy.util = {
     conectadoInternet: function () {
         if (navigator.connection.type != Connection.NONE) {
             return true;
-        } else  {
+        } else {
             return false;
         }
     },
-    
+
     onInternet: function (callback) {
         $(document).on('online', function () {
-            callback(true);            
+            callback(true);
         });
         $(document).on('offline', function () {
-            callback(false);            
+            callback(false);
         });
     },
 
@@ -127,7 +150,7 @@ FlashBuy.util = {
                 break;
             }
             default: {
-                retorno: "Houve um problema ao identificar sua conex�o. Tente novamente mais tarde.";
+                    retorno: "Houve um problema ao identificar sua conex�o. Tente novamente mais tarde.";
                 break;
             }
         }

@@ -31,7 +31,7 @@ var FlashBuy = {
         FlashBuy.bindEventsRedirections();
         //carrega primeira tela: login se existir, se não carrega a home
         //Estou negando a expressão abaixo para que eu possa trabalhar no login sem atrapalhar vocês :3
-        if (!FlashBuy.login) {
+        if (FlashBuy.login) {
             FlashBuy.load('login', 'views/login.html');
         } else {
             FlashBuy.load('home', 'views/home.html');
@@ -100,7 +100,9 @@ var FlashBuy = {
         } else {
             $('#main-loading').hide();
         }
-    }
+    },
+    //DEFINIÇÃO DE KEYS PARA LOCALSTORAGE
+    Cliente: 'flashBuyCliente'
 };
 
 //inicializa aplicação
