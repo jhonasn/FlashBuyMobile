@@ -1,6 +1,6 @@
-var segundosContar = null;
-var contagem = null;
-var timer = null;
+var segundosContar = null;//segundos inseridos pelo usuario
+var contagem = null;//contagem mostrada
+var timer = null;//identificador interval
 
 function contador() {
     contagem = 0;

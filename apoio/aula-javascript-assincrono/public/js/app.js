@@ -109,7 +109,7 @@ var ProjetoAula = {
     salvar: function(tarefa, cb) {
         ProjetoAula.loading(true);
 
-        $.ajax({
+        jQuery.ajax({
                 method: 'PUT',
                 url: '/api/tarefas',
                 data: tarefa
@@ -142,7 +142,7 @@ var ProjetoAula = {
 
         ProjetoAula.loading(true);
 
-        $.ajax({
+        jQuery.ajax({
                 method: 'DELETE',
                 url: '/api/tarefas',
                 data: { id: id }
