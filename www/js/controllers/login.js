@@ -6,37 +6,43 @@ FlashBuy.login = {
     init: function () {
         console.log('login init');
     },
-    ready: function () { 
-        if (true) {
-            Materialize.toast('Você está conectado.', 3000, 'rounded');
-            //simulando um device ID
-            var deviceId = FlashBuy.util.criptografarMD5('escrevi_e_saí_correndo');
-            $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI='+ deviceId + '?nome=' + 'joão')
-                .success(function (data) {
-                    console.log(data);
-                })
-                .error(function () {
-                    console.error(arguments);
-                });
-        }
-        // O código abaixo é para devices. Como ainda estou testando no navegador, deixarei comentado.
-        //if (FlashBuy.util.conectadoInternet()) {
-        //    Materialize.toast('Você está conectado.', 3000, 'rounded');
-        //    var deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
-        //    $.get('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId)
-        //    .success(function (data) {
-        //        console.info('proxy ok!');
-        //    })
-        //    .error(function () {
-        //        console.error(arguments);
-        //    });
+    ready: function () {
 
-        //}
-        else
-        {
-            Materialize.toast('Você está desconectado.', 3000, 'rounded');
+        //Tenta buscar login salvo
+        if (FlashBuy.util.getUsuario()) {
+            //Caso esteja logado, redireciona para a HOME
+            console.log('Usuário logado, redirecionando para a home.');
+            FlashBuy.load('home', 'views/home.html');
+        } else {
+            //Caso não esteja logado, mostra tela de login
+            Materialize.toast('Nos informe seu nome para completar o cadastro', 3000);
+            //Cria evento para quando clicar no botão de login
+            $("#btNome").click(function () {
+                var deviceId;
+                //VERIFICA SE ESTAMOS UTILIZANDO UM SMARTPHONE OU ESTAMOS SIMULANDO NO NAVEGADOR
+                if (FlashBuy.util.isDevice()) {
+                    //CASO ESTEJA SENDO USADO EM UM DEVICE, PEGA O IMEI E CRIPTOGRAFA
+                    deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
+                } else {
+                    //SENÃO SIMULAMOS UM VALOR QUALQUER
+                    deviceId = FlashBuy.util.criptografarMD5('Último teste');
+                }
+                //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT 
+                var nome = $("#inputNome").val();
+                //TENTA CADASTRAR O CLIENTE
+                $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId + '&nome=' + nome)
+                .success(function (data) {
+                    //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
+                    localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
+                    console.log('Usuário cadastrado com sucesso. Redirecionando para home');
+                    FlashBuy.load('home', 'views/home.html');
+                })
+                .error(function (erro) {
+                    //CASO CONTRÁRIO, MOSTRA TOAST REDONDO E CRIA UM LOG DE ERRO
+                    console.error('Ocorreu algum erro: ' + erro);
+                    Materialize.toast('Que feio servidor você não pode fazer isso, tente novamente mais tarde 😔', 3000, 'rounded')
+                });
+            });
         }
-        //console.log('login ready ' + deviceId );
-        console.log('login ready');
     }
-};
+}
