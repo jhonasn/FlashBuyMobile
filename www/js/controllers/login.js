@@ -25,23 +25,29 @@ FlashBuy.login = {
                     deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
                 } else {
                     //SENÃO SIMULAMOS UM VALOR QUALQUER
-                    deviceId = FlashBuy.util.criptografarMD5('Último teste');
+                    deviceId = FlashBuy.util.criptografarMD5('JANEIRO');
                 }
                 //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT 
                 var nome = $("#inputNome").val();
                 //TENTA CADASTRAR O CLIENTE
                 $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId + '&nome=' + nome)
-                .success(function (data) {
-                    //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
-                    localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
-                    console.log('Usuário cadastrado com sucesso. Redirecionando para home');
-                    FlashBuy.load('home', 'views/home.html');
-                })
-                .error(function (erro) {
-                    //CASO CONTRÁRIO, MOSTRA TOAST REDONDO E CRIA UM LOG DE ERRO
-                    console.error('Ocorreu algum erro: ' + erro);
-                    Materialize.toast('Que feio servidor você não pode fazer isso, tente novamente mais tarde 😔', 3000, 'rounded')
-                });
+                    .success(function (data) {
+                        //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
+                        localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
+                        console.log('Usuário cadastrado com sucesso. Redirecionando para home');
+                        FlashBuy.load('home', 'views/home.html');
+                    }).error(function (erro) {
+                        //CASO CONTRÁRIO, MOSTRA TOAST REDONDO E CRIA UM LOG DE ERRO
+                        console.error('Ocorreu algum erro: ' + erro);
+                        if (FlashBuy.util.isDevice()) {
+                            if (!FlashBuy.util.conectadoInternet()) {
+                                Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+                            } else {
+                                Materialize.toast('Que estranho.. algo sobrenatural aconteceu aqui, é melhor chamar o agente Mulder.', 3000, 'rounded');
+                            }
+                        }
+                        Materialize.toast('Que feio servidor você não pode fazer isso, tente novamente mais tarde 😔', 3000, 'rounded');
+                    });
             });
         }
     }
