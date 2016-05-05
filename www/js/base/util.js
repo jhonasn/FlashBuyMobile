@@ -28,25 +28,42 @@ FlashBuy.util = {
     },
     getUsuario: function () {
         var user = localStorage.getItem(FlashBuy.Cliente);
+        var retorno;
         if (!user) {
-            var deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
-            $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId)
-             .success(function (data) {
-                 //ANALISA RETORNO
-                 if (data.length) {
-                     //SALVA OBJETO CLIENTE NA LOCAL STORAGE
-                     localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
-                     console.log('Agora usuário está logado');
-                     return data;
-                 }
-             })
-             .error(function () {
-                 console.error(arguments);
-             });
+            var deviceId;
+            //VERIFICA SE É UM SMARTPHONE QUE ESTÁ EXECUTANDO O CÓDIGO
+            if (FlashBuy.util.isDevice()) {
+                //PEGA VALOR DO "IMEI" E CRIPTOGRAFA
+                deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
+            }
+            else {
+                //CASO NÃO SEJA UM SMARTPHONE(OU DEVICES EM GERAL) SIMULA DEVICE ID EXISTENTE NA BASE DE DADOS (EXISTE MESMO, TRATEI DE VERIFICAR ISSO)
+                deviceId = FlashBuy.util.criptografarMD5('12345678910');
+            }
+            //EXECUTA A VERIFICAÇÃO DE SE  HÁ REGISTROS DESSE IMEI NA BASE
+            $.ajax({
+                type: 'POST',
+                async: false,
+                url: 'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId,
+                success: function (data) {
+                    //ANALISA RETORNO
+                    if (data.length) {
+                        //CASO HAJA ALGUM RETORNO, SALVA OBJETO CLIENTE NA LOCAL STORAGE
+                        localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
+                        retorno = data;
+                    }
+                    else {
+                        //CASO NÃO EXISTA O IMEI NA BASE, O RETORNO RECEBE UM VALOR FALSO/0
+                        retorno = 0;
+                    }
+                },
+            });
+
         }
         else {
-            return JSON.parse(user);
+            retorno = JSON.parse(user);
         }
+        return retorno;
     },
     getDeviceId: function () {
         return device.uuid;
