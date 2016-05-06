@@ -5,10 +5,10 @@
 FlashBuy.listaAnunciosAdquiridos = {
     init: function () {
 
-        //método para fazer a listagem, por enquanto passando direto o idCliente =1
+        //método para fazer a listagem, pegando id do usuário logado
         FlashBuy.listaAnunciosAdquiridos.carregarAnuncios(function () {
             FlashBuy.util.configurarRotasControllers();
-        }, 1);
+        }, FlashBuy.util.getUsuario()[0].IdCliente);
 
         console.log('listaAnunciosAdquiridos init');
     },
@@ -17,8 +17,7 @@ FlashBuy.listaAnunciosAdquiridos = {
 
     },
     //metodo para comunicar com o web service
-    carregarAnuncios: function (cb, idCliente) {
-        idCliente = 1001;
+    carregarAnuncios: function (cb, idCliente) {      
         $.get('http://189.16.45.2/flashbuywebapi/api/Compras/GetComprasCliente?idCliente=' + idCliente)
         .success(function (data) {
             console.info('proxy ok!');
