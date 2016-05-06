@@ -14,7 +14,7 @@ FlashBuy.listaAnuncios = {
         console.log('listaAnuncios ready');
     },
     //metodo para comunicar com o web service
-    carregarAnuncios: function (cb) {
+    carregarAnuncios: function (configurarRotasControllers) {
         $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
@@ -32,8 +32,8 @@ FlashBuy.listaAnuncios = {
                 $('#divOferta').append(htmlRenderizado);
             });
 
-            if (cb) {
-                cb();
+            if (configurarRotasControllers) {
+                configurarRotasControllers();
             }
         })
         .error(function () {
