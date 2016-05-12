@@ -9,6 +9,8 @@ FlashBuy.qrCodeAnuncio = {
         $("#qrcode").empty();
         FlashBuy.util.gerarQRCode(qrcode, "qrcode");
 
+        $('#codigoLegivel').append(qrcode);
+        
         console.log('qrCodeAnuncio init');
     },
     ready: function () {
