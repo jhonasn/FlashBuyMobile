@@ -6,15 +6,7 @@ FlashBuy.listaAnunciosAdquiridos = {
     init: function () {
 
         //método para fazer a listagem, pegando id do usuário logado
-        FlashBuy.listaAnunciosAdquiridos.carregarAnuncios(function () {
-            FlashBuy.util.configurarRotasControllers();
-        }, FlashBuy.util.getUsuario()[0].IdCliente);
-
-        console.log('listaAnunciosAdquiridos init');
-    },
-    ready: function () {
-        console.log('listaAnunciosAdquiridos ready');
-
+        FlashBuy.listaAnunciosAdquiridos.carregarAnuncios(FlashBuy.util.getUsuario()[0].IdCliente);
     },
     //metodo para comunicar com o web service
     carregarAnuncios: function (cb, idCliente) {      
@@ -32,10 +24,7 @@ FlashBuy.listaAnunciosAdquiridos = {
                 var htmlRenderizado = FlashBuy.util.templateHtml(htmlTemplate, model);
                 $('#divOferta').append(htmlRenderizado);
             });
-
-            if (cb) {
-                cb();
-            }
+            FlashBuy.util.configurarRotasControllers();
         })
         .error(function () {
             console.error(arguments);
