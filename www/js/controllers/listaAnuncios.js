@@ -5,16 +5,13 @@
 FlashBuy.listaAnuncios = {
     init: function () {
         //método para fazer a listagem
-        FlashBuy.listaAnuncios.carregarAnuncios(function () {
-            FlashBuy.util.configurarRotasControllers();
-        });
-        console.log('listaAnuncios init');
+        FlashBuy.listaAnuncios.carregarAnuncios();
     },
     ready: function () {
         console.log('listaAnuncios ready');
     },
     //metodo para comunicar com o web service
-    carregarAnuncios: function (configurarRotasControllers) {
+    carregarAnuncios: function () {
         $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
@@ -31,10 +28,7 @@ FlashBuy.listaAnuncios = {
 
                 $('#divOferta').append(htmlRenderizado);
             });
-
-            if (configurarRotasControllers) {
-                configurarRotasControllers();
-            }
+            FlashBuy.util.configurarRotasControllers();
         })
         .error(function () {
             console.error(arguments);
