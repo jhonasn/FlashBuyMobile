@@ -10,7 +10,7 @@ FlashBuy.listaAnuncios = {
     ready: function () {
         console.log('listaAnuncios ready');
     },
-    //metodo para comunicar com o web service
+    //metodo para comunicar com o web service.
     carregarAnuncios: function () {
         $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
