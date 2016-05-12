@@ -8,7 +8,7 @@ FlashBuy.listaAnuncios = {
         FlashBuy.listaAnuncios.carregarAnuncios();
     },
     ready: function () {
-        console.log('listaAnuncios ready');.
+        console.log('listaAnuncios ready');
     },
     //metodo para comunicar com o web service
     carregarAnuncios: function () {
