@@ -19,18 +19,21 @@ FlashBuy.login = {
             //Cria evento para quando clicar no botão de login
             $("#btNome").click(function () {
                 var deviceId;
+                var deviceKey;
                 //VERIFICA SE ESTAMOS UTILIZANDO UM SMARTPHONE OU ESTAMOS SIMULANDO NO NAVEGADOR
                 if (FlashBuy.util.isDevice()) {
                     //CASO ESTEJA SENDO USADO EM UM DEVICE, PEGA O IMEI E CRIPTOGRAFA
                     deviceId = FlashBuy.util.criptografarMD5(FlashBuy.util.getDeviceId());
+                    deviceKey = 'pau no cu de quem ta lendo';
                 } else {
                     //SENÃO SIMULAMOS UM VALOR QUALQUER
-                    deviceId = FlashBuy.util.criptografarMD5('JANEIRO');
+                    deviceId = FlashBuy.util.criptografarMD5('ESCREVI E SAI CORRENDO');
+                    deviceKey = 'pau no cu de quem ta lendo';
                 }
                 //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT 
                 var nome = $("#inputNome").val();
                 //TENTA CADASTRAR O CLIENTE
-                $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId + '&nome=' + nome)
+                $.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?IMEI=' + deviceId + '&nome=' + nome + '&deviceKey='+deviceKey)
                     .success(function (data) {
                         //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
                         localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
