@@ -9,5 +9,11 @@
 /**Div que comporta o logo na navbar**/
 #divLogo {
   width: 60%;
-  padding-top: 5px;
+  padding-top: 10px;
+}
+
+#formLog
+{
+    margin-top: 30%;
+    margin-bottom: 30%
 }
