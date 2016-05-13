@@ -38,7 +38,7 @@ FlashBuy.util = {
             }
             else {
                 //CASO NÃO SEJA UM SMARTPHONE(OU DEVICES EM GERAL) SIMULA DEVICE ID EXISTENTE NA BASE DE DADOS (EXISTE MESMO, TRATEI DE VERIFICAR ISSO)
-                deviceId = FlashBuy.util.criptografarMD5('12345678910');
+                deviceId = FlashBuy.util.criptografarMD5('ESCREVI E SAI CORRENDO');
             }
             //EXECUTA A VERIFICAÇÃO DE SE  HÁ REGISTROS DESSE IMEI NA BASE
             $.ajax({
