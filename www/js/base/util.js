@@ -16,11 +16,11 @@ FlashBuy.util = {
     gerarQRCode: function (texto, divId) {
         //Convers�o da vari�vel em string necess�ria, se nao tiver, o qrCode nao funciona
         texto = String(texto);
-        var tamanhoDiv = $(divId).width();
+        var tamanhoDiv = $("#" + divId).width();
         var qrcode = new QRCode(divId, {
             text: texto,
-            width: 128,
-            height: 128,
+            width: tamanhoDiv,
+            height: tamanhoDiv,
             colorDark: "#000000",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
