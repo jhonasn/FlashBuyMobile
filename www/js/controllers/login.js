@@ -6,6 +6,7 @@ FlashBuy.login = {
     deviceKey: null,
 
     ready: function() {
+        FlashBuy.loading(true);
         //pega o deviceKey
         FlashBuy.login.pushRegistrarDispositivoFake();
         //Tenta buscar login salvo
@@ -18,6 +19,7 @@ FlashBuy.login = {
             //Cria evento para quando clicar no botão de login
             jQuery("#btNome").click(FlashBuy.login.logar);
         }
+        FlashBuy.loading(false);
     },
 
     pushRegistrarDispositivoFake: function() {
@@ -75,6 +77,7 @@ FlashBuy.login = {
     },
 
     logar: function(e) {
+        FlashBuy.loading(true);
         //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT
         var nome = jQuery("#inputNome").val();
         var imei;
@@ -99,16 +102,24 @@ FlashBuy.login = {
             deviceKey: FlashBuy.login.deviceKey
         };
 
+        dados = jQuery.param(dados);
+
         //TENTA CADASTRAR O CLIENTE
-        jQuery.post('http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin',
-                dados
-            )
+        jQuery.post(
+            'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?' +
+            dados
+        )
             .success(function(data) {
+                FlashBuy.loading(false);
                 //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
-                localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data[0]));
+                if(Array.isArray(data) && data.length > 0) {
+                    data = data[0];
+                }
+                localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
                 console.log('Usuário cadastrado com sucesso. Redirecionando para home');
                 FlashBuy.load('home', 'views/home.html');
             }).error(function(erro) {
+                FlashBuy.loading(false);
                 //CASO CONTRÁRIO, MOSTRA TOAST REDONDO E CRIA UM LOG DE ERRO
                 console.error('Ocorreu algum erro: ' + erro);
                 if (FlashBuy.util.isDevice()) {

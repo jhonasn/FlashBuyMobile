@@ -50,19 +50,26 @@ FlashBuy.util = {
                     Math.random().toString().split('.')[1]
                 );
             }
+
+            var dados = {
+                IMEI: imei
+            };
+            dados = jQuery.param(dados);
+
             //EXECUTA A VERIFICAÇÃO DE SE  HÁ REGISTROS DESSE IMEI NA BASE
             jQuery.ajax({
                 type: 'POST',
                 async: false,
-                url: 'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin',
-                data: {
-                    IMEI: imei
-                },
+                url: 'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?' +
+                dados,
                 success: function (data) {
                     //ANALISA RETORNO
-                    if (data.length) {
+                    if (data.length || data.idCliente) {
+                        if(data.length > 0) {
+                            data = data[0];
+                        }
                         //CASO HAJA ALGUM RETORNO, SALVA OBJETO CLIENTE NA LOCAL STORAGE
-                        localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data[0]));
+                        localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
                         retorno = data;
                     }
                     else {
