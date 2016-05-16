@@ -3,17 +3,10 @@
 /// <reference path="../base/util.js" />
 
 FlashBuy.qrCodeAnuncio = {
-    init: function (qrcode) {
-        console.log('qrCode: ' + qrcode);
+    init: function (idCompra) {
+        jQuery("#qrcode").empty();
 
-        $("#qrcode").empty();
-        FlashBuy.util.gerarQRCode(qrcode, "qrcode");
-
-        $('#codigoLegivel').append(qrcode);
-        
-        console.log('qrCodeAnuncio init');
-    },
-    ready: function () {
-        console.log('qrCodeAnuncio ready');
+        FlashBuy.util.gerarQRCode(idCompra, "qrcode");
+        jQuery('#codigoLegivel').append(idCompra);
     }
 };

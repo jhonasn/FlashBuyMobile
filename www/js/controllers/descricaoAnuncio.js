@@ -3,39 +3,54 @@
 /// <reference path="../base/util.js" />
 
 FlashBuy.descricaoAnuncio = {
-    init: function (idOferta, DataInicio, DataFim, produto, idAnunciante, imgMime) {
+    init: function (oferta) {
+        oferta = JSON.parse(oferta);
+        oferta.DataInicio = FlashBuy.util.formatarDataHora(new Date(oferta.DataInicio));
+        oferta.DataFim = FlashBuy.util.formatarDataHora(new Date(oferta.DataFim));
+
         //iniciar carousel
-        $(document).ready(function () {
-            $('.carousel').carousel();
+        jQuery(document).ready(function () {
+            jQuery('.carousel').carousel();
         });
 
+        var dados = {
+            idOferta: oferta.IdOferta,
+            idCliente: FlashBuy.util.getUsuario()
+        };
+
+        FlashBuy.loading(true);
+        jQuery.post(
+            'http://189.16.45.2/flashbuywebapi/api/Compras/PostGeraCompra',
+            dados)
+        .success(function (idCompra) {
+            FlashBuy.loading(false);
+            oferta.idCompra = idCompra;
+            FlashBuy.descricaoAnuncio.mostrarDescricaoOferta(oferta);
+        })
+        .error(function (err) {
+            FlashBuy.loading(false);
+            console.error(err);
+        });
+    },
+    mostrarDescricaoOferta: function (oferta) {
         // colocar imagem
-        $("#divImagem").append("<img src=" + imgMime + " />");
-        
+        jQuery("#divImagem").append("<img src=" + oferta.imgMime + " />");
+
         //jogando as informações na tela, podemos implementar um template depois
-        $("#descricaoOferta").append("<div class='row'>");
-        $("#descricaoOferta").append("<div class='col s12 m7'>");
-        $("#descricaoOferta").append("<blockquote> produto: " + produto + "</blockquote>");
-        $("#descricaoOferta").append("<blockquote> dataInicio: " + DataInicio + "</blockquote>");
-        $("#descricaoOferta").append("<blockquote> dataFim: " + DataFim + "</blockquote>");
-        //$("#descricaoOferta").append("<blockquote> idAnunciante: " + idAnunciante + "</blockquote>");
-        $("#descricaoOferta").append("</div>");
-        $("#descricaoOferta").append("</div>");
+        jQuery("#descricaoOferta").append("<div class='row'>");
+        jQuery("#descricaoOferta").append("<div class='col s12 m7'>");
+        jQuery("#descricaoOferta").append("<blockquote> produto: " + oferta.Produto + "</blockquote>");
+        jQuery("#descricaoOferta").append("<blockquote> dataInicio: " + oferta.DataInicio + "</blockquote>");
+        jQuery("#descricaoOferta").append("<blockquote> dataFim: " + oferta.DataFim + "</blockquote>");
+        //jQuery("#descricaoOferta").append("<blockquote> idAnunciante: " + idAnunciante + "</blockquote>");
+        jQuery("#descricaoOferta").append("</div>");
+        jQuery("#descricaoOferta").append("</div>");
 
         //area dos botões
-        $("#descricaoOferta").append("<div class='row'>");
-        $("#descricaoOferta").append("<button type='button' class='waves-effect waves-light btn' data-controller='qrCodeAnuncio' data-qrcode='" + idOferta + "'>Eu quero</button>");
-        $("#descricaoOferta").append("</div>");
+        jQuery("#descricaoOferta").append("<div class='row'>");
+        jQuery("#descricaoOferta").append("<button type='button' class='waves-effect waves-light btn' data-controller='qrCodeAnuncio' data-idCompra='" + oferta.idCompra + "'>Eu quero</button>");
+        jQuery("#descricaoOferta").append("</div>");
 
         FlashBuy.util.configurarRotasControllers();
-
-        console.log('descricaoAnuncio init');
-    },
-    ready: function () {
-        console.log('descricaoAnuncio ready');
-    },
-    gerarQrCode: function (string, divId) {
-        //configuração das rotas do controller
-
     }
 };

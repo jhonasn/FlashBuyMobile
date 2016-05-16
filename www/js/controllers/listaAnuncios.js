@@ -7,16 +7,13 @@ FlashBuy.listaAnuncios = {
         //método para fazer a listagem
         FlashBuy.listaAnuncios.carregarAnuncios();
     },
-    ready: function () {
-        console.log('listaAnuncios ready');
-    },
     //metodo para comunicar com o web service.
     carregarAnuncios: function () {
-        $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
+        FlashBuy.loading(true);
+        jQuery.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
-            console.info('proxy ok!');
-            console.log(data);
-            htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosTemplate.html');
+            FlashBuy.loading(false);
+            var htmlTemplate = FlashBuy.util.getHtml('views/listaAnunciosTemplate.html');
 
             data.forEach(function (model) {
                 //Valida se tem imagem
@@ -24,13 +21,16 @@ FlashBuy.listaAnuncios = {
                     model.imgMime = "../img/semImagem.png";
                 }
 
+                model.oferta = JSON.stringify(model);
+
                 var htmlRenderizado = FlashBuy.util.templateHtml(htmlTemplate, model);
 
-                $('#divOferta').append(htmlRenderizado);
+                jQuery('#divOferta').append(htmlRenderizado);
             });
             FlashBuy.util.configurarRotasControllers();
         })
         .error(function () {
+            FlashBuy.loading(false);
             console.error(arguments);
         });
     }

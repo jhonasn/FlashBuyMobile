@@ -4,22 +4,18 @@
 
 FlashBuy.testeMD5 = {
     init: function () {
-        console.log('testeMD5 init');
-
-        var $txtString = $("#txtString");
-        var $txtResultado = $("#txtResultado");
+        var $txtString = jQuery("#txtString");
+        var $txtResultado = jQuery("#txtResultado");
         var $textoMD5;
 
         //apenas um teste com a biblioteca
-        $("#btnCalcular").click(function () {
+        jQuery("#btnCalcular").click(function () {
             $textoMD5 = FlashBuy.util.criptografarMD5($txtString.val());
             $txtResultado.val($textoMD5);
         });
 
     },
     ready: function () {
-        console.log('testeMD5 ready');
-
         //teste 1
         var model = {
             titulo: 'Teste de Template',
@@ -28,7 +24,7 @@ FlashBuy.testeMD5 = {
 
         var htmlTemplate = FlashBuy.util.templateUrl('views/testeMD5template.html', model);
 
-        $('#teste-template-1').append(htmlTemplate);
+        jQuery('#teste-template-1').append(htmlTemplate);
 
         //teste 2
         var models = [
@@ -50,18 +46,18 @@ FlashBuy.testeMD5 = {
 
         models.forEach(function (model) {
             var htmlRenderizado = FlashBuy.util.templateHtml(htmlTemplate, model);
-            $('#teste-template-2').append(htmlRenderizado);
+            jQuery('#teste-template-2').append(htmlRenderizado);
         });
 
         //teste proxy
-        $.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
+        jQuery.get('http://189.16.45.2/flashbuywebapi/api/Ofertas/GetOferta')
         .success(function (data) {
             console.info('proxy ok!');
-            console.log(data)
+            console.log(data);
         })
         .error(function () {
             console.error(arguments);
-        })
+        });
 
     }
 };

@@ -13,12 +13,12 @@ var FlashBuy = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function () {
         //espera carregar util
-        $(document).on('FlashBuy.util.ready', function () {
+        jQuery(document).on('FlashBuy.util.ready', function () {
             //executa o deviceReady de FlashBuy
             FlashBuy.util.onDeviceReady(FlashBuy.deviceReady);
         });
         //executa o ready de FlashBuy
-        $(document).ready(FlashBuy.ready);
+        jQuery(document).ready(FlashBuy.ready);
     },
     //executa ações que necessitam ser executadas após o celular terminar de carregar o aplicativo
     deviceReady: function () {
@@ -26,7 +26,7 @@ var FlashBuy = {
     //executa ações que necessitam ser executadas após os elementos html da pagina serem carregados
     ready: function () {
         //inicializa o menu
-        $('.button-collapse').sideNav();
+        jQuery('.button-collapse').sideNav();
         //liga os botões de menu as rotas das controllers/telas
         FlashBuy.bindEventsRedirections();
         //carrega primeira tela: login se existir, se não carrega a home
@@ -42,11 +42,11 @@ var FlashBuy = {
         //verifica se foi passado o link e controller
         if (!controller || !link) {
             throw new Error('Erro de redirecionamento, controller ou link nao foram passados para FlashBuy.load().');
-        } else if (link.indexOf(controller) == -1) {
+        } else if (link.indexOf(controller) === -1) {
             throw new Error('Erro de redirecionamento, controller e link não correspondem.');
         }
 
-        var $content = $('#content');
+        var $content = jQuery('#content');
 
         //carrega tela e dispara metodos da controller
         $content.load(link, function () {
@@ -58,7 +58,7 @@ var FlashBuy = {
                 }
             }
 
-            $('#content').ready(function () {
+            jQuery('#content').ready(function () {
                 //chama a função ready da controller
                 if (FlashBuy[controller].ready) {
                     FlashBuy[controller].ready();
@@ -67,11 +67,11 @@ var FlashBuy = {
         });
 
         //esconde o menu
-        $('.button-collapse').sideNav('hide');
+        jQuery('.button-collapse').sideNav('hide');
     },
     //configura a chamada de telas / rotas
     bindEventsRedirections: function () {
-        $.getJSON('data/configuration.json')
+        jQuery.getJSON('data/configuration.json')
         .success(function (configuration) {
             if (!configuration) {
                 throw new Error("Erro ao iniciar aplicação. Configuração da aplicação inválida.");
@@ -84,8 +84,8 @@ var FlashBuy = {
             for (var i = 0; i < configuration.controllers.length; i++) {
                 var controllerName = configuration.controllers[i];
 
-                $('[data-controller="' + controllerName + '"]').on('click', function () {
-                    controllerName = $(this).data('controller');                    
+                jQuery('[data-controller="' + controllerName + '"]').on('click', function () {
+                    controllerName = jQuery(this).data('controller');
                     FlashBuy.load(controllerName, 'views/' + controllerName + '.html');
                 });
             }
@@ -96,9 +96,9 @@ var FlashBuy = {
     },
     loading: function (show) {
         if (show) {
-            $('#main-loading').show();
+            jQuery('#main-loading').show();
         } else {
-            $('#main-loading').hide();
+            jQuery('#main-loading').hide();
         }
     },
     //DEFINIÇÃO DE KEYS PARA LOCALSTORAGE
