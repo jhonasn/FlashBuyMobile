@@ -36,7 +36,7 @@ FlashBuy.login = {
         );
     },
 
-    pushRegistrarDispositivo: function() {
+    pushInit: function () {
         var pushOptions = {
             android: {
                 senderID: "12345679"
@@ -49,7 +49,11 @@ FlashBuy.login = {
             windows: {}
         };
 
-        var push = PushNotification.init(pushOptions);
+        return PushNotification.init(pushOptions);
+    },
+
+    pushRegistrarDispositivo: function() {
+        var push = FlashBuy.login.pushInit();
 
         push.on('registration', function(data) {
             FlashBuy.login.deviceKey = data.registrationId;
@@ -73,6 +77,19 @@ FlashBuy.login = {
         push.on('error', function(e) {
             console.error('erro: ' + e.message);
             FlashBuy.erroAjax();
+        });
+    },
+
+    pushDesregistrarDispositivo: function () {
+        var push = FlashBuy.login.pushInit();
+
+        push.unregister(function() {
+            push.off('notification');
+            push.off('error');
+
+            //ajax para retirar a chave do aparelho do servidor
+        }, function() {
+            console.error('erro ao desregistrar');
         });
     },
 
