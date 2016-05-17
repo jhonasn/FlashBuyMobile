@@ -4,10 +4,12 @@
 //Modulo principal, podemos adicionar aqui regras de negócio que podem ser reutilizadas em outras telas
 var FlashBuy = {
     controllers: null,
+
     //construtor
     init: function () {
         FlashBuy.bindEvents();
     },
+
     // faz ligação de escutadores de eventos 'Event Listeners'
     // Liga quaisquer eventos requeridos na inicialização. Exemplos de eventos comuns são:
     // 'load', 'deviceready', 'offline', and 'online'.
@@ -20,9 +22,11 @@ var FlashBuy = {
         //executa o ready de FlashBuy
         jQuery(document).ready(FlashBuy.ready);
     },
+
     //executa ações que necessitam ser executadas após o celular terminar de carregar o aplicativo
     deviceReady: function () {
     },
+
     //executa ações que necessitam ser executadas após os elementos html da pagina serem carregados
     ready: function () {
         //inicializa o menu
@@ -37,6 +41,7 @@ var FlashBuy = {
             FlashBuy.load('home', 'views/home.html');
         }
     },
+
     //carrega telas no elemento principal do app -> #content
     load: function (controller, link, params) {
         //verifica se foi passado o link e controller
@@ -69,6 +74,7 @@ var FlashBuy = {
         //esconde o menu
         jQuery('.button-collapse').sideNav('hide');
     },
+
     //configura a chamada de telas / rotas
     bindEventsRedirections: function () {
         jQuery.getJSON('data/configuration.json')
@@ -94,12 +100,17 @@ var FlashBuy = {
             throw new Error("Erro ao iniciar aplicação. Não foi possível encontrar o arquivo de configuração.");
         });
     },
+
     loading: function (show) {
         if (show) {
             jQuery('#main-loading').show();
         } else {
             jQuery('#main-loading').hide();
         }
+    },
+
+    erroAjax: function () {
+        Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
     },
     //DEFINIÇÃO DE KEYS PARA LOCALSTORAGE
     Cliente: 'flashBuyCliente'

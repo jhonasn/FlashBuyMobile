@@ -8,31 +8,80 @@ FlashBuy.descricaoAnuncioAdquirido = {
         oferta.DataInicio = FlashBuy.util.formatarDataHora(new Date(oferta.DataInicio));
         oferta.DataFim = FlashBuy.util.formatarDataHora(new Date(oferta.DataFim));
 
-        //iniciar carousel
-        jQuery(document).ready(function () {
-            jQuery('.carousel').carousel();
-        });
+        FlashBuy.descricaoAnuncioAdquirido.mostrar(oferta);
+    },
+    mostrar: function (oferta) {
+        var templateHtml = FlashBuy.util.templateUrl(
+            'views/descricaoAnuncioAdquirido.html',
+            oferta
+        );
 
-        // colocar imagem
-        jQuery("#divImagem").append("<img src=" + oferta.imgMime + " />");
-
-        //jogando as informações na tela, podemos implementar um template depois
-        jQuery("#descricaoOferta").append("<div class='row'>");
-        jQuery("#descricaoOferta").append("<div class='col s12 m7'>");
-        jQuery("#descricaoOferta").append("<blockquote> produto: " + oferta.Produto + "</blockquote>");
-        jQuery("#descricaoOferta").append("<blockquote> dataInicio: " + oferta.DataInicio + "</blockquote>");
-        jQuery("#descricaoOferta").append("<blockquote> dataFim: " + oferta.DataFim + "</blockquote>");
-        //jQuery("#descricaoOferta").append("<blockquote> idAnunciante: " + idAnunciante + "</blockquote>");
-        jQuery("#descricaoOferta").append("</div>");
-        jQuery("#descricaoOferta").append("</div>");
-
-        //area dos botões
-        jQuery("#avaliarOferta").append("<h6>Nos diga o que achou da sua compra</h6>");
-        jQuery("#avaliarOferta").append("</div>");
-        jQuery("#avaliarOferta").append("<div class='input-field col s12'>");
-        jQuery("#avaliarOferta").append("<button class='btn-floating btn-large waves-effect waves-light red'><i class='material-icons'>thumb_down</i></button>");
-        jQuery("#avaliarOferta").append("<button class='btn-floating btn-large waves-effect waves-light green'><i class='material-icons'>thumb_up</i></button>");
-
+        jQuery('#content').empty();
+        jQuery('#content').html(templateHtml);
+        jQuery('.carousel').carousel();
         FlashBuy.util.configurarRotasControllers();
+
+        //coloca evento de votar caso ainda não votou
+        if(!oferta.Votou) {
+            jQuery('#like-compra').click(function (e) {
+                FlashBuy.descricaoAnuncioAdquirido.votarCompra(oferta.IdCompra, true);
+            });
+
+            jQuery('#unlike-compra').click(function (e) {
+                FlashBuy.descricaoAnuncioAdquirido.votarCompra(oferta.IdCompra, false);
+            });
+        } else {
+            //bloqueia botões caso já votou
+            // jQuery('#like-compra, #unlike-compra').prop('disabled', true);
+            jQuery('#like-compra, #unlike-compra').addClass('disabled');
+            //mostra mensaginha
+            jQuery('#like-compra, #unlike-compra').click(function (e) {
+                Materialize.toast(
+                    'Voce ja fez sua votacao para essa compra',
+                    3000,
+                    'rounded'
+                );
+                FlashBuy.descricaoAnuncioAdquirido.voltarParaListagem();
+            });
+        }
+
+
+    },
+    votarCompra: function (idCompra, voto) {
+        var dados = {
+            idCompra: idCompra,
+            voto: voto
+        };
+        dados = jQuery.param(dados);
+
+        jQuery.post(
+            'http://189.16.45.2/flashbuywebapi/api/Clientes/PostVotaAnunciante?' +
+            dados
+        )
+        .success(function (ok) {
+            FlashBuy.loading(false);
+
+            if(ok) {
+                Materialize.toast(
+                    'Obrigado pela sua avaliação!',
+                    3000,
+                    'rounded'
+                );
+                FlashBuy.descricaoAnuncioAdquirido.voltarParaListagem();
+            } else {
+                Materialize.toast('Não foi possível completar sua requisição', 3000, 'rounded');
+            }
+        })
+        .error(function (err) {
+            FlashBuy.loading(false);
+            FlashBuy.erroAjax();
+            console.error(err);
+        });
+    },
+    voltarParaListagem: function () {
+        FlashBuy.load(
+            'listaAnunciosAdquiridos',
+            'views/listaAnunciosAdquiridos.html'
+        );
     }
 };

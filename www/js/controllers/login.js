@@ -72,7 +72,7 @@ FlashBuy.login = {
 
         push.on('error', function(e) {
             console.error('erro: ' + e.message);
-            Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+            FlashBuy.erroAjax();
         });
     },
 
@@ -124,7 +124,7 @@ FlashBuy.login = {
                 console.error('Ocorreu algum erro: ' + erro);
                 if (FlashBuy.util.isDevice()) {
                     if (!FlashBuy.util.conectadoInternet()) {
-                        Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+                        FlashBuy.erroAjax();
                     } else {
                         Materialize.toast('Que estranho.. algo sobrenatural aconteceu aqui, é melhor chamar o agente Mulder.', 3000, 'rounded');
                     }

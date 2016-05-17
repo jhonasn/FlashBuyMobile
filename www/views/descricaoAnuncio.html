@@ -1,7 +1,7 @@
 ﻿<div class="carousel" align="center">
     <a class="carousel-item" href="#one!">
         <div id="divImagem">
-            
+            <img src="{{imgMime}}" />
         </div>
     </a>
 </div>
@@ -9,10 +9,23 @@
 <div class="row">
     <div class="input-field col s12">
         <div id="descricaoOferta">
-
+            <div class="row">
+                <div class="col s12 m7">
+                    <blockquote> produto: {{Produto}}</blockquote>
+                    <blockquote> dataInicio: {{DataInicio}}</blockquote>
+                    <blockquote> dataFim: {{DataFim}}</blockquote>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<div class="row">
+    <button type="button" class="waves-effect waves-light btn" data-controller="qrCodeAnuncio" data-idcompra="{{idCompra}}">
+        Eu quero
+    </button>
+</div>
+
 <!--Caso decidirmos usar o qrCode nessa tela, podemos usar ele nessa div aqui-->
 <!--<div class="row" align="center">
     <div class="input-field col s12">

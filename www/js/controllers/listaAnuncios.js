@@ -31,6 +31,7 @@ FlashBuy.listaAnuncios = {
         })
         .error(function () {
             FlashBuy.loading(false);
+            FlashBuy.erroAjax();
             console.error(arguments);
         });
     }

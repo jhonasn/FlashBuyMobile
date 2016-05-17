@@ -16,20 +16,20 @@ FlashBuy.qrCodeAnuncio = {
             'http://189.16.45.2/flashbuywebapi/api/Compras/PostCheckarCompra?' +
             dados
         )
-        .success(function (data) {
+        .success(function (ok) {
             FlashBuy.loading(false);
 
-            if(data) {
+            if(ok) {
                 FlashBuy.util.gerarQRCode(idCompra, "qrcode");
                 jQuery('#codigoLegivel').append(idCompra);
             } else {
                 Materialize.toast('Não foi possível completar sua compra', 3000, 'rounded');
             }
-
         })
         .error(function (err) {
             FlashBuy.loading(false);
-            Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+            FlashBuy.erroAjax();
+            console.error(err);
         });
     }
 };

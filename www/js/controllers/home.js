@@ -8,9 +8,9 @@ FlashBuy.home = {
         var usuario = FlashBuy.util.getUsuario();
         var nome = usuario.Nome;
         var numCompras = usuario.Compra.length;
-        $("#nomeHome").text(nome);
-        $("#numCompras").text(numCompras);
-        $("#numCompras").click(function () {
+        jQuery("#nomeHome").text(nome);
+        jQuery("#numCompras").text(numCompras);
+        jQuery("#numCompras").click(function () {
             FlashBuy.load('listaAnunciosAdquiridos', 'views/listaAnunciosAdquiridos.html');
         });
     },
