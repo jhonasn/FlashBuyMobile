@@ -3,8 +3,15 @@
 /// <reference path="../base/util.js" />
 
 FlashBuy.qrCodeAnuncio = {
-    init: function (idCompra) {
+    init: function (idCompra, adquirido) {
         jQuery("#qrcode").empty();
+
+        if(adquirido) {
+            FlashBuy.qrCodeAnuncio.gerar(idCompra, adquirido);
+            jQuery('#qr-titulo').text('QR-Code para compra:');
+            //encerra
+            return;
+        }
 
         var dados = {
             idCompra: idCompra
@@ -20,8 +27,7 @@ FlashBuy.qrCodeAnuncio = {
             FlashBuy.loading(false);
 
             if(ok) {
-                FlashBuy.util.gerarQRCode(idCompra, "qrcode");
-                jQuery('#codigoLegivel').append(idCompra);
+                FlashBuy.qrCodeAnuncio.gerar(idCompra);
             } else {
                 Materialize.toast('Não foi possível completar sua compra', 3000, 'rounded');
             }
@@ -31,5 +37,10 @@ FlashBuy.qrCodeAnuncio = {
             FlashBuy.erroAjax();
             console.error(err);
         });
+    },
+
+    gerar: function (idCompra) {
+        FlashBuy.util.gerarQRCode(idCompra, "qrcode");
+        jQuery('#codigoLegivel').append(idCompra);
     }
 };

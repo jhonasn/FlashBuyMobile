@@ -6,7 +6,7 @@ FlashBuy.home = {
     init: function () {
         console.log('home init');
         //MOSTRA BARRA VERTICAL QUE SÓ DEVE APARECER APÓS O LOGIN
-        $("#barraVertical").show();
+        jQuery("#barraVertical").show();
         //PREENCHE INFORMAÇÕES NA HOME
         var usuario = FlashBuy.util.getUsuario();
         var nome = usuario.Nome;
