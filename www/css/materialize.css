@@ -7761,8 +7761,11 @@ small {
 }
 
 .card .card-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
+  background: rgba(0, 0, 0, 0.03);
+  width: 100%;
+  text-align: center;
 }
 
 .card .card-title.activator {
@@ -7824,12 +7827,17 @@ small {
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 20px;
+  padding: 0px;
+  text-shadow: 1px 1px rgb(0, 0, 0);
+  font-weight: 400;
 }
 
 .card .card-content {
-  padding: 20px;
   border-radius: 0 0 2px 2px;
+  padding: 0.7em;
+  padding-top: 0.3em;
+  font-size: 35px;
+  text-align: center;
 }
 
 .card .card-content p {
@@ -7843,7 +7851,7 @@ small {
 
 .card .card-action {
   border-top: 1px solid rgba(160, 160, 160, 0.2);
-  padding: 20px;
+  padding: 0.5em;
 }
 
 .card .card-action a:not(.btn):not(.btn-large):not(.btn-floating) {
