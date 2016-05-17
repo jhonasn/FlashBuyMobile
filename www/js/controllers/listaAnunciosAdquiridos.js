@@ -5,10 +5,11 @@
 FlashBuy.listaAnunciosAdquiridos = {
     init: function () {
         //método para fazer a listagem, pegando id do usuário logado
-        FlashBuy.listaAnunciosAdquiridos.carregarAnuncios(FlashBuy.util.getUsuario()[0].IdCliente);
+        var usuario = FlashBuy.util.getUsuario();
+        FlashBuy.listaAnunciosAdquiridos.carregarAnuncios(usuario.IdCliente);
     },
     //metodo para comunicar com o web service
-    carregarAnuncios: function (cb, idCliente) {
+    carregarAnuncios: function (idCliente) {
         FlashBuy.loading(true);
         jQuery.get('http://189.16.45.2/flashbuywebapi/api/Compras/GetComprasCliente?idCliente=' + idCliente)
         .success(function (data) {
@@ -18,7 +19,7 @@ FlashBuy.listaAnunciosAdquiridos = {
             data.forEach(function (model) {
                 //valida se tem imagem
                 if (model.imgMime === null) {
-                    model.imgMime = "../img/semImagem.png";
+                    model.imgMime = "img/semImagem.png";
                 }
 
                 model.oferta = JSON.stringify(model);

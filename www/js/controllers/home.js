@@ -5,7 +5,7 @@
 FlashBuy.home = {
     init: function () {
         console.log('home init');
-        var usuario = FlashBuy.util.getUsuario()[0];
+        var usuario = FlashBuy.util.getUsuario();
         var nome = usuario.Nome;
         var numCompras = usuario.Compra.length;
         $("#nomeHome").text(nome);

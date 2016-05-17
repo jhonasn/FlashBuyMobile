@@ -18,7 +18,7 @@ FlashBuy.listaAnuncios = {
             data.forEach(function (model) {
                 //Valida se tem imagem
                 if (model.imgMime === null) {
-                    model.imgMime = "../img/semImagem.png";
+                    model.imgMime = "img/semImagem.png";
                 }
 
                 model.oferta = JSON.stringify(model);

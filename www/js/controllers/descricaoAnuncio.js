@@ -13,15 +13,19 @@ FlashBuy.descricaoAnuncio = {
             jQuery('.carousel').carousel();
         });
 
+        FlashBuy.loading(true);
+
+        var usuario = FlashBuy.util.getUsuario();
         var dados = {
             idOferta: oferta.IdOferta,
-            idCliente: FlashBuy.util.getUsuario()
+            idCliente: usuario.IdCliente
         };
+        dados = jQuery.param(dados);
 
-        FlashBuy.loading(true);
         jQuery.post(
-            'http://189.16.45.2/flashbuywebapi/api/Compras/PostGeraCompra',
-            dados)
+            'http://189.16.45.2/flashbuywebapi/api/Compras/PostGeraCompra?' +
+            dados
+        )
         .success(function (idCompra) {
             FlashBuy.loading(false);
             oferta.idCompra = idCompra;
