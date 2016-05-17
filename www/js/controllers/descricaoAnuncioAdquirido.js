@@ -5,8 +5,8 @@
 FlashBuy.descricaoAnuncioAdquirido = {
     init: function (oferta) {
         oferta = JSON.parse(oferta);
-        oferta.DataInicio = FlashBuy.util.formatarDataHora(new Date(oferta.DataInicio));
-        oferta.DataFim = FlashBuy.util.formatarDataHora(new Date(oferta.DataFim));
+        oferta.DataInicio = FlashBuy.util.tempo.formatarDataHora(new Date(oferta.DataInicio));
+        oferta.DataFim = FlashBuy.util.tempo.formatarDataHora(new Date(oferta.DataFim));
 
         FlashBuy.descricaoAnuncioAdquirido.mostrar(oferta);
     },
