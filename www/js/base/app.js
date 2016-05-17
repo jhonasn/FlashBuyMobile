@@ -109,11 +109,23 @@ var FlashBuy = {
         }
     },
 
-    erroAjax: function () {
-        Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+    erroAjax: function (err) {
+        //Analisa o erro de Ajax e informa o devido tratamento
+        switch (err.status) {
+            case 404: {
+                Materialize.toast('Não encontramos registros na nossa base 💩',3000,'rounded');
+                break;
+            }
+            default: {
+                Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+                break;
+            }
+        }
     },
     //DEFINIÇÃO DE KEYS PARA LOCALSTORAGE
-    Cliente: 'flashBuyCliente'
+    //Representa a Key para buscar o cliente logado
+    Cliente: 'flashBuyCliente',
+    Compras: 'flashBuyCompras'
 };
 
 //inicializa aplicação
