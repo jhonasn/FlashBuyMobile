@@ -1,11 +1,11 @@
-﻿ /// <reference path="../base/base.js" />
+﻿/// <reference path="../base/base.js" />
 /// <reference path="../base/app.js" />
 /// <reference path="../base/util.js" />
 
 FlashBuy.login = {
     deviceKey: null,
 
-    ready: function() {
+    ready: function () {
         FlashBuy.loading(true);
         //pega o deviceKey
         FlashBuy.login.pushRegistrarDispositivoFake();
@@ -22,7 +22,7 @@ FlashBuy.login = {
         FlashBuy.loading(false);
     },
 
-    pushRegistrarDispositivoFake: function() {
+    pushRegistrarDispositivoFake: function () {
         var preposicao = null;
         if (FlashBuy.util.isDevice()) {
             preposicao = 'mobile-';
@@ -36,7 +36,7 @@ FlashBuy.login = {
         );
     },
 
-    pushRegistrarDispositivo: function() {
+    pushRegistrarDispositivo: function () {
         var pushOptions = {
             android: {
                 senderID: "12345679"
@@ -51,11 +51,11 @@ FlashBuy.login = {
 
         var push = PushNotification.init(pushOptions);
 
-        push.on('registration', function(data) {
+        push.on('registration', function (data) {
             FlashBuy.login.deviceKey = data.registrationId;
         });
 
-        push.on('notification', function(data) {
+        push.on('notification', function (data) {
             // console.log(data.message);
             // console.log(data.title);
             // console.log(data.count);
@@ -70,29 +70,33 @@ FlashBuy.login = {
             );
         });
 
-        push.on('error', function(e) {
+        push.on('error', function (e) {
             console.error('erro: ' + e.message);
             Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
         });
     },
 
-    logar: function(e) {
-        FlashBuy.loading(true);
-        //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT
-        var nome = jQuery("#inputNome").val();
-        var imei;
-        //VERIFICA SE ESTAMOS UTILIZANDO UM SMARTPHONE OU ESTAMOS SIMULANDO NO NAVEGADOR
-        if (FlashBuy.util.isDevice()) {
-            //CASO ESTEJA SENDO USADO EM UM DEVICE, PEGA O IMEI E CRIPTOGRAFA
-            imei = FlashBuy.util.criptografarMD5(
-                FlashBuy.util.getDeviceId()
-            );
+    logar: function (e) {
+        if ($("#inputNome").val() == '') {
+            Materialize.toast('Poxa, eu disse que você precisa inserir o seu nome 😢', 3000, 'rounded');
         } else {
-            //SENÃO SIMULAMOS UM VALOR QUALQUER
-            imei = FlashBuy.util.criptografarMD5(
-                'pc-' +
-                Math.random().toString().split('.')[1]
-            );
+            FlashBuy.loading(true);
+            //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT
+            var nome = jQuery("#inputNome").val();
+            var imei;
+            //VERIFICA SE ESTAMOS UTILIZANDO UM SMARTPHONE OU ESTAMOS SIMULANDO NO NAVEGADOR
+            if (FlashBuy.util.isDevice()) {
+                //CASO ESTEJA SENDO USADO EM UM DEVICE, PEGA O IMEI E CRIPTOGRAFA
+                imei = FlashBuy.util.criptografarMD5(
+                    FlashBuy.util.getDeviceId()
+                );
+            } else {
+                //SENÃO SIMULAMOS UM VALOR QUALQUER
+                imei = FlashBuy.util.criptografarMD5(
+                    'pc-' +
+                    Math.random().toString().split('.')[1]
+                );
+            }
         }
 
         //prepara dados para login no servidor
@@ -109,16 +113,16 @@ FlashBuy.login = {
             'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?' +
             dados
         )
-            .success(function(data) {
+            .success(function (data) {
                 FlashBuy.loading(false);
                 //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
-                if(Array.isArray(data) && data.length > 0) {
+                if (Array.isArray(data) && data.length > 0) {
                     data = data[0];
                 }
                 localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
                 console.log('Usuário cadastrado com sucesso. Redirecionando para home');
                 FlashBuy.load('home', 'views/home.html');
-            }).error(function(erro) {
+            }).error(function (erro) {
                 FlashBuy.loading(false);
                 //CASO CONTRÁRIO, MOSTRA TOAST REDONDO E CRIA UM LOG DE ERRO
                 console.error('Ocorreu algum erro: ' + erro);
