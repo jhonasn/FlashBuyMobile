@@ -117,4 +117,5 @@ var FlashBuy = {
 };
 
 //inicializa aplicação
+var jQuery = jQuery.noConflict();
 FlashBuy.init();

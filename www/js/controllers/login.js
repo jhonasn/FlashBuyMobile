@@ -77,6 +77,12 @@ FlashBuy.login = {
     },
 
     logar: function(e) {
+        if (jQuery("#inputNome").val() === '') {
+            Materialize.toast('Poxa, eu disse que você precisa inserir o seu nome 😢', 3000, 'rounded');
+            //sai da função
+            return;
+        }
+
         FlashBuy.loading(true);
         //SETA O VALOR DA VARIAVEL 'NOME' COM O CONTEÚDO DO INPUT
         var nome = jQuery("#inputNome").val();
@@ -106,13 +112,13 @@ FlashBuy.login = {
 
         //TENTA CADASTRAR O CLIENTE
         jQuery.post(
-            'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?' +
-            dados
-        )
+                'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?' +
+                dados
+            )
             .success(function(data) {
                 FlashBuy.loading(false);
                 //SE CONSEGUIR, SALVA O CLIENTE NA LOCALSTORAGE E REDIRECIONA PARA A HOME
-                if(Array.isArray(data) && data.length > 0) {
+                if (Array.isArray(data) && data.length > 0) {
                     data = data[0];
                 }
                 localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
