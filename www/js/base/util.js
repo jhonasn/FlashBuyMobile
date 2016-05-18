@@ -29,11 +29,17 @@ FlashBuy.util = {
         });
     },
 
+    notificacao : {
+        agendar: function (anuncio) {
+
+        }
+    },
+
     obterPushId: function(deviceId) {
 
     },
     storeAnunciosAdquiridos: function () {
-        var idCliente = FlashBuy.util.getUsuario().idCliente;
+        var idCliente = FlashBuy.util.getUsuario().IdCliente;
         var dados = {
             idCliente: idCliente
         };
@@ -46,6 +52,7 @@ FlashBuy.util = {
             localStorage.setItem(FlashBuy.Compras, JSON.stringify(data));
         })
         .error(function (err) {
+            FlashBuy.erroAjax(err);
             console.error(arguments);
         });
     },
