@@ -3,11 +3,11 @@
 
 //utilidades variadas que podem ser reutilizadas em todo o projeto
 FlashBuy.util = {
-    isDevice: function() {
+    isDevice: function () {
         return document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
     },
 
-    onDeviceReady: function(callback) {
+    onDeviceReady: function (callback) {
         if (FlashBuy.util.isDevice()) {
             jQuery(document).on('deviceready', callback);
         } else {
@@ -15,7 +15,7 @@ FlashBuy.util = {
         }
     },
 
-    gerarQRCode: function(texto, divId) {
+    gerarQRCode: function (texto, divId) {
         //Conversao da variavel em string necessaria, se nao tiver, o qrCode nao funciona
         texto = String(texto);
         var tamanhoDiv = jQuery("#" + divId).width();
@@ -29,13 +29,27 @@ FlashBuy.util = {
         });
     },
 
-    notificacao : {
-        agendar: function (anuncio) {
-
+    notificacao: {
+        agendar: function (compra) {
+            //Agenda a notificação para daqui 5 segundos.
+            var now = new Date().getTime(),
+                    _5_sec_from_now = new Date(now + 15 * 1000);
+            //Define local do arquivo de som da notificação
+            var sound = device.platform == 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
+            //Agenda a notificação conforme o anuncio
+            cordova.plugins.notification.local.schedule({
+                //Insere Id da Notificação (acredito que por enquanto podemos definir uma notificação por compra)
+                id: compra.IdCompra,
+                title: 'FlashBuy ⚡',
+                text: 'TESTE MALUCO',
+                at: _5_sec_from_now,
+                sound: sound,
+                badge: 0
+            });
         }
     },
 
-    obterPushId: function(deviceId) {
+    obterPushId: function (deviceId) {
 
     },
     storeAnunciosAdquiridos: function () {
@@ -84,7 +98,7 @@ FlashBuy.util = {
                 async: false,
                 url: 'http://189.16.45.2/flashbuywebapi/api/Clientes/PostLogin?' +
                     dados,
-                success: function(data) {
+                success: function (data) {
                     //ANALISA RETORNO
                     if (data.length || data.idCliente) {
                         if (data.length > 0) {
@@ -106,30 +120,30 @@ FlashBuy.util = {
         return retorno;
     },
 
-    getDeviceId: function() {
+    getDeviceId: function () {
         return device.uuid;
     },
 
-    getDeviceInfo: function() {
+    getDeviceInfo: function () {
         return device;
     },
 
     //criptografa o texto em MD5
-    criptografarMD5: function(texto) {
+    criptografarMD5: function (texto) {
         return md5(texto);
     },
 
-    getHtml: function(url) {
+    getHtml: function (url) {
         var html;
         var err;
         jQuery.ajax({
-                url: url,
-                async: false
-            })
-            .success(function(data) {
+            url: url,
+            async: false
+        })
+            .success(function (data) {
                 html = data;
             })
-            .error(function(err, code) {
+            .error(function (err, code) {
                 err = err;
             });
 
@@ -140,13 +154,13 @@ FlashBuy.util = {
         return html;
     },
 
-    templateUrl: function(url, model) {
+    templateUrl: function (url, model) {
         var html = FlashBuy.util.getHtml(url);
 
         return FlashBuy.util.templateHtml(html, model);
     },
 
-    templateHtml: function(html, model) {
+    templateHtml: function (html, model) {
         if (model) {
             for (var key in model) {
                 var value = model[key];
@@ -162,7 +176,7 @@ FlashBuy.util = {
         return html;
     },
 
-    conectadoInternet: function() {
+    conectadoInternet: function () {
         if (navigator.connection.type !== Connection.NONE) {
             return true;
         } else {
@@ -170,16 +184,16 @@ FlashBuy.util = {
         }
     },
 
-    onInternet: function(callback) {
-        jQuery(document).on('online', function() {
+    onInternet: function (callback) {
+        jQuery(document).on('online', function () {
             callback(true);
         });
-        jQuery(document).on('offline', function() {
+        jQuery(document).on('offline', function () {
             callback(false);
         });
     },
 
-    tipoInternet: function() {
+    tipoInternet: function () {
         var connType = navigator.connection.type;
         var retorno = "Conexao ";
         switch (connType) {
@@ -232,7 +246,7 @@ FlashBuy.util = {
         return retorno + ".";
     },
 
-    zeroPad: function(n) {
+    zeroPad: function (n) {
         if (typeof n === 'number') {
             if (n < 10) {
                 return '0' + n;
@@ -243,17 +257,17 @@ FlashBuy.util = {
     },
 
     tempo: {
-        isTipoData: function(data) {
+        isTipoData: function (data) {
             if (!(data instanceof Date)) {
                 throw new Error('O tipo a se formatar não é de data, passar parametro tipo Date');
             }
         },
 
-        milisParaTempo: function(milis) {
+        milisParaTempo: function (milis) {
             var pad = FlashBuy.util.zeroPad;
             var negativo = false;
 
-            if(milis < 0) {
+            if (milis < 0) {
                 negativo = true;
                 milis = Math.abs(milis);
             }
@@ -286,7 +300,7 @@ FlashBuy.util = {
             }
             //d:hh:MM:ss.mmm
             var tempo = [d, pad(h), pad(m), pad(s)].join(':').concat('.').concat(mi);
-            if(negativo) {
+            if (negativo) {
                 tempo = '-'.concat(tempo);
             }
 
@@ -299,7 +313,7 @@ FlashBuy.util = {
 
             var maior, menor;
 
-            if(d1 > d2) {
+            if (d1 > d2) {
                 maior = d1;
                 menor = d2;
             } else {
@@ -310,7 +324,7 @@ FlashBuy.util = {
             return FlashBuy.util.tempo.milisParaTempo(maior - menor);
         },
 
-        formatarData: function(data) {
+        formatarData: function (data) {
             FlashBuy.util.tempo.isTipoData(data);
             var pad = FlashBuy.util.zeroPad;
 
@@ -321,8 +335,8 @@ FlashBuy.util = {
             return pad(d) + '/' + pad(m) + '/' + pad(y);
         },
 
-        formatarDataHora: function(data) {
-            var dataFormatada = FlashBuy.util.formatarData(data);
+        formatarDataHora: function (data) {
+            var dataFormatada = FlashBuy.util.tempo.formatarData(data);
             var pad = FlashBuy.util.zeroPad;
 
             var h = data.getHours();
@@ -332,14 +346,14 @@ FlashBuy.util = {
         }
     },
 
-    configurarRotasControllers: function() {
+    configurarRotasControllers: function () {
         //configura chamada de controllers / rotas dentro da view atual
         var $content = jQuery('#content');
         if (FlashBuy.controllers) {
-            FlashBuy.controllers.forEach(function(controllerName) {
+            FlashBuy.controllers.forEach(function (controllerName) {
                 var $controllerButton = $content.find('[data-controller="' + controllerName + '"]');
                 if ($controllerButton.length) {
-                    $controllerButton.on('click', function() {
+                    $controllerButton.on('click', function () {
                         controllerName = jQuery(this).data('controller');
 
                         //carregamento de parametros para a controller
@@ -347,7 +361,7 @@ FlashBuy.util = {
                         var initParamsNames = getParamNames(FlashBuy[controllerName].init);
                         var params = [];
 
-                        initParamsNames.forEach(function(paramName) {
+                        initParamsNames.forEach(function (paramName) {
                             var paramValue = paramsButton[paramName.toLowerCase()];
                             if (paramValue) {
                                 if (typeof paramValue === 'string' && paramValue.indexOf('\'') > -1) {

@@ -25,9 +25,11 @@ FlashBuy.qrCodeAnuncio = {
         )
         .success(function (ok) {
             FlashBuy.loading(false);
-
+            
             if(ok) {
                 FlashBuy.qrCodeAnuncio.gerar(idCompra);
+                //Salva na store os anuncios adquiridos
+                FlashBuy.util.storeAnunciosAdquiridos();
             } else {
                 Materialize.toast('Não foi possível completar sua compra', 3000, 'rounded');
             }

@@ -10,7 +10,8 @@ FlashBuy.home = {
         //PREENCHE INFORMAÇÕES NA HOME
         var usuario = FlashBuy.util.getUsuario();
         var nome = usuario.Nome;
-        var numCompras = usuario.Compra.length;
+        console.log(localStorage.getItem(FlashBuy.Compras));
+        var numCompras = JSON.parse(localStorage.getItem(FlashBuy.Compras)).length;
         jQuery("#nomeHome").text(nome);
         jQuery("#numCompras").text(numCompras);
         jQuery("#numCompras").click(function () {
