@@ -52,6 +52,15 @@ FlashBuy.util = {
     obterPushId: function (deviceId) {
 
     },
+    removeAnuncioAdquirido: function (IdOferta) {
+        var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
+        listaAnunciosAdquiridos.forEach(function (item, index) {
+            if (item.IdOferta == IdOferta) {
+                listaAnunciosAdquiridos.splice(index,1);
+            }
+        });
+        localStorage.setItem(FlashBuy.Compras, JSON.stringify(listaAnunciosAdquiridos));
+    },
     storeAnunciosAdquiridos: function () {
         var idCliente = FlashBuy.util.getUsuario().IdCliente;
         var dados = {
@@ -63,12 +72,49 @@ FlashBuy.util = {
             dados
         )
         .success(function (data) {
+            //Medida para não sobrecarregar localStorage com as imagens das compras que já foram concretizadas.
+            //data.forEach(function (item, index) {
+            //    if (item.Votou) {
+            //        data[index].Oferta.imgMime = '';
+            //        data[index].Oferta.Foto = '';
+            //    }
+            //});
             localStorage.setItem(FlashBuy.Compras, JSON.stringify(data));
         })
         .error(function (err) {
             FlashBuy.erroAjax(err);
             console.error(arguments);
         });
+    },
+    votarAnuncioAdquirido: function (IdCompra) {
+        var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
+        listaAnunciosAdquiridos.forEach(function (item, index) {
+            if (item.IdCompra == IdCompra) {
+                item.Votou = true;
+            }
+        });
+        FlashBuy.util.setAnunciosAdquiridos(listaAnunciosAdquiridos);
+    },
+
+    setAnunciosAdquiridos: function (listaAnunciosAdquiridos) {
+        localStorage.setItem(FlashBuy.Compras, JSON.stringify(listaAnunciosAdquiridos));
+    },
+
+    getAnunciosAdquiridos: function () {
+        var listaAnunciosAdquiridos = localStorage.getItem(FlashBuy.Compras);
+        if (listaAnunciosAdquiridos == undefined) {
+            FlashBuy.util.storeAnunciosAdquiridos();
+            listaAnunciosAdquiridos = localStorage.getItem(FlashBuy.Compras);
+        }
+        return JSON.parse(listaAnunciosAdquiridos);
+    },
+    getNumAnunciosAdquiridos: function () {
+        var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
+        if (listaAnunciosAdquiridos == undefined) {
+            return 0;
+        } else {
+            return listaAnunciosAdquiridos.length;
+        }
     },
     getUsuario: function () {
         var user = localStorage.getItem(FlashBuy.Cliente);

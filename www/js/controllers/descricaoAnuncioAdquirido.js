@@ -25,11 +25,14 @@ FlashBuy.descricaoAnuncioAdquirido = {
         if(!oferta.Votou) {
             jQuery('#like-compra').click(function (e) {
                 FlashBuy.descricaoAnuncioAdquirido.votarCompra(oferta.IdCompra, true);
+                FlashBuy.util.votarAnuncioAdquirido(oferta.IdCompra);
             });
 
             jQuery('#unlike-compra').click(function (e) {
                 FlashBuy.descricaoAnuncioAdquirido.votarCompra(oferta.IdCompra, false);
+                FlashBuy.util.votarAnuncioAdquirido(oferta.IdCompra);
             });
+            
         } else {
             //bloqueia botões caso já votou
             // jQuery('#like-compra, #unlike-compra').prop('disabled', true);
