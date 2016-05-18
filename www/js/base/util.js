@@ -32,8 +32,24 @@ FlashBuy.util = {
     obterPushId: function(deviceId) {
 
     },
-
-    getUsuario: function() {
+    storeAnunciosAdquiridos: function () {
+        var idCliente = FlashBuy.util.getUsuario().idCliente;
+        var dados = {
+            idCliente: idCliente
+        };
+        dados = jQuery.param(dados);
+        jQuery.get(
+            'http://189.16.45.2/flashbuywebapi/api/Compras/GetComprasCliente?' +
+            dados
+        )
+        .success(function (data) {
+            localStorage.setItem(FlashBuy.Compras, JSON.stringify(data));
+        })
+        .error(function (err) {
+            console.error(arguments);
+        });
+    },
+    getUsuario: function () {
         var user = localStorage.getItem(FlashBuy.Cliente);
         var retorno;
         if (!user) {
