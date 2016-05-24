@@ -30,7 +30,8 @@
         "PushNotification",
         "QRCode",
         "device",
-        "md5"
+        "md5",
+        "cordova"
     ],
     "browser": true,
     "rhino": false,

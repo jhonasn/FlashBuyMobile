@@ -32,7 +32,7 @@ FlashBuy.util = {
     notificacao: {
         agendar: function (compra) {
             //Define local do arquivo de som da notificação
-            var sound = device.platform == 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
+            var sound = device.platform === 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
             var paramAgendamentos = [
                 {
                     tipo: "dias",
@@ -135,7 +135,9 @@ FlashBuy.util = {
 
 
             //} else {
-            //    //Caso não tenha começado, agenda a notificação informando que a oferta já começou (também posso informar quantos dias aprox. faltam para acabar).
+            //    //Caso não tenha começado, agenda a notificação informando
+            //    // que a oferta já começou
+            //    // (também posso informar quantos dias aprox. faltam para acabar).
             //    alert("já começou");
             //}
             //var dataNotificacao = new Date(dataInicio);
@@ -158,32 +160,34 @@ FlashBuy.util = {
             // var milis = FlashBuy.util.tempo.getDiferencaEntreDatasEmMili(dataInicial, dataFinal);
             //alert(milis);
             //_5_sec_from_now = new Date(now + 5 * 1000);
-          
+
             //Agenda a notificação conforme o anuncio
-            cordova.plugins.notification.local.schedule({
-                //Insere Id da Notificação (acredito que por enquanto podemos definir uma notificação por compra)
-                id: compra.IdCompra,
-                title: 'FlashBuy ⚡',
-                text: 'TESTE MALUCO',
-                at: _5_sec_from_now,
-                sound: sound,
-                badge: 0
-            });
+            // cordova.plugins.notification.local.schedule({
+            //     //Insere Id da Notificação (acredito que por enquanto podemos definir uma notificação por compra)
+            //     id: compra.IdCompra,
+            //     title: 'FlashBuy ⚡',
+            //     text: 'TESTE MALUCO',
+            //     at: _5_sec_from_now,
+            //     sound: sound,
+            //     badge: 0
+            // });
         }
     },
 
     obterPushId: function (deviceId) {
 
     },
+
     removeAnuncioAdquirido: function (IdOferta) {
         var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
         listaAnunciosAdquiridos.forEach(function (item, index) {
-            if (item.IdOferta == IdOferta) {
+            if (item.IdOferta === IdOferta) {
                 listaAnunciosAdquiridos.splice(index, 1);
             }
         });
         localStorage.setItem(FlashBuy.Compras, JSON.stringify(listaAnunciosAdquiridos));
     },
+
     storeAnunciosAdquiridos: function () {
         var idCliente = FlashBuy.util.getUsuario().IdCliente;
         var dados = {
@@ -209,10 +213,11 @@ FlashBuy.util = {
             console.error(arguments);
         });
     },
+
     votarAnuncioAdquirido: function (IdCompra) {
         var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
         listaAnunciosAdquiridos.forEach(function (item, index) {
-            if (item.IdCompra == IdCompra) {
+            if (item.IdCompra === IdCompra) {
                 item.Votou = true;
             }
         });
@@ -225,20 +230,22 @@ FlashBuy.util = {
 
     getAnunciosAdquiridos: function () {
         var listaAnunciosAdquiridos = localStorage.getItem(FlashBuy.Compras);
-        if (listaAnunciosAdquiridos == undefined) {
+        if (listaAnunciosAdquiridos === undefined) {
             FlashBuy.util.storeAnunciosAdquiridos();
             listaAnunciosAdquiridos = localStorage.getItem(FlashBuy.Compras);
         }
         return JSON.parse(listaAnunciosAdquiridos);
     },
+
     getNumAnunciosAdquiridos: function () {
         var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
-        if (listaAnunciosAdquiridos == undefined) {
+        if (listaAnunciosAdquiridos === undefined) {
             return 0;
         } else {
             return listaAnunciosAdquiridos.length;
         }
     },
+
     getUsuario: function () {
         var user = localStorage.getItem(FlashBuy.Cliente);
         var retorno;
@@ -480,8 +487,13 @@ FlashBuy.util = {
         milisParaTempoFormatar: function (tempo) {
             var pad = FlashBuy.util.zeroPad;
             //d:hh:MM:ss.mmm
-            var tempo = [tempo.dias, pad(tempo.horas), pad(tempo.minutos), pad(tempo.segundos)].join(':').concat('.').concat(tempo.milis);
-            if (negativo) {
+            tempo = [
+                tempo.dias,
+                pad(tempo.horas),
+                pad(tempo.minutos), pad(tempo.segundos)
+            ].join(':')
+            .concat('.').concat(tempo.milis);
+            if (tempo.negativo) {
                 tempo = '-'.concat(tempo);
             }
 
@@ -495,6 +507,7 @@ FlashBuy.util = {
 
             return d2.getTime() - d1.getTime();
         },
+
         subtrairDatas: function (d1, d2, formatar) {
             FlashBuy.util.tempo.isTipoData(d1);
             FlashBuy.util.tempo.isTipoData(d2);
