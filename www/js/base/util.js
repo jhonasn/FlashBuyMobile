@@ -31,11 +31,134 @@ FlashBuy.util = {
 
     notificacao: {
         agendar: function (compra) {
-            //Agenda a notificação para daqui 5 segundos.
-            var now = new Date().getTime(),
-                    _5_sec_from_now = new Date(now + 15 * 1000);
             //Define local do arquivo de som da notificação
             var sound = device.platform == 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
+            var paramAgendamentos = [
+                {
+                    tipo: "dias",
+                    valor: 3
+                },
+                {
+                    tipo: "dias",
+                    valor: 2
+                },
+                {
+                    tipo: "dias",
+                    valor: 1
+                },
+                {
+                    tipo: "horas",
+                    valor: 3
+                },
+                {
+                    tipo: "horas",
+                    valor: 1
+                },
+                {
+                    tipo: "minutos",
+                    valor: 30
+                },
+                {
+                    tipo: "minutos",
+                    valor: 5
+                }
+            ];
+            var agendados = [];
+            paramAgendamentos.forEach(function (agendamento,i) {
+                var mili;
+                switch (agendamento.tipo) {
+                    case "dias": {
+                        //Transforma OS DIAS em mili
+                        mili = agendamento.valor * 24 * 60 * 60 * 1000;
+                        break;
+                    }
+                    case "horas": {
+                        mili = agendamento.valor * 60 * 60 * 1000;
+                        break;
+                    }
+                    case "minutos": {
+                        mili = agendamento.valor * 60 * 1000;
+                        break;
+                    }
+                    default: {
+                        console.error("Agendamento inválido, putz");
+                        break;
+                    }
+                }
+
+                var quantoFalta = new Date() - compra.DataInicio;
+                if (mili > compra.DataInicio) {
+                   //continue break sei lá porra
+                    return;
+                }
+                var idNotificacao = compra.IdCompra + '-' + i;
+                //Agenda a notificação
+                cordova.plugins.notification.local.schedule({
+                    //Insere Id da Notificação
+                    id: idNotificacao,
+                    title: 'FlashBuy ⚡',
+                    text: 'TESTE MALUCO',
+                    at: mili,
+                    sound: sound,
+                    badge: 0
+                });
+
+                agendamento.id = idNotificacao;
+                agendados.push(agendamento);
+            });
+            localStorage.setItem("notificacoes-"+compra.IdCompra ,JSON.stringify(agendados));
+            ////Cria variável que captura a data e hora atual.
+            //var agora = new Date();
+            ////Cria variável que captura a data em que a oferta iniciará
+            //var dataInicio = new Date(JSON.parse(localStorage.getItem(FlashBuy.Compras))[0].Oferta.dataInicio);
+            ////Verifica se a oferta já começou
+            //if (agora < dataInicio) {
+            //    //Agenda
+
+            //    //Verifica se a oferta começa hoje
+            //    //if (agora.getDay() == dataInicio.getDay() &&
+            //    //    agora.getMonth() == dataInicio.getMonth() &&
+            //    //    agora.getYear() == dataInicio.getYear()) {
+
+            //    //}
+            //    //Verifica se posso agendar uma notificação "É amanhã"
+            //    if (agora < dataInicio(dataInicio.getDate() - 1)) {
+            //        //Verifica se posso agendar uma notificação "Começa em dois dias"
+            //        if (agora < dataInicio(dataInicio.getDate() - 2)) {
+            //            //Verifica se posso agendar uma notificação "Começa em três dias"
+            //            if (agora < dataInicio(dataInicio.getDate() - 3)) {
+
+
+            //            }
+            //        }
+            //    }
+
+
+            //} else {
+            //    //Caso não tenha começado, agenda a notificação informando que a oferta já começou (também posso informar quantos dias aprox. faltam para acabar).
+            //    alert("já começou");
+            //}
+            //var dataNotificacao = new Date(dataInicio);
+            //dataNotificacao.setDate(dataInicio.getDate() - 1);
+            //if (agora < dataNotificacao) {
+            //    alert(dataNotificacao + 'isso deve ser 1 dia antes de acabar');
+            //}
+            //dataNotificacao.setDate(dataInicio.getDate() - 2);
+            //if (agora < dataNotificacao) {
+            //    alert(dataNotificacao + 'isso deve ser 2 dias antes de acabar');
+            //}
+            //dataNotificacao.setDate(dataInicio.getDate() - 3);
+            //if (agora < dataNotificacao) {
+            //    alert(dataNotificacao + 'isso deve ser 3 dias antes de acabar');
+            //}
+
+            //alert(dataInicio);
+            ////Define a quantidade de milisegundos que faltam para chegarmos até a data final
+
+            // var milis = FlashBuy.util.tempo.getDiferencaEntreDatasEmMili(dataInicial, dataFinal);
+            //alert(milis);
+            //_5_sec_from_now = new Date(now + 5 * 1000);
+          
             //Agenda a notificação conforme o anuncio
             cordova.plugins.notification.local.schedule({
                 //Insere Id da Notificação (acredito que por enquanto podemos definir uma notificação por compra)
@@ -56,7 +179,7 @@ FlashBuy.util = {
         var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
         listaAnunciosAdquiridos.forEach(function (item, index) {
             if (item.IdOferta == IdOferta) {
-                listaAnunciosAdquiridos.splice(index,1);
+                listaAnunciosAdquiridos.splice(index, 1);
             }
         });
         localStorage.setItem(FlashBuy.Compras, JSON.stringify(listaAnunciosAdquiridos));
@@ -310,7 +433,6 @@ FlashBuy.util = {
         },
 
         milisParaTempo: function (milis) {
-            var pad = FlashBuy.util.zeroPad;
             var negativo = false;
 
             if (milis < 0) {
@@ -344,8 +466,21 @@ FlashBuy.util = {
                 d++;
                 h = 0;
             }
+
+            return {
+                negativo: negativo,
+                dias: d,
+                horas: h,
+                minutos: m,
+                segundos: s,
+                milis: mi
+            };
+        },
+
+        milisParaTempoFormatar: function (tempo) {
+            var pad = FlashBuy.util.zeroPad;
             //d:hh:MM:ss.mmm
-            var tempo = [d, pad(h), pad(m), pad(s)].join(':').concat('.').concat(mi);
+            var tempo = [tempo.dias, pad(tempo.horas), pad(tempo.minutos), pad(tempo.segundos)].join(':').concat('.').concat(tempo.milis);
             if (negativo) {
                 tempo = '-'.concat(tempo);
             }
@@ -353,7 +488,14 @@ FlashBuy.util = {
             return tempo;
         },
 
-        subtrairDatas: function (d1, d2) {
+        getDiferencaEntreDatasEmMili: function (d1, d2) {
+            //d1 deve representar a data inicial, d2 deve representar a data final
+            FlashBuy.util.tempo.isTipoData(d1);
+            FlashBuy.util.tempo.isTipoData(d2);
+
+            return d2.getTime() - d1.getTime();
+        },
+        subtrairDatas: function (d1, d2, formatar) {
             FlashBuy.util.tempo.isTipoData(d1);
             FlashBuy.util.tempo.isTipoData(d2);
 
@@ -367,7 +509,12 @@ FlashBuy.util = {
                 menor = d2;
             }
 
-            return FlashBuy.util.tempo.milisParaTempo(maior - menor);
+            var tempo = FlashBuy.util.tempo.milisParaTempo(maior - menor);
+            if (formatar) {
+                return FlashBuy.util.tempo.milisParaTempoFormatar(tempo);
+            } else {
+                return tempo;
+            }
         },
 
         formatarData: function (data) {
