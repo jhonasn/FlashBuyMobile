@@ -64,7 +64,7 @@ FlashBuy.util = {
                 }
             ];
             var agendados = [];
-            paramAgendamentos.forEach(function (agendamento,i) {
+            paramAgendamentos.forEach(function (agendamento, i) {
                 var mili;
                 switch (agendamento.tipo) {
                     case "dias": {
@@ -86,18 +86,19 @@ FlashBuy.util = {
                     }
                 }
 
-                var quantoFalta = new Date() - compra.DataInicio;
-                if (mili > compra.DataInicio) {
-                   //continue break sei lá porra
-                    return;
-                }
-                var idNotificacao = compra.IdCompra + '-' + i;
+                //var quantoFalta = new Date() - compra.DataInicio;
+                //if (mili > compra.DataInicio) {
+                //    //continue break sei lá porra
+                //    return;
+                //}
+                var idNotificacao = compra.IdOferta + '-' + i;
+                var mensagemNotificacao = 'ATENÇÃO! Faltam ' + agendamento.valor + ' ' + agendamento.tipo + ' para começar o FlashBuy de ' + compra.Produto + ' por R$' + compra.Valor;
                 //Agenda a notificação
                 cordova.plugins.notification.local.schedule({
                     //Insere Id da Notificação
                     id: idNotificacao,
                     title: 'FlashBuy ⚡',
-                    text: 'TESTE MALUCO',
+                    text: mensagemNotificacao,
                     at: mili,
                     sound: sound,
                     badge: 0
@@ -106,7 +107,8 @@ FlashBuy.util = {
                 agendamento.id = idNotificacao;
                 agendados.push(agendamento);
             });
-            localStorage.setItem("notificacoes-"+compra.IdCompra ,JSON.stringify(agendados));
+            localStorage.setItem(FlashBuy.Notificacoes + compra.IdOferta, JSON.stringify(agendados));
+
             ////Cria variável que captura a data e hora atual.
             //var agora = new Date();
             ////Cria variável que captura a data em que a oferta iniciará
@@ -171,6 +173,24 @@ FlashBuy.util = {
             //     sound: sound,
             //     badge: 0
             // });
+        },
+        getArrayAgendadas: function (oferta) {
+            var keyArray = FlashBuy.Notificacoes + oferta.IdOferta;
+            var arrayAgendadas = JSON.parse(localStorage.getItem(keyArray));
+            if (!(arrayAgendadas === undefined || arrayAgendadas === null || arrayAgendadas.length === 0)) {
+                return arrayAgendadas;
+            }
+            else {
+                console.error('Não existem notificações agendadas para essa oferta.');
+                return [];
+            }
+        },
+        cancelar: function (arrayAgendadas) {
+            arrayAgendadas.forEach(function (item, i) {
+                cordova.plugins.notification.local.cancel(item.id, function () {
+                    console.log('Notificação ' + item.id + ' foi cancelada com sucesso.');
+                });
+            });
         }
     },
 
@@ -239,7 +259,7 @@ FlashBuy.util = {
 
     getNumAnunciosAdquiridos: function () {
         var listaAnunciosAdquiridos = FlashBuy.util.getAnunciosAdquiridos();
-        if (listaAnunciosAdquiridos === undefined) {
+        if (listaAnunciosAdquiridos === undefined || listaAnunciosAdquiridos === null) {
             return 0;
         } else {
             return listaAnunciosAdquiridos.length;

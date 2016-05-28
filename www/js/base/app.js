@@ -113,19 +113,23 @@ var FlashBuy = {
         //Analisa o erro de Ajax e informa o devido tratamento
         switch (err.status) {
             case 404: {
-                Materialize.toast('Não encontramos registros na nossa base 💩',3000,'rounded');
+           //     Materialize.toast('Não encontramos registros na nossa base 💩',3000,'rounded');
                 break;
             }
             default: {
-                Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+             //em   Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
                 break;
             }
         }
     },
+
     //DEFINIÇÃO DE KEYS PARA LOCALSTORAGE
-    //Representa a Key para buscar o cliente logado
+    //Representa a Key utilizada para buscar o cliente logado
     Cliente: 'flashBuyCliente',
-    Compras: 'flashBuyCompras'
+    //Representa a Key utilizada para buscar as compras do Cliente
+    Compras: 'flashBuyCompras',
+    //Representa a Key utilizada para buscar as notificações agendadas do cliente
+    Notificacoes: 'flashBuyNotificacoesAgendadas-'
 };
 
 //inicializa aplicação
