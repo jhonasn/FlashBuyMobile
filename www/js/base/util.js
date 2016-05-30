@@ -569,6 +569,39 @@ FlashBuy.util = {
             var m = data.getMinutes();
 
             return dataFormatada + ' ' + pad(h) + ':' + pad(m);
+        },
+
+        contagemRegressiva: function (dataFim, elementoHtmlId, isTimerInicio) {
+            //Busca elemento pelo Id via JQuery e coloca em uma variável
+            var timer = jQuery('#'+elementoHtmlId);
+            function atualizarTimer() {
+                var t = getTempoQueFalta();
+                //Seta valor para ser mostrado na tela
+                timer.html(t.dias + ' dias, ' + t.horas + 'h ' + t.minutos + 'm ' + t.segundos + 's');
+                //Verifica se o resultado da subtração não é negativo (Esse é o caso
+                //de quando a data extrapola o limite)
+                if (t.negativo === true) {
+                    //Limpa o timer
+                    clearInterval(timeInterval);
+                    //Verifica se o timer requisitado é de início de oferta.
+                    if (isTimerInicio) {
+                        //Seta conteúdo do Timer para tratamento de início
+                        timer.html('Já começou.');
+                    } else {
+                        //Seta conteúdo do Timer para tratamento de fim.
+                        timer.html('Chegou ao fim.');
+                    }
+                }
+            }
+
+            atualizarTimer();
+
+            var timeInterval = setInterval(atualizarTimer, 1000);
+
+            function getTempoQueFalta() {
+                var tempoQueFalta = FlashBuy.util.tempo.subtrairDatas(dataFim, new Date(), false);
+                return tempoQueFalta;
+            }
         }
     },
 
