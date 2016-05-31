@@ -528,15 +528,19 @@ FlashBuy.util = {
             return d2.getTime() - d1.getTime();
         },
 
-        subtrairDatas: function (d1, d2, formatar) {
+        subtrairDatas: function (d1, d2, formatar, compararMaiorMenor) {
             FlashBuy.util.tempo.isTipoData(d1);
             FlashBuy.util.tempo.isTipoData(d2);
 
             var maior, menor;
-
-            if (d1 > d2) {
-                maior = d1;
-                menor = d2;
+            if (compararMaiorMenor) {
+                if (d1 > d2) {
+                    maior = d1;
+                    menor = d2;
+                } else {
+                    maior = d1;
+                    menor = d2;
+                }
             } else {
                 maior = d1;
                 menor = d2;
@@ -573,24 +577,34 @@ FlashBuy.util = {
 
         contagemRegressiva: function (dataFim, elementoHtmlId, isTimerInicio) {
             //Busca elemento pelo Id via JQuery e coloca em uma variável
-            var timer = jQuery('#'+elementoHtmlId);
+            var timer = jQuery('#' + elementoHtmlId);
+
+            var tratamentoPreposicao, tratamentoFimContagem;
+
+            if (isTimerInicio) {
+                //Seta o conteúdo do tratamento de preposição
+                tratamentoPreposicao = 'Faltam: ';
+                //Seta conteúdo do tratamento de fim de contagem
+                tratamentoFimContagem = 'Já começou.';
+            } else {
+                //Seta o conteúdo do tratamento de preposição
+                tratamentoPreposicao = 'Acaba em: ';
+                //Seta conteúdo do tratamento de fim de contagem
+                timer.html('Chegou ao fim.');
+            }
+
             function atualizarTimer() {
                 var t = getTempoQueFalta();
                 //Seta valor para ser mostrado na tela
-                timer.html(t.dias + ' dias, ' + t.horas + 'h ' + t.minutos + 'm ' + t.segundos + 's');
+                timer.html(tratamentoPreposicao + t.dias + ' dias, ' + t.horas + 'h ' + t.minutos + 'm ' + t.segundos + 's');
                 //Verifica se o resultado da subtração não é negativo (Esse é o caso
                 //de quando a data extrapola o limite)
                 if (t.negativo === true) {
                     //Limpa o timer
                     clearInterval(timeInterval);
-                    //Verifica se o timer requisitado é de início de oferta.
-                    if (isTimerInicio) {
-                        //Seta conteúdo do Timer para tratamento de início
-                        timer.html('Já começou.');
-                    } else {
-                        //Seta conteúdo do Timer para tratamento de fim.
-                        timer.html('Chegou ao fim.');
-                    }
+                    //Seta o conteúdo do timer para o tratamento de fim de contagem.
+                    timer.html(tratamentoFimContagem);
+                    return;
                 }
             }
 

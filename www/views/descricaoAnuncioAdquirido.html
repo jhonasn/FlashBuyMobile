@@ -1,4 +1,4 @@
-
+<meta charset="ISO-8859-1">
 <div class="carousel" align="center">
     <a class="carousel-item" href="#one!">
         <div id="divImagem">
@@ -6,41 +6,41 @@
         </div>
     </a>
 </div>
-
 <div class="row">
     <div class="input-field col s12">
+        <div class="card-panel center">
+            <span id="timer" class="blue-text text-darken-2"></span>
+        </div>
         <div id="descricaoOferta">
             <div class="row">
                 <div class="col s12 m7">
-                    <blockquote>produto: {{Produto}}</blockquote>
-                    <blockquote>dataInicio: {{DataInicio}}</blockquote>
-                    <blockquote>dataFim: {{DataFim}}</blockquote>
+                    <blockquote> Produto: {{Produto}}</blockquote>
+                    <blockquote> Início da Promoção: {{DataInicio}}</blockquote>
+                    <blockquote> Disponível até: {{DataFim}}</blockquote>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="row" align="center">
     <div class="input-field col s12" id="avaliarOferta">
         <h6>Nos diga o que achou da sua compra</h6>
-
         <div class="input-field col s12">
             <button id="unlike-compra" class="btn-floating btn-large waves-effect waves-light red">
                 <i class="material-icons">thumb_down</i>
             </button>
-
             <button id="like-compra" class="btn-floating btn-large waves-effect waves-light green">
                 <i class="material-icons">thumb_up</i>
             </button>
         </div>
     </div>
 </div>
-
 <div class="row" align="center">
     <button type="button"
-    class="waves-effect waves-light btn"
-    data-controller="qrCodeAnuncio"
-    data-idcompra="{{IdCompra}}"
-    data-adquirido="true">Visualizar QR Code</button>
+            class="waves-effect waves-light btn"
+            data-controller="qrCodeAnuncio"
+            data-idcompra="{{IdCompra}}"
+            data-adquirido="true">
+        Visualizar QR Code
+    </button>
 </div>
