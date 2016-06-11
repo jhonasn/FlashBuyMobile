@@ -31,7 +31,7 @@ FlashBuy.qrCodeAnuncio = {
                 //Salva na store os anuncios adquiridos
                 FlashBuy.util.storeAnunciosAdquiridos();
             } else {
-                Materialize.toast('Não foi possível completar sua compra', 3000, 'rounded');
+                Materialize.toast('Não foi possível completar sua compra.', 3000, 'rounded');
             }
         })
         .error(function (err) {

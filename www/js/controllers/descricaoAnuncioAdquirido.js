@@ -41,11 +41,7 @@ FlashBuy.descricaoAnuncioAdquirido = {
             jQuery('#like-compra, #unlike-compra').addClass('disabled');
             //mostra mensaginha
             jQuery('#like-compra, #unlike-compra').click(function (e) {
-                Materialize.toast(
-                    'Voce ja fez sua votacao para essa compra',
-                    3000,
-                    'rounded'
-                );
+                Materialize.toast('Voce já avaliou essa compra', 3000, 'rounded');
                 FlashBuy.descricaoAnuncioAdquirido.voltarParaListagem();
             });
         }
@@ -67,14 +63,10 @@ FlashBuy.descricaoAnuncioAdquirido = {
             FlashBuy.loading(false);
 
             if (ok) {
-                Materialize.toast(
-                    'Obrigado pela sua avaliação!',
-                    3000,
-                    'rounded'
-                );
+                Materialize.toast('Obrigado pela sua avaliação!', 3000 ,'rounded');
                 FlashBuy.descricaoAnuncioAdquirido.voltarParaListagem();
             } else {
-                Materialize.toast('Não foi possível completar sua requisição', 3000, 'rounded');
+                Materialize.toast('Não foi possível completar sua avaliação, por favor tente mais tarde.', 3000, 'rounded');
             }
         })
         .error(function (err) {

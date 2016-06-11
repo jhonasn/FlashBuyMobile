@@ -15,7 +15,7 @@ FlashBuy.login = {
             FlashBuy.load('home', 'views/home.html');
         } else {
             //Caso não esteja logado, mostra tela de login
-            Materialize.toast('Nos informe seu nome para completar o cadastro', 3000);
+            //Materialize.toast('Nos informe o seu nome para completar o cadastro', 3000); //creio ser desnecessário mostrar essa mensagem ao logar
             //Cria evento para quando clicar no botão de login
             jQuery("#btNome").click(FlashBuy.login.logar);
         }
@@ -95,7 +95,7 @@ FlashBuy.login = {
 
     logar: function(e) {
         if (jQuery("#inputNome").val() === '') {
-            Materialize.toast('Poxa, eu disse que você precisa inserir o seu nome 😢', 3000, 'rounded');
+            Materialize.toast('Nos informe o seu nome para completar o seu cadastro', 3000, 'rounded');
             //sai da função
             return;
         }
@@ -139,7 +139,7 @@ FlashBuy.login = {
                     data = data[0];
                 }
                 localStorage.setItem(FlashBuy.Cliente, JSON.stringify(data));
-                console.log('Usuário cadastrado com sucesso. Redirecionando para home');
+                console.log('Usuário cadastrado com sucesso.');
                 FlashBuy.load('home', 'views/home.html');
             }).error(function(erro) {
                 FlashBuy.loading(false);
@@ -149,10 +149,10 @@ FlashBuy.login = {
                     if (!FlashBuy.util.conectadoInternet()) {
                         FlashBuy.erroAjax();
                     } else {
-                        Materialize.toast('Que estranho.. algo sobrenatural aconteceu aqui, é melhor chamar o agente Mulder.', 3000, 'rounded');
+                        Materialize.toast('Estamos enfrentando problemas com o nosso servidor, por favor tente mais tarde', 3000, 'rounded');
                     }
                 }
-                Materialize.toast('Que feio servidor você não pode fazer isso, tente novamente mais tarde 😔', 3000, 'rounded');
+                Materialize.toast('Ops! aconteceu algo de errado aqui, por favor tente mais tarde.', 3000, 'rounded');
             });
     }
 };

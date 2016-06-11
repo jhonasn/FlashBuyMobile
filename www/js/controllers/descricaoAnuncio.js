@@ -30,7 +30,7 @@ FlashBuy.descricaoAnuncio = {
         })
         .error(function (err) {
             FlashBuy.loading(false);
-            Materialize.toast('Há algo de errado com sua conexão... 😔', 3000, 'rounded');
+            Materialize.toast('Há algo de errado com sua conexão de internet...', 3000, 'rounded');
             FlashBuy.erroAjax();
             console.error(err);
         });

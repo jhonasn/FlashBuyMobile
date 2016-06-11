@@ -18,7 +18,7 @@ FlashBuy.home = {
         });
     },
     ready: function () {
-        Materialize.toast('Bem vindo ao FlashBuy ⚡', 4000);
+        Materialize.toast('seja bem vindo ao FlashBuy!', 4000);
         console.log('home ready');
     }
 };
