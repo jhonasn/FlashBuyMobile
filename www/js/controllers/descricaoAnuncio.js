@@ -8,6 +8,7 @@ FlashBuy.descricaoAnuncio = {
         var timerDataInicio = oferta.DataInicio;
         oferta.DataInicio = FlashBuy.util.tempo.formatarDataHora(new Date(oferta.DataInicio));
         oferta.DataFim = FlashBuy.util.tempo.formatarDataHora(new Date(oferta.DataFim));
+        oferta.NomeFantasia = oferta.Anunciante.NomeFantasia;
 
         FlashBuy.loading(true);
 
@@ -43,7 +44,7 @@ FlashBuy.descricaoAnuncio = {
 
         jQuery('#content').empty();
         jQuery('#content').html(templateHtml);
-        jQuery('.carousel').carousel();
+        jQuery('.materialboxed').materialbox();
 
         FlashBuy.util.configurarRotasControllers();
     }

@@ -19,7 +19,7 @@ FlashBuy.descricaoAnuncioAdquirido = {
 
         jQuery('#content').empty();
         jQuery('#content').html(templateHtml);
-        jQuery('.carousel').carousel();
+        jQuery('.materialboxed').materialbox();
 
         FlashBuy.util.configurarRotasControllers();
 
@@ -63,7 +63,7 @@ FlashBuy.descricaoAnuncioAdquirido = {
             FlashBuy.loading(false);
 
             if (ok) {
-                Materialize.toast('Obrigado pela sua avaliação!', 3000 ,'rounded');
+                Materialize.toast('Obrigado pela sua avaliação!', 4000);
                 FlashBuy.descricaoAnuncioAdquirido.voltarParaListagem();
             } else {
                 Materialize.toast('Não foi possível completar sua avaliação, por favor tente mais tarde.', 3000, 'rounded');
