@@ -31,36 +31,34 @@ FlashBuy.util = {
 
     notificacao: {
         agendar: function (compra) {
-            //Define local do arquivo de som da notificação
-            var sound = device.platform === 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
             //Implementando configurações padrão para agendamento
             var paramAgendamentos = [
                 {
-                    tipo: "dias",
+                    tipo: "dia(s)",
                     valor: 3
                 },
                 {
-                    tipo: "dias",
+                    tipo: "dia(s)",
                     valor: 2
                 },
                 {
-                    tipo: "dias",
+                    tipo: "dia(s)",
                     valor: 1
                 },
                 {
-                    tipo: "horas",
+                    tipo: "hora(s)",
                     valor: 3
                 },
                 {
-                    tipo: "horas",
+                    tipo: "hora(s)",
                     valor: 1
                 },
                 {
-                    tipo: "minutos",
+                    tipo: "minuto(s)",
                     valor: 30
                 },
                 {
-                    tipo: "minutos",
+                    tipo: "minuto(s)",
                     valor: 5
                 }
             ];
@@ -68,16 +66,16 @@ FlashBuy.util = {
             paramAgendamentos.forEach(function (agendamento, i) {
                 var mili;
                 switch (agendamento.tipo) {
-                    case "dias": {
+                    case "dia(s)": {
                         //Transforma OS DIAS em mili
                         mili = agendamento.valor * 24 * 60 * 60 * 1000;
                         break;
                     }
-                    case "horas": {
+                    case "hora(s)": {
                         mili = agendamento.valor * 60 * 60 * 1000;
                         break;
                     }
-                    case "minutos": {
+                    case "minuto(s)": {
                         mili = agendamento.valor * 60 * 1000;
                         break;
                     }
@@ -86,27 +84,39 @@ FlashBuy.util = {
                         break;
                     }
                 }
+                var dataInicio = new Date(compra.Oferta.DataInicio);
+                var quantoFalta = new Date(dataInicio.getTime() - mili);
+                if (!(quantoFalta < new Date())) {
+                    idNotificacao = JSON.parse(localStorage.getItem(FlashBuy.idUltimaNotificacao));
+                    if (!idNotificacao) {
+                        idNotificacao = 1;
+                        localStorage.setItem(FlashBuy.idUltimaNotificacao, JSON.stringify(idNotificacao));
+                    }
+                    else {
+                        idNotificacao++;
+                        localStorage.setItem(FlashBuy.idUltimaNotificacao, JSON.stringify(idNotificacao));
+                    }
 
-                //var quantoFalta = new Date() - compra.DataInicio;
-                //if (mili > compra.DataInicio) {
-                //    //continue break sei lá porra
-                //    return;
-                //}
-                var idNotificacao = compra.IdOferta + '-' + i;
-                var mensagemNotificacao = 'ATENÇÃO! Faltam ' + agendamento.valor + ' ' + agendamento.tipo + ' para começar o FlashBuy de ' + compra.Produto + ' por R$' + compra.Valor;
-                //Agenda a notificação
-                cordova.plugins.notification.local.schedule({
-                    //Insere Id da Notificação
-                    id: idNotificacao,
-                    title: 'FlashBuy ⚡',
-                    text: mensagemNotificacao,
-                    at: mili,
-                    sound: sound,
-                    badge: 0
-                });
+                    var mensagemNotificacao = agendamento.valor + ' ' + agendamento.tipo + ' para começar a venda de ' + compra.Oferta.Produto;
+                    //Agenda a notificação
+                    //Define local do arquivo de som da notificação
+                    var sound = device.platform === 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
 
-                agendamento.id = idNotificacao;
-                agendados.push(agendamento);
+                    cordova.plugins.notification.local.schedule({
+                        //Insere Id da Notificação
+                        id: idNotificacao,
+                        title: 'FlashBuy',
+                        text: mensagemNotificacao,
+                        at: quantoFalta,
+                        sound: sound,
+                        badge: 0
+                    });
+
+                    agendamento.id = idNotificacao;
+                    agendamento.dataDisparo = quantoFalta;
+                    agendados.push(agendamento);
+                }
+
             });
             localStorage.setItem(FlashBuy.Notificacoes + compra.IdOferta, JSON.stringify(agendados));
 
@@ -372,76 +382,77 @@ FlashBuy.util = {
 
         return html;
     },
+    // ACREDITO QUE NÃO USAREMOS MAIS ESSE PLUGIN, PORQUE ELE NÃO AJUDA MUITO... DEIXAREI COMENTADO POR ENQUANTO
+    //
+    //conectadoInternet: function () {
+    //    if (navigator.connection.type !== Connection.NONE) {
+    //        return true;
+    //    } else {
+    //        return false;
+    //    }
+    //},
 
-    conectadoInternet: function () {
-       if (navigator.connection.type !== Connection.NONE) {
-           return true;
-       } else {
-           return false;
-       }
-    },
+    //onInternet: function (callback) {
+    //    jQuery(document).on('online', function () {
+    //        callback(true);
+    //    });
+    //    jQuery(document).on('offline', function () {
+    //        callback(false);
+    //    });
+    //},
 
-    onInternet: function (callback) {
-       jQuery(document).on('online', function () {
-           callback(true);
-       });
-       jQuery(document).on('offline', function () {
-           callback(false);
-       });
-    },
-
-    tipoInternet: function () {
-       var connType = navigator.connection.type;
-       var retorno = "Conexao ";
-       switch (connType) {
-           case Connection.UNKNOWN:
-               {
-                   retorno += "desconhecida";
-                   break;
-               }
-           case Connection.ETHERNET:
-               {
-                   retorno += "a cabo";
-                   break;
-               }
-           case Connection.WIFI:
-               {
-                   retorno += "WI-FI";
-                   break;
-               }
-           case Connection.CELL_2G:
-               {
-                   retorno += "2G";
-                   break;
-               }
-           case Connection.CELL_3G:
-               {
-                   retorno += "3G";
-                   break;
-               }
-           case Connection.CELL_4G:
-               {
-                   retorno += "4G";
-                   break;
-               }
-           case Connection.CELL:
-               {
-                   retorno += "de dados celulares";
-                   break;
-               }
-           case Connection.NONE:
-               {
-                   retorno += "inexistente";
-                   break;
-               }
-           default:
-               {
-                   retorno = "Houve um problema ao identificar sua conexao. Tente novamente mais tarde.";
-                   break;
-               }
-       }
-       return retorno + ".";
-    },
+    //tipoInternet: function () {
+    //    var connType = navigator.connection.type;
+    //    var retorno = "Conexao ";
+    //    switch (connType) {
+    //        case Connection.UNKNOWN:
+    //            {
+    //                retorno += "desconhecida";
+    //                break;
+    //            }
+    //        case Connection.ETHERNET:
+    //            {
+    //                retorno += "a cabo";
+    //                break;
+    //            }
+    //        case Connection.WIFI:
+    //            {
+    //                retorno += "WI-FI";
+    //                break;
+    //            }
+    //        case Connection.CELL_2G:
+    //            {
+    //                retorno += "2G";
+    //                break;
+    //            }
+    //        case Connection.CELL_3G:
+    //            {
+    //                retorno += "3G";
+    //                break;
+    //            }
+    //        case Connection.CELL_4G:
+    //            {
+    //                retorno += "4G";
+    //                break;
+    //            }
+    //        case Connection.CELL:
+    //            {
+    //                retorno += "de dados celulares";
+    //                break;
+    //            }
+    //        case Connection.NONE:
+    //            {
+    //                retorno += "inexistente";
+    //                break;
+    //            }
+    //        default:
+    //            {
+    //                retorno = "Houve um problema ao identificar sua conexao. Tente novamente mais tarde.";
+    //                break;
+    //            }
+    //    }
+    //    return retorno + ".";
+    //},
 
     zeroPad: function (n) {
         if (typeof n === 'number') {
