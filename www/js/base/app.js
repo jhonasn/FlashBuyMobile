@@ -25,6 +25,14 @@ var FlashBuy = {
 
     //executa ações que necessitam ser executadas após o celular terminar de carregar o aplicativo
     deviceReady: function () {
+		//mostra mensagem quando se conecta ou desconecta da internet
+		FlashBuy.util.onInternet(function(isConectado) {
+			if(isConectado) {
+				Materialize.toast('Conexão estabelecida.', 4000);
+			} else {
+				Materialize.toast('Verifique sua conexão com a Internet.', 4000);
+			}
+		});
     },
 
     //executa ações que necessitam ser executadas após os elementos html da pagina serem carregados
