@@ -33,6 +33,7 @@ FlashBuy.util = {
         agendar: function (compra) {
             //Define local do arquivo de som da notificação
             var sound = device.platform === 'Android' ? 'file://data/sound/sound.mp3' : 'file://data/sound/beep.caf';
+            //Implementando configurações padrão para agendamento
             var paramAgendamentos = [
                 {
                     tipo: "dias",
@@ -81,7 +82,7 @@ FlashBuy.util = {
                         break;
                     }
                     default: {
-                        console.error("Agendamento inválido, putz");
+                        console.error("Agendamento inválido.");
                         break;
                     }
                 }
@@ -103,7 +104,7 @@ FlashBuy.util = {
                     sound: sound,
                     badge: 0
                 });
-
+                
                 agendamento.id = idNotificacao;
                 agendados.push(agendamento);
             });
@@ -371,76 +372,77 @@ FlashBuy.util = {
 
         return html;
     },
+    // ACREDITO QUE NÃO USAREMOS MAIS ESSE PLUGIN, PORQUE ELE NÃO AJUDA MUITO... DEIXAREI COMENTADO POR ENQUANTO
+    //
+    //conectadoInternet: function () {
+    //    if (navigator.connection.type !== Connection.NONE) {
+    //        return true;
+    //    } else {
+    //        return false;
+    //    }
+    //},
 
-    conectadoInternet: function () {
-        if (navigator.connection.type !== Connection.NONE) {
-            return true;
-        } else {
-            return false;
-        }
-    },
+    //onInternet: function (callback) {
+    //    jQuery(document).on('online', function () {
+    //        callback(true);
+    //    });
+    //    jQuery(document).on('offline', function () {
+    //        callback(false);
+    //    });
+    //},
 
-    onInternet: function (callback) {
-        jQuery(document).on('online', function () {
-            callback(true);
-        });
-        jQuery(document).on('offline', function () {
-            callback(false);
-        });
-    },
-
-    tipoInternet: function () {
-        var connType = navigator.connection.type;
-        var retorno = "Conexao ";
-        switch (connType) {
-            case Connection.UNKNOWN:
-                {
-                    retorno += "desconhecida";
-                    break;
-                }
-            case Connection.ETHERNET:
-                {
-                    retorno += "a cabo";
-                    break;
-                }
-            case Connection.WIFI:
-                {
-                    retorno += "WI-FI";
-                    break;
-                }
-            case Connection.CELL_2G:
-                {
-                    retorno += "2G";
-                    break;
-                }
-            case Connection.CELL_3G:
-                {
-                    retorno += "3G";
-                    break;
-                }
-            case Connection.CELL_4G:
-                {
-                    retorno += "4G";
-                    break;
-                }
-            case Connection.CELL:
-                {
-                    retorno += "de dados celulares";
-                    break;
-                }
-            case Connection.NONE:
-                {
-                    retorno += "inexistente";
-                    break;
-                }
-            default:
-                {
-                    retorno = "Houve um problema ao identificar sua conexao. Tente novamente mais tarde.";
-                    break;
-                }
-        }
-        return retorno + ".";
-    },
+    //tipoInternet: function () {
+    //    var connType = navigator.connection.type;
+    //    var retorno = "Conexao ";
+    //    switch (connType) {
+    //        case Connection.UNKNOWN:
+    //            {
+    //                retorno += "desconhecida";
+    //                break;
+    //            }
+    //        case Connection.ETHERNET:
+    //            {
+    //                retorno += "a cabo";
+    //                break;
+    //            }
+    //        case Connection.WIFI:
+    //            {
+    //                retorno += "WI-FI";
+    //                break;
+    //            }
+    //        case Connection.CELL_2G:
+    //            {
+    //                retorno += "2G";
+    //                break;
+    //            }
+    //        case Connection.CELL_3G:
+    //            {
+    //                retorno += "3G";
+    //                break;
+    //            }
+    //        case Connection.CELL_4G:
+    //            {
+    //                retorno += "4G";
+    //                break;
+    //            }
+    //        case Connection.CELL:
+    //            {
+    //                retorno += "de dados celulares";
+    //                break;
+    //            }
+    //        case Connection.NONE:
+    //            {
+    //                retorno += "inexistente";
+    //                break;
+    //            }
+    //        default:
+    //            {
+    //                retorno = "Houve um problema ao identificar sua conexao. Tente novamente mais tarde.";
+    //                break;
+    //            }
+    //    }
+    //    return retorno + ".";
+    //},
 
     zeroPad: function (n) {
         if (typeof n === 'number') {
